@@ -4,14 +4,16 @@ using CakeShop.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CakeShop.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210110150716_CreateDataBase")]
+    partial class CreateDataBase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -331,7 +333,7 @@ namespace CakeShop.Data.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("CupcakeTags");
+                    b.ToTable("CupCakeTags");
                 });
 
             modelBuilder.Entity("CakeShop.Data.Models.Ingredient", b =>

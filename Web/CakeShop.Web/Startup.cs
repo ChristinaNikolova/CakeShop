@@ -8,7 +8,6 @@
     using CakeShop.Data.Models;
     using CakeShop.Data.Repositories;
     using CakeShop.Data.Seeding;
-    using CakeShop.Services.Data;
     using CakeShop.Services.Mapping;
     using CakeShop.Services.Messaging;
     using CakeShop.Web.ViewModels;
@@ -64,7 +63,6 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

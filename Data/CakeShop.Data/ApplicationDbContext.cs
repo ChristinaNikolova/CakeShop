@@ -24,7 +24,31 @@
         {
         }
 
-        public DbSet<Setting> Settings { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
+
+        public DbSet<Cupcake> Cupcakes { get; set; }
+
+        public DbSet<CupcakeIngredient> CupcakeIngredients { get; set; }
+
+        public DbSet<CupcakeLike> CupcakeLikes { get; set; }
+
+        public DbSet<CupcakeOrder> CupcakeOrders { get; set; }
+
+        public DbSet<CupcakeTag> CupcakeTags { get; set; }
+
+        public DbSet<Ingredient> Ingredients { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<Recipe> Recipes { get; set; }
+
+        public DbSet<RecipeLike> RecipeLikes { get; set; }
+
+        public DbSet<Review> Reviews { get; set; }
+
+        public DbSet<Tag> Tags { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
