@@ -14,7 +14,7 @@
         public ApplicationUser()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.CupcakeLikes = new HashSet<CupcakeLike>();
+            this.DessertLikes = new HashSet<DessertLike>();
             this.ArticleLikes = new HashSet<RecipeLike>();
             this.Orders = new HashSet<Order>();
             this.Reviews = new HashSet<Review>();
@@ -41,7 +41,7 @@
 
         public DateTime? ModifiedOn { get; set; }
 
-        public virtual ICollection<CupcakeLike> CupcakeLikes { get; set; }
+        public virtual ICollection<DessertLike> DessertLikes { get; set; }
 
         public virtual ICollection<RecipeLike> ArticleLikes { get; set; }
 

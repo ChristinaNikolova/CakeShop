@@ -27,6 +27,6 @@
         [Required]
         public string CupCakeId { get; set; }
 
-        public virtual Cupcake Cupcake { get; set; }
+        public virtual Dessert Cupcake { get; set; }
     }
 }

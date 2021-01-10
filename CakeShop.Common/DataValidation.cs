@@ -15,10 +15,10 @@
         // Comment
         public const int CommentContentMaxLenght = 1000;
 
-        // Cupcake
-        public const int CupcakeNameMaxLenght = 200;
+        // Dessert
+        public const int DessertNameMaxLenght = 200;
 
-        public const int CupcakeDescriptionMaxLenght = 2000;
+        public const int DessertDescriptionMaxLenght = 2000;
 
         // Ingredient
         public const int IngredientNameMaxLenght = 150;

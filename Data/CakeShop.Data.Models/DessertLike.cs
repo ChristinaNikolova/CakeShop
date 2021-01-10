@@ -2,12 +2,12 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class CupcakeLike
+    public class DessertLike
     {
         [Required]
-        public string CupcakeId { get; set; }
+        public string DessertId { get; set; }
 
-        public virtual Cupcake Cupcake { get; set; }
+        public virtual Dessert Dessert { get; set; }
 
         [Required]
         public string ClientId { get; set; }

@@ -12,7 +12,7 @@
         public Category()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.Cupcakes = new HashSet<Cupcake>();
+            this.Desserts = new HashSet<Dessert>();
             this.Recipes = new HashSet<Recipe>();
         }
 
@@ -20,7 +20,7 @@
         [MaxLength(DataValidation.CategotyNameMaxLenght)]
         public string Name { get; set; }
 
-        public virtual ICollection<Cupcake> Cupcakes { get; set; }
+        public virtual ICollection<Dessert> Desserts { get; set; }
 
         public virtual ICollection<Recipe> Recipes { get; set; }
     }

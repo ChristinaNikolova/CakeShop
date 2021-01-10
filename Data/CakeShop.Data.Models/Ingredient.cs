@@ -12,13 +12,13 @@
         public Ingredient()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.CupcakeIngredients = new HashSet<CupcakeIngredient>();
+            this.DessertIngredients = new HashSet<DessertIngredient>();
         }
 
         [Required]
         [MaxLength(DataValidation.IngredientNameMaxLenght)]
         public string Name { get; set; }
 
-        public virtual ICollection<CupcakeIngredient> CupcakeIngredients { get; set; }
+        public virtual ICollection<DessertIngredient> DessertIngredients { get; set; }
     }
 }

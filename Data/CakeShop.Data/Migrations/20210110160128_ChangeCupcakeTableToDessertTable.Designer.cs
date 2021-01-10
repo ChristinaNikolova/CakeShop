@@ -4,14 +4,16 @@ using CakeShop.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CakeShop.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210110160128_ChangeCupcakeTableToDessertTable")]
+    partial class ChangeCupcakeTableToDessertTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -283,7 +285,7 @@ namespace CakeShop.Data.Migrations
 
                     b.HasIndex("IngredientId");
 
-                    b.ToTable("DessertIngredients");
+                    b.ToTable("CupcakeIngredients");
                 });
 
             modelBuilder.Entity("CakeShop.Data.Models.DessertLike", b =>
@@ -298,7 +300,7 @@ namespace CakeShop.Data.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("DessertLikes");
+                    b.ToTable("CupcakeLikes");
                 });
 
             modelBuilder.Entity("CakeShop.Data.Models.DessertOrder", b =>
@@ -316,7 +318,7 @@ namespace CakeShop.Data.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("DessertOrders");
+                    b.ToTable("CupcakeOrders");
                 });
 
             modelBuilder.Entity("CakeShop.Data.Models.DessertTag", b =>
@@ -331,7 +333,7 @@ namespace CakeShop.Data.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("DessertTags");
+                    b.ToTable("CupcakeTags");
                 });
 
             modelBuilder.Entity("CakeShop.Data.Models.Ingredient", b =>

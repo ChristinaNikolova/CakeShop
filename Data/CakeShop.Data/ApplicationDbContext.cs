@@ -28,15 +28,15 @@
 
         public DbSet<Comment> Comments { get; set; }
 
-        public DbSet<Cupcake> Cupcakes { get; set; }
+        public DbSet<Dessert> Desserts { get; set; }
 
-        public DbSet<CupcakeIngredient> CupcakeIngredients { get; set; }
+        public DbSet<DessertIngredient> DessertIngredients { get; set; }
 
-        public DbSet<CupcakeLike> CupcakeLikes { get; set; }
+        public DbSet<DessertLike> DessertLikes { get; set; }
 
-        public DbSet<CupcakeOrder> CupcakeOrders { get; set; }
+        public DbSet<DessertOrder> DessertOrders { get; set; }
 
-        public DbSet<CupcakeTag> CupcakeTags { get; set; }
+        public DbSet<DessertTag> DessertTags { get; set; }
 
         public DbSet<Ingredient> Ingredients { get; set; }
 

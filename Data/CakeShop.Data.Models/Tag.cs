@@ -12,13 +12,13 @@
         public Tag()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.CupcakeTags = new HashSet<CupcakeTag>();
+            this.CupcakeTags = new HashSet<DessertTag>();
         }
 
         [Required]
         [MaxLength(DataValidation.TagNameMaxLenght)]
         public string Name { get; set; }
 
-        public virtual ICollection<CupcakeTag> CupcakeTags { get; set; }
+        public virtual ICollection<DessertTag> CupcakeTags { get; set; }
     }
 }
