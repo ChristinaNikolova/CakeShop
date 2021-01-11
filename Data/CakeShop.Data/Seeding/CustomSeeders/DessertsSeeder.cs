@@ -74,7 +74,7 @@
 
                     desserts.Add(dessert);
                 }
-                ;
+
                 await dbContext.DessertIngredients.AddRangeAsync(dessertIngredients);
                 await dbContext.DessertTags.AddRangeAsync(dessertTags);
                 await dbContext.Desserts.AddRangeAsync(desserts);

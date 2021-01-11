@@ -10,6 +10,7 @@
     using CakeShop.Data.Seeding;
     using CakeShop.Services.Mapping;
     using CakeShop.Services.Messaging;
+    using CakeShop.Web.SecurityModels;
     using CakeShop.Web.ViewModels;
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
@@ -71,6 +72,9 @@
                 ApiKey = this.configuration["Cloudinary:AppKey"],
                 ApiSecret = this.configuration["Cloudinary:AppSecret"],
             });
+
+            // Add reCAPTCHA
+            services.Configure<GoogleReCAPTCHA>(this.configuration.GetSection("GoogleReCAPTCHA"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
