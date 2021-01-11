@@ -28,20 +28,18 @@
                 destinationImage = memoryStream.ToArray();
             }
 
-            using (var ms = new MemoryStream(destinationImage))
+            using var ms = new MemoryStream(destinationImage);
+            imageName += DateTime.UtcNow.ToString();
+
+            var uploadParams = new ImageUploadParams()
             {
-                imageName += DateTime.UtcNow.ToString();
+                File = new FileDescription(imageName, ms),
+                PublicId = imageName,
+            };
 
-                var uploadParams = new ImageUploadParams()
-                {
-                    File = new FileDescription(imageName, ms),
-                    PublicId = imageName,
-                };
+            var uploadResult = this.cloudinary.UploadAsync(uploadParams);
 
-                var uploadResult = this.cloudinary.UploadAsync(uploadParams);
-
-                return uploadResult.Result.SecureUri.AbsoluteUri;
-            }
+            return uploadResult.Result.SecureUri.AbsoluteUri;
         }
     }
 }

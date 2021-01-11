@@ -21,6 +21,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using SendGrid;
 
     public class Startup
     {
@@ -63,7 +64,7 @@
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             // Application services
-            services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IEmailSender, SendGridEmailSender>();
 
             // Add Cloudinary
             var cloudinary = new Cloudinary(new Account()
@@ -73,8 +74,14 @@
                 ApiSecret = this.configuration["Cloudinary:AppSecret"],
             });
 
+            services.AddSingleton(cloudinary);
+
             // Add reCAPTCHA
             services.Configure<GoogleReCAPTCHA>(this.configuration.GetSection("GoogleReCAPTCHA"));
+
+            // Add SendGrid
+            var sendGrid = new SendGridClient(this.configuration["SendGrid:ApiKey"]);
+            services.AddSingleton(sendGrid);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

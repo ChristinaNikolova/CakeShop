@@ -19,5 +19,12 @@
         public const string ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.";
 
         public const string ErrorMessagePasswords = "The password and confirmation password do not match.";
+
+        // messages SendGrid
+        public const string CakeShopEmail = "christina.b.nikolova@gmail.com";
+
+        public const string ConfirmProfileTitleMessage = "Registration Confirmation";
+
+        public const string ConfirmProfileMessage = "<p>{0}, thank you for your registration at <strong>CakeShop</strong>! Please, click <a href={1}>here</a> to confirm your email.</p>";
     }
 }

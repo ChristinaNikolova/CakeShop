@@ -1,7 +1,6 @@
 ﻿namespace CakeShop.Web.Areas.Identity.Pages.Account
 {
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -17,16 +16,13 @@
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ILogger<LoginModel> logger;
 
         public LoginModel(
             SignInManager<ApplicationUser> signInManager,
-            ILogger<LoginModel> logger,
-            UserManager<ApplicationUser> userManager)
+            ILogger<LoginModel> logger)
         {
-            this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
         }
@@ -77,7 +73,7 @@
 
                 if (result.RequiresTwoFactor)
                 {
-                    return this.RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = this.Input.RememberMe });
+                    return this.RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, this.Input.RememberMe });
                 }
 
                 if (result.IsLockedOut)

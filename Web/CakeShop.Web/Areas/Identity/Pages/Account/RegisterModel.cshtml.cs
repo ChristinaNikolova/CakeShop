@@ -3,15 +3,15 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Text.Encodings.Web;
     using System.Threading.Tasks;
 
+    using CakeShop.Common;
     using CakeShop.Data.Models;
+    using CakeShop.Services.Messaging;
     using CakeShop.Web.Areas.Identity.Pages.Account.InputModels;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
@@ -68,29 +68,21 @@
                 };
 
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
+
                 if (result.Succeeded)
                 {
                     this.logger.LogInformation("User created a new account with password.");
+                    var token = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var confirmationLink = this.Url.Action("ConfirmEmail", "Account", new { code = token, userId = user.Id }, this.Request.Scheme);
 
-                    var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = this.Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                        protocol: this.Request.Scheme);
+                    await this.emailSender.SendEmailAsync(
+                        GlobalConstants.CakeShopEmail,
+                        GlobalConstants.SystemName,
+                        user.Email,
+                        GlobalConstants.ConfirmProfileTitleMessage,
+                        string.Format(GlobalConstants.ConfirmProfileMessage, user.UserName, confirmationLink));
 
-                    await this.emailSender.SendEmailAsync(this.Input.Email, "Confirm your email", $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    if (this.userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return this.RedirectToPage("RegisterConfirmation", new { email = this.Input.Email, returnUrl = returnUrl });
-                    }
-                    else
-                    {
-                        await this.signInManager.SignInAsync(user, isPersistent: false);
-                        return this.LocalRedirect(returnUrl);
-                    }
+                    return this.RedirectToPage("RegisterConfirmation", new { email = this.Input.Email, returnUrl });
                 }
 
                 foreach (var error in result.Errors)
