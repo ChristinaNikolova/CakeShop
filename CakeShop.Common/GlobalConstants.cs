@@ -12,5 +12,7 @@
         public const string IngredientSeederPath = @"../../Data/CakeShop.Data/Seeding/Data/Ingredients.json";
 
         public const string CategorySeederPath = @"../../Data/CakeShop.Data/Seeding/Data/Categories.json";
+
+        public const string DessertSeederPath = @"../../Data/CakeShop.Data/Seeding/Data/Desserts.json";
     }
 }

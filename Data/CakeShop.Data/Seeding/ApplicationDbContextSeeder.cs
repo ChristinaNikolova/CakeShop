@@ -30,6 +30,7 @@
                               new TagsSeeder(),
                               new IngredientsSeeder(),
                               new CategoriesSeeder(),
+                              new DessertsSeeder(),
                           };
 
             foreach (var seeder in seeders)
