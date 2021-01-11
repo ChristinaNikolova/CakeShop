@@ -4,11 +4,12 @@
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
 
+    using CakeShop.Common;
     using CakeShop.Data.Models;
+    using CakeShop.Services.Messaging;
     using CakeShop.Web.Areas.Identity.Pages.Account.InputModels;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
@@ -49,9 +50,11 @@
                     protocol: this.Request.Scheme);
 
                 await this.emailSender.SendEmailAsync(
-                    this.Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    GlobalConstants.CakeShopEmail,
+                    GlobalConstants.SystemName,
+                    user.Email,
+                    GlobalConstants.ForgotPasswordTitleMessage,
+                    string.Format(GlobalConstants.ForgotPasswordMessage, HtmlEncoder.Default.Encode(callbackUrl)));
 
                 return this.RedirectToPage("./ForgotPasswordConfirmation");
             }
