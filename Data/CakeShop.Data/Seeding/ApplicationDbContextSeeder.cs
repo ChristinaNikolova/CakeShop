@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using CakeShop.Data.Seeding.CustomSeeders;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
@@ -26,6 +27,9 @@
             var seeders = new List<ISeeder>
                           {
                               new RolesSeeder(),
+                              new TagsSeeder(),
+                              new IngredientsSeeder(),
+                              new CategoriesSeeder(),
                           };
 
             foreach (var seeder in seeders)
