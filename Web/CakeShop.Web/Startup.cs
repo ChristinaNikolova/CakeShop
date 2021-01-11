@@ -11,7 +11,7 @@
     using CakeShop.Services.Mapping;
     using CakeShop.Services.Messaging;
     using CakeShop.Web.ViewModels;
-
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -63,6 +63,14 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
+
+            // Add Cloudinary
+            var cloudinary = new Cloudinary(new Account()
+            {
+                Cloud = this.configuration["Cloudinary:AppName"],
+                ApiKey = this.configuration["Cloudinary:AppKey"],
+                ApiSecret = this.configuration["Cloudinary:AppSecret"],
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
