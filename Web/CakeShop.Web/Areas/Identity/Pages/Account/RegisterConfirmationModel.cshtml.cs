@@ -13,12 +13,10 @@
     public class RegisterConfirmationModel : PageModel
     {
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly IEmailSender sender;
 
-        public RegisterConfirmationModel(UserManager<ApplicationUser> userManager, IEmailSender sender)
+        public RegisterConfirmationModel(UserManager<ApplicationUser> userManager)
         {
             this.userManager = userManager;
-            this.sender = sender;
         }
 
         public string Email { get; set; }
