@@ -61,6 +61,10 @@ html {
 }
 
 /*body {*/
-    /* Margin bottom by footer height */
-    /*margin-bottom: 60px;
+/* Margin bottom by footer height */
+/*margin-bottom: 60px;
 }*/
+
+site-btn:hover {
+    background-color: #F08632,
+}

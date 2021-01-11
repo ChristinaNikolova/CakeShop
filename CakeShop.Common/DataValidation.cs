@@ -3,11 +3,21 @@
     public static class DataValidation
     {
         // User
+        public const int UserFirstNameMinLenght = 2;
+
         public const int UserFirstNameMaxLenght = 50;
+
+        public const int UserLastNameMinLenght = 2;
 
         public const int UserLastNameMaxLenght = 50;
 
+        public const int UserAddressMinLenght = 10;
+
         public const int UserAddressMaxLenght = 200;
+
+        public const int UserPasswordMinLenght = 6;
+
+        public const int UserPasswordMaxLenght = 100;
 
         // Category
         public const int CategotyNameMaxLenght = 50;
