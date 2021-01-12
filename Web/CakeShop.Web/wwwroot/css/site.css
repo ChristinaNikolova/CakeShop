@@ -73,6 +73,22 @@ html {
     color: black;
 }
 
-.color-black:hover {
-    color: #F08632;
+    .color-black:hover {
+        color: #F08632;
+    }
+
+#logout-button {
+    border: none;
+    background-color: transparent;
+}
+
+#logout-button:hover {
+  color: #F08632;
+  text-decoration: none;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #F08632;
+    border-color: #F08632;
 }
