@@ -93,13 +93,12 @@
                });
 
             // Add Google Authentication
-            //services.AddAuthentication()
-            //   .AddGoogle(option =>
-            //   {
-            //       option.ClientId = this.configuration["Google:ClientId"];
-            //       option.ClientSecret = this.configuration["Google:ClientSecret"];
-            //       option.ClaimActions.MapJsonKey("picture", "picture");
-            //   });
+            services.AddAuthentication()
+               .AddGoogle(option =>
+               {
+                   option.ClientId = this.configuration["Google:ClientId"];
+                   option.ClientSecret = this.configuration["Google:ClientSecret"];
+               });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
