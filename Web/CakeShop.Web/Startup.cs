@@ -82,6 +82,24 @@
             // Add SendGrid
             var sendGrid = new SendGridClient(this.configuration["SendGrid:ApiKey"]);
             services.AddSingleton(sendGrid);
+
+            // Add Facebook Authentication
+            services.AddAuthentication()
+               .AddFacebook(option =>
+               {
+                   option.AppId = this.configuration["Facebook:AppId"];
+                   option.AppSecret = this.configuration["Facebook:AppSecret"];
+                   option.AccessDeniedPath = "/AccessDeniedPathInfo";
+               });
+
+            // Add Google Authentication
+            //services.AddAuthentication()
+            //   .AddGoogle(option =>
+            //   {
+            //       option.ClientId = this.configuration["Google:ClientId"];
+            //       option.ClientSecret = this.configuration["Google:ClientSecret"];
+            //       option.ClaimActions.MapJsonKey("picture", "picture");
+            //   });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

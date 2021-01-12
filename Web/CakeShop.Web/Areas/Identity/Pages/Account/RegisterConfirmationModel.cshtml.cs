@@ -5,7 +5,6 @@
     using CakeShop.Data.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -25,7 +24,7 @@
 
         public string EmailConfirmationUrl { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string email, string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string email)
         {
             if (email == null)
             {
