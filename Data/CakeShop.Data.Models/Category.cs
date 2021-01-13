@@ -20,6 +20,9 @@
         [MaxLength(DataValidation.CategotyNameMaxLenght)]
         public string Name { get; set; }
 
+        [Required]
+        public string Picture { get; set; }
+
         public virtual ICollection<Dessert> Desserts { get; set; }
 
         public virtual ICollection<Recipe> Recipes { get; set; }

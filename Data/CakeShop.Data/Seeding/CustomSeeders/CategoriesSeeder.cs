@@ -28,6 +28,7 @@
                     var category = new Category()
                     {
                         Name = currentCategoryData.Name,
+                        Picture = currentCategoryData.Picture,
                     };
 
                     categories.Add(category);

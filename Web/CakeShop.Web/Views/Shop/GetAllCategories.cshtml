@@ -1,0 +1,27 @@
+﻿@using CakeShop.Web.ViewModels.Categories.ViewModels;
+@model AllCategoriesViewModel;
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<div class="offset-1">
+    <h2 class="mb-2 mt-2 text-center">Shop by categories</h2>
+    <div class="categories">
+        <div class="container">
+            <div class="row">
+                @foreach (var category in Model.Categories)
+                {
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="@category.Picture" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">@category.Name</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="site-btn">Shop now</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

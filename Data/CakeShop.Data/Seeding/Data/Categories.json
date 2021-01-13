@@ -1,20 +1,27 @@
 ﻿[
   {
-    "Name": "Cupcakes"
+    "Name": "Cupcakes",
+    "Picture": "https://res.cloudinary.com/dieu4mste/image/upload/v1610547225/Chocolate-Cupcakes-SM-5629_lm2zs5.jpg"
   },
   {
-    "Name": "Cookies"
+    "Name": "Cookies",
+    "Picture": "https://res.cloudinary.com/dieu4mste/image/upload/v1610547597/vegandoublechocolatechunkcookiessquare-5877-256x256_qf73p8.jpg"
+
   },
   {
-    "Name": "Pies"
+    "Name": "Pies",
+    "Picture": "https://res.cloudinary.com/dieu4mste/image/upload/v1610547442/instagram-4_bjuahx.jpg"
   },
   {
-    "Name": "Candies"
+    "Name": "Donuts",
+    "Picture": "https://res.cloudinary.com/dieu4mste/image/upload/v1610547443/instagram-5_mwldq2.jpg"
   },
   {
-    "Name": "Pastries"
+    "Name": "Pastries",
+    "Picture": "https://res.cloudinary.com/dieu4mste/image/upload/v1610547689/Pastry_baking-processes-e1593464950587-400x400_owkbsu.jpg"
   },
   {
-    "Name": "Cakes"
+    "Name": "Cakes",
+    "Picture": "https://res.cloudinary.com/dieu4mste/image/upload/v1610547444/instagram-1_numca2.jpg"
   }
 ]

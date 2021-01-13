@@ -8,6 +8,7 @@
     using CakeShop.Data.Models;
     using CakeShop.Data.Repositories;
     using CakeShop.Data.Seeding;
+    using CakeShop.Services.Data.Categories;
     using CakeShop.Services.Data.Users;
     using CakeShop.Services.Mapping;
     using CakeShop.Services.Messaging;
@@ -68,6 +69,7 @@
             services.AddTransient<IEmailSender, SendGridEmailSender>();
 
             services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<ICategoriesService, CategoriesService>();
 
             // Add Cloudinary
             var cloudinary = new Cloudinary(new Account()
