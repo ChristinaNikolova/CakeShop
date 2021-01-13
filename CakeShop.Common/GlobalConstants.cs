@@ -30,5 +30,8 @@
         public const string ForgotPasswordTitleMessage = "Reset Password";
 
         public const string ForgotPasswordMessage = "Please reset your password by <a href='{0}'>clicking here</a>.";
+
+        // pagination
+        public const int DessertsPerPage = 8;
     }
 }

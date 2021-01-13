@@ -1,7 +1,8 @@
 ﻿namespace CakeShop.Web.Controllers
 {
+    using System;
     using System.Threading.Tasks;
-
+    using CakeShop.Common;
     using CakeShop.Services.Data.Categories;
     using CakeShop.Services.Data.Desserts;
     using CakeShop.Web.ViewModels.Categories.ViewModels;
@@ -31,11 +32,17 @@
             return this.View(model);
         }
 
-        public async Task<IActionResult> GetAllCurrentCategory(string id)
+        public async Task<IActionResult> GetAllCurrentCategory(string id, int currentPage = 1)
         {
-            var model = new AllDessertsViewModel()
+            var dessertsCount = await this.dessertsService.GetTotalCountDessertsByCategoryAsync(id);
+
+            var pageCount = (int)Math.Ceiling((double)dessertsCount / GlobalConstants.DessertsPerPage);
+
+            var model = new AllDessertsByCategoryViewModel()
             {
-                Desserts = await this.dessertsService.GetAllCurrentCategoryAsync<DessertViewModel>(id),
+                Desserts = await this.dessertsService.GetAllCurrentCategoryAsync<DessertViewModel>(id, GlobalConstants.DessertsPerPage, (currentPage - 1) * GlobalConstants.DessertsPerPage),
+                CurrentPage = currentPage,
+                PagesCount = pageCount,
             };
 
             return this.View(model);

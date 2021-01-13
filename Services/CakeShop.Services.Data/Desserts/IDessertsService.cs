@@ -5,6 +5,8 @@
 
     public interface IDessertsService
     {
-        Task<IEnumerable<T>> GetAllCurrentCategoryAsync<T>(string categoryId);
+        Task<IEnumerable<T>> GetAllCurrentCategoryAsync<T>(string categoryId, int take, int skip);
+
+        Task<int> GetTotalCountDessertsByCategoryAsync(string categoryId);
     }
 }

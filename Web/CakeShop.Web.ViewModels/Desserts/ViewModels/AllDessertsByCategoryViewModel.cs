@@ -2,8 +2,12 @@
 {
     using System.Collections.Generic;
 
-    public class AllDessertsViewModel
+    public class AllDessertsByCategoryViewModel
     {
         public IEnumerable<DessertViewModel> Desserts { get; set; }
+
+        public int PagesCount { get; set; }
+
+        public int CurrentPage { get; set; }
     }
 }

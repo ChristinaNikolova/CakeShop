@@ -1,8 +1,8 @@
 ﻿@using CakeShop.Web.ViewModels.Desserts.ViewModels;
-@model AllDessertsViewModel;
+@model AllDessertsByCategoryViewModel;
 
 @{
-    ViewData["Title"] = Model.Desserts.First().CategoryName;
+    ViewData["Title"] = Model.Desserts.FirstOrDefault().CategoryName;
 }
 
 <h2 class="mb-2 mt-3 text-center text-uppercase">@ViewData["Title"]</h2>
@@ -27,4 +27,15 @@
             </div>
         </div>
     }
+</div>
+<div class="shop__last__option">
+    <div class="row">
+        <div class="shop__pagination">
+            <a href="#"><span class="arrow_carrot-left"></span></a>
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#"><span class="arrow_carrot-right"></span></a>
+        </div>
+    </div>
 </div>
