@@ -22,6 +22,8 @@
         // Category
         public const int CategotyNameMaxLenght = 50;
 
+        public const int CategotyDescriptionMaxLenght = 500;
+
         // Comment
         public const int CommentContentMaxLenght = 1000;
 

@@ -1,0 +1,30 @@
+﻿@using CakeShop.Web.ViewModels.Desserts.ViewModels;
+@model AllDessertsViewModel;
+
+@{
+    ViewData["Title"] = Model.Desserts.First().CategoryName;
+}
+
+<h2 class="mb-2 mt-3 text-center text-uppercase">@ViewData["Title"]</h2>
+<hr />
+<div class="row m-2">
+    @foreach (var dessert in Model.Desserts)
+    {
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="product__item">
+                <div class="product__item__pic set-bg" data-setbg="@dessert.Picture">
+                    <div class="product__label">
+                        <span>@dessert.CategoryName</span>
+                    </div>
+                </div>
+                <div class="product__item__text">
+                    <h6><a href="#">@dessert.Name</a></h6>
+                    <div class="product__item__price">@dessert.Price</div>
+                    <div class="cart_add">
+                        <a href="#">See details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

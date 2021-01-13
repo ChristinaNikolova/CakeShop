@@ -1,27 +1,32 @@
 ﻿[
   {
     "Name": "Cupcakes",
-    "Picture": "https://res.cloudinary.com/dieu4mste/image/upload/v1610547225/Chocolate-Cupcakes-SM-5629_lm2zs5.jpg"
+    "Picture": "https://res.cloudinary.com/dieu4mste/image/upload/v1610547225/Chocolate-Cupcakes-SM-5629_lm2zs5.jpg",
+    "Description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
   },
   {
     "Name": "Cookies",
-    "Picture": "https://res.cloudinary.com/dieu4mste/image/upload/v1610547597/vegandoublechocolatechunkcookiessquare-5877-256x256_qf73p8.jpg"
-
+    "Picture": "https://res.cloudinary.com/dieu4mste/image/upload/v1610547597/vegandoublechocolatechunkcookiessquare-5877-256x256_qf73p8.jpg",
+    "Description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
   },
   {
     "Name": "Pies",
-    "Picture": "https://res.cloudinary.com/dieu4mste/image/upload/v1610547442/instagram-4_bjuahx.jpg"
+    "Picture": "https://res.cloudinary.com/dieu4mste/image/upload/v1610547442/instagram-4_bjuahx.jpg",
+    "Description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
   },
   {
     "Name": "Donuts",
-    "Picture": "https://res.cloudinary.com/dieu4mste/image/upload/v1610547443/instagram-5_mwldq2.jpg"
+    "Picture": "https://res.cloudinary.com/dieu4mste/image/upload/v1610547443/instagram-5_mwldq2.jpg",
+    "Description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
   },
   {
     "Name": "Pastries",
-    "Picture": "https://res.cloudinary.com/dieu4mste/image/upload/v1610547689/Pastry_baking-processes-e1593464950587-400x400_owkbsu.jpg"
+    "Picture": "https://res.cloudinary.com/dieu4mste/image/upload/v1610547689/Pastry_baking-processes-e1593464950587-400x400_owkbsu.jpg",
+    "Description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
   },
   {
     "Name": "Cakes",
-    "Picture": "https://res.cloudinary.com/dieu4mste/image/upload/v1610547444/instagram-1_numca2.jpg"
+    "Picture": "https://res.cloudinary.com/dieu4mste/image/upload/v1610547444/instagram-1_numca2.jpg",
+    "Description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
   }
 ]

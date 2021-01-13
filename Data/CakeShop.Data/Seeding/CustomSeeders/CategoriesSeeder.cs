@@ -29,6 +29,7 @@
                     {
                         Name = currentCategoryData.Name,
                         Picture = currentCategoryData.Picture,
+                        Description = currentCategoryData.Description,
                     };
 
                     categories.Add(category);

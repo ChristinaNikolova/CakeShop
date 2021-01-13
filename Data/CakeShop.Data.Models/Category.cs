@@ -23,6 +23,10 @@
         [Required]
         public string Picture { get; set; }
 
+        [Required]
+        [MaxLength(DataValidation.CategotyDescriptionMaxLenght)]
+        public string Description { get; set; }
+
         public virtual ICollection<Dessert> Desserts { get; set; }
 
         public virtual ICollection<Recipe> Recipes { get; set; }

@@ -9,6 +9,7 @@
     using CakeShop.Data.Repositories;
     using CakeShop.Data.Seeding;
     using CakeShop.Services.Data.Categories;
+    using CakeShop.Services.Data.Desserts;
     using CakeShop.Services.Data.Users;
     using CakeShop.Services.Mapping;
     using CakeShop.Services.Messaging;
@@ -70,6 +71,7 @@
 
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
+            services.AddTransient<IDessertsService, DessertsService>();
 
             // Add Cloudinary
             var cloudinary = new Cloudinary(new Account()
