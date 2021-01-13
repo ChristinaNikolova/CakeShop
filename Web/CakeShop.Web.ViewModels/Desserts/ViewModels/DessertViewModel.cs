@@ -13,16 +13,6 @@
 
         public string Picture { get; set; }
 
-        //public string Description { get; set; }
-
         public string CategoryName { get; set; }
-
-        //public virtual ICollection<DessertTag> DessertTags { get; set; }
-
-        //public virtual ICollection<DessertIngredient> DessertIngredients { get; set; }
-
-        //public virtual ICollection<DessertLike> DessertLikes { get; set; }
-
-        //public virtual ICollection<Review> Reviews { get; set; }
     }
 }

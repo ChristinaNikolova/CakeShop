@@ -82,10 +82,10 @@ html {
     background-color: transparent;
 }
 
-#logout-button:hover {
-  color: #F08632;
-  text-decoration: none;
-}
+    #logout-button:hover {
+        color: #F08632;
+        text-decoration: none;
+    }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
@@ -97,4 +97,8 @@ html {
     margin: 10px;
     padding: 10px;
     background-color: white;
+}
+
+#pagination-desserts {
+    margin-left: 20px;
 }
