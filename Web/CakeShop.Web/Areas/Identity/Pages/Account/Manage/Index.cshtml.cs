@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
 
     using CakeShop.Data.Models;
+    using CakeShop.Services.Data.Users;
     using CakeShop.Web.Areas.Identity.Pages.Account.InputModels;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -12,13 +13,16 @@
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly IUsersService usersService;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            IUsersService usersService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.usersService = usersService;
         }
 
         public string Username { get; set; }
@@ -58,18 +62,12 @@
                 return this.Page();
             }
 
-            var phoneNumber = await this.userManager.GetPhoneNumberAsync(user);
+            user.FirstName = this.Input.FirstName;
+            user.LastName = this.Input.LastName;
+            user.Address = this.Input.Address;
+            user.PhoneNumber = this.Input.PhoneNumber;
 
-            if (this.Input.PhoneNumber != phoneNumber)
-            {
-                var setPhoneResult = await this.userManager.SetPhoneNumberAsync(user, this.Input.PhoneNumber);
-
-                if (!setPhoneResult.Succeeded)
-                {
-                    this.StatusMessage = "Unexpected error when trying to set phone number.";
-                    return this.RedirectToPage();
-                }
-            }
+            await this.usersService.UpdateUserProfileAsync(user.Id, this.Input.FirstName, this.Input.LastName, this.Input.Address, this.Input.PhoneNumber);
 
             await this.signInManager.RefreshSignInAsync(user);
             this.StatusMessage = "Your profile has been updated";
