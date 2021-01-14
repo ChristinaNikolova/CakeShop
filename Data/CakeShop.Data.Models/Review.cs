@@ -25,8 +25,8 @@
         public virtual ApplicationUser Client { get; set; }
 
         [Required]
-        public string CupCakeId { get; set; }
+        public string DessertId { get; set; }
 
-        public virtual Dessert Cupcake { get; set; }
+        public virtual Dessert Dessert { get; set; }
     }
 }

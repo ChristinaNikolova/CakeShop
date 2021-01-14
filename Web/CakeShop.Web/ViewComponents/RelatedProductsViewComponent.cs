@@ -20,7 +20,7 @@
         {
             var model = new AllDessertsByCategoryViewModel()
             {
-                Desserts = await this.dessertsService.GetAllWithCurrentTags<DessertViewModel>(categoryId, tagTagNames),
+                Desserts = await this.dessertsService.GetAllWithCurrentTagsAsync<DessertViewModel>(categoryId, tagTagNames),
             };
 
             return this.View(model);

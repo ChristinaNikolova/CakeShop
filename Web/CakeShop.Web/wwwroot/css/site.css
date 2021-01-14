@@ -99,6 +99,10 @@ html {
     background-color: white;
 }
 
+.active-pagination {
+    background-color: #F08632;
+}
+
 .shop,
 .spad {
     padding-top: 0px;

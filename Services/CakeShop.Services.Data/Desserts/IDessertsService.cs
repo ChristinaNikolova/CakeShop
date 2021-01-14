@@ -11,6 +11,6 @@
 
         Task<T> GetDetailsAsync<T>(string id);
 
-        Task<IEnumerable<T>> GetAllWithCurrentTags<T>(string categoryId, string[] tagTagNames);
+        Task<IEnumerable<T>> GetAllWithCurrentTagsAsync<T>(string categoryId, string[] tagTagNames);
     }
 }

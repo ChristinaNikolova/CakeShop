@@ -46,8 +46,8 @@
                             </div>
                         </div>
                         <div class="product__item__text">
-                            <h6><a href="#">@dessert.Name</a></h6>
-                            <div class="product__item__price">@dessert.Price</div>
+                            <h6><a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id="@dessert.Id">@dessert.Name</a></h6>
+                            <div class="product__item__price">$ @dessert.Price</div>
                             <div class="cart_add">
                                 <a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id="@dessert.Id">See details</a>
                             </div>
@@ -57,27 +57,5 @@
             }
         </div>
     </div>
-    <div class="shop__last__option">
-        <div class="offset-5">
-            <div class="shop__pagination">
-                @if (this.Model.CurrentPage != 1)
-                {
-                    <a asp-controller="Shop" asp-action="GetAllCurrentCategory"
-                       asp-route-currentPage="@(this.Model.PreviousPage)"><span class="arrow_carrot-left"></span></a>
-                }
-
-                @for (int i = 1; i <= Model.PagesCount; i++)
-                {
-                    var active = i == this.Model.CurrentPage ? "active" : string.Empty;
-                    <a asp-controller="Shop" asp-action="GetAllCurrentCategory" asp-route-currentPage="@i" class="@active">@i</a>
-                }
-
-                @if (this.Model.CurrentPage != this.Model.PagesCount)
-                {
-                    <a asp-controller="Shop" asp-action="GetAllCurrentCategory"
-                       asp-route-currentPage="@(this.Model.NextPage)"><span class="arrow_carrot-right"></span></a>
-                }
-            </div>
-        </div>
-    </div>
+    <partial name="_ShopPaginationPartial" model="@Model" />
 </section>

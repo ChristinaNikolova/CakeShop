@@ -32,7 +32,7 @@
             return desserts;
         }
 
-        public async Task<IEnumerable<T>> GetAllWithCurrentTags<T>(string categoryId, string[] tagTagNames)
+        public async Task<IEnumerable<T>> GetAllWithCurrentTagsAsync<T>(string categoryId, string[] tagTagNames)
         {
             var desserts = await this.dessertsRepository
                 .All()

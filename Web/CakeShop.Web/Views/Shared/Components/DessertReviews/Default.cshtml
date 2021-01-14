@@ -1,0 +1,22 @@
+﻿@using CakeShop.Web.ViewModels.Reviews.ViewModels;
+@model AllReviewsViewModel;
+
+<div>
+    <h2 class="text-center">Previews(@Model.Reviews.Count())</h2>
+    <div class="row">
+        <div class="related__products__slider owl-carousel">
+            @foreach (var review in Model.Reviews)
+            {
+
+                <div class="col-lg-3">
+                    <div class="product__item">
+                        <div class="product__item__text">
+                            <div>@review.Content</div>
+                            <div class="product__item__price">@review.Points</div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
