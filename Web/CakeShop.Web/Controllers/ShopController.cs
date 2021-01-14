@@ -48,5 +48,12 @@
 
             return this.View(model);
         }
+
+        public async Task<IActionResult> DessertDetails(string id)
+        {
+            var model = await this.dessertsService.GetDetailsAsync<DessertDetailsViewModel>(id);
+
+            return this.View(model);
+        }
     }
 }

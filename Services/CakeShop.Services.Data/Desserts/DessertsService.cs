@@ -32,6 +32,28 @@
             return desserts;
         }
 
+        public async Task<IEnumerable<T>> GetAllWithCurrentTags<T>(string categoryId, string[] tagTagNames)
+        {
+            var desserts = await this.dessertsRepository
+                .All()
+                .Where(d => d.CategoryId == categoryId && d.DessertTags.Any(dt => tagTagNames.Contains(dt.Tag.Name)))
+                .To<T>()
+                .ToListAsync();
+
+            return desserts;
+        }
+
+        public async Task<T> GetDetailsAsync<T>(string id)
+        {
+            var dessert = await this.dessertsRepository
+                .All()
+                .Where(d => d.Id == id)
+                .To<T>()
+                .FirstOrDefaultAsync();
+
+            return dessert;
+        }
+
         public async Task<int> GetTotalCountDessertsByCategoryAsync(string categoryId)
         {
             var count = await this.dessertsRepository

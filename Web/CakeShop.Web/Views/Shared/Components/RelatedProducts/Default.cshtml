@@ -1,0 +1,38 @@
+﻿@using CakeShop.Web.ViewModels.Desserts.ViewModels;
+@model AllDessertsByCategoryViewModel;
+
+<section class="related-products spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="section-title">
+                    <h2>Related Products</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="related__products__slider owl-carousel">
+                @foreach (var dessert in Model.Desserts)
+                {
+
+                    <div class="col-lg-3">
+                        <div class="product__item">
+                            <div class="product__item__pic set-bg" data-setbg="@dessert.Picture">
+                                <div class="product__label">
+                                    <span>@dessert.CategoryName</span>
+                                </div>
+                            </div>
+                            <div class="product__item__text">
+                                <h6><a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id="@dessert.Id">@dessert.Name</a></h6>
+                                <div class="product__item__price">$ @dessert.Price</div>
+                                <div class="cart_add">
+                                    <a a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id="@dessert.Id">See details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

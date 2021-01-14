@@ -99,6 +99,12 @@ html {
     background-color: white;
 }
 
-#pagination-desserts {
-    margin-left: 20px;
+.shop,
+.spad {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+#category-id:hover {
+    background-color: #F08632;
 }
