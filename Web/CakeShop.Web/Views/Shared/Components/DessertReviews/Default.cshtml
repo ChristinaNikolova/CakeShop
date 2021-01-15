@@ -1,22 +1,67 @@
 ﻿@using CakeShop.Web.ViewModels.Reviews.ViewModels;
 @model AllReviewsViewModel;
 
-<div>
-    <h2 class="text-center">Previews(@Model.Reviews.Count())</h2>
-    <div class="row">
-        <div class="related__products__slider owl-carousel">
-            @foreach (var review in Model.Reviews)
-            {
-
-                <div class="col-lg-3">
-                    <div class="product__item">
-                        <div class="product__item__text">
-                            <div>@review.Content</div>
-                            <div class="product__item__price">@review.Points</div>
+<section class="testimonial spad mt-5 mb-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="section-title mt-3">
+                    <span>Reviews</span>
+                    <h2>Our client say</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="testimonial__slider owl-carousel">
+                @foreach (var review in Model.Reviews)
+                {
+                    <div class="col-lg-6 mb-3">
+                        <div class="testimonial__item">
+                            <div class="testimonial__author">
+                                <div class="testimonial__author__text">
+                                    <h6><i class="fas fa-user-edit"></i> @review.ClientUserName</h6>
+                                    <span><i class="fas fa-calendar-alt"></i> @review.CreatedOnAsString</span>
+                                </div>
+                            </div>
+                            <div class="rating">
+                                @if (review.Points == 1)
+                                {
+                                    <span class="icon_star"></span>
+                                }
+                                else if (review.Points == 2)
+                                {
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                }
+                                else if (review.Points == 3)
+                                {
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                }
+                                else if (review.Points == 4)
+                                {
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                }
+                                else if (review.Points == 5)
+                                {
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                }
+                            </div>
+                            <p>
+                                @review.Content
+                            </p>
                         </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         </div>
     </div>
-</div>
+</section>

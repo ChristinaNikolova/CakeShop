@@ -14,5 +14,8 @@
         public string ClientUserName { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public string CreatedOnAsString
+            => string.Format("{0:g}", this.CreatedOn);
     }
 }

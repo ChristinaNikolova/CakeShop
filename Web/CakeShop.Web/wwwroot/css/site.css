@@ -112,3 +112,13 @@ html {
 #category-id:hover {
     background-color: #F08632;
 }
+
+.testimonial__author__text span {
+    color: grey;
+    font-size: 12px
+}
+
+.fa-user-edit:before,
+.fa-calendar-alt:before {
+    color: #F08632;
+}
