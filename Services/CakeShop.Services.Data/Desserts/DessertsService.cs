@@ -12,10 +12,14 @@
     public class DessertsService : IDessertsService
     {
         private readonly IRepository<Dessert> dessertsRepository;
+        private readonly IRepository<DessertLike> dessertLikesRepository;
 
-        public DessertsService(IRepository<Dessert> dessertsRepository)
+        public DessertsService(
+            IRepository<Dessert> dessertsRepository,
+            IRepository<DessertLike> dessertLikesRepository)
         {
             this.dessertsRepository = dessertsRepository;
+            this.dessertLikesRepository = dessertLikesRepository;
         }
 
         public async Task<IEnumerable<T>> GetAllCurrentCategoryAsync<T>(string categoryId, int take, int skip)
@@ -62,6 +66,57 @@
                 .CountAsync();
 
             return count;
+        }
+
+        public async Task<bool> IsFavouriteAsync(string dessertId, string userId)
+        {
+            var isFavourite = await this.dessertLikesRepository
+                .All()
+                .AnyAsync(dl => dl.DessertId == dessertId && dl.ClientId == userId);
+
+            return isFavourite;
+        }
+
+        public async Task<bool> LikeDessertAsync(string dessertId, string userId)
+        {
+            var isAdded = true;
+            var isExisting = await this.IsFavouriteAsync(dessertId, userId);
+
+            if (isExisting)
+            {
+                isAdded = await this.RemoveFromFavouriteAsync(dessertId, userId, isAdded);
+            }
+            else
+            {
+                await this.AddToFavouriteAsync(dessertId, userId);
+            }
+
+            await this.dessertLikesRepository.SaveChangesAsync();
+
+            return isAdded;
+        }
+
+        private async Task AddToFavouriteAsync(string dessertId, string userId)
+        {
+            var dessertLike = new DessertLike()
+            {
+                ClientId = userId,
+                DessertId = dessertId,
+            };
+
+            await this.dessertLikesRepository.AddAsync(dessertLike);
+        }
+
+        private async Task<bool> RemoveFromFavouriteAsync(string dessertId, string userId, bool isAdded)
+        {
+            var dessertLike = await this.dessertLikesRepository
+                                .All()
+                                .FirstOrDefaultAsync(dl => dl.DessertId == dessertId && dl.ClientId == userId);
+
+            isAdded = false;
+            this.dessertLikesRepository.Delete(dessertLike);
+
+            return isAdded;
         }
     }
 }

@@ -75,6 +75,12 @@
             services.AddTransient<IDessertsService, DessertsService>();
             services.AddTransient<IReviewsService, ReviewsService>();
 
+            // Add Antiforgery
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-CSRF-TOKEN";
+            });
+
             // Add Cloudinary
             var cloudinary = new Cloudinary(new Account()
             {

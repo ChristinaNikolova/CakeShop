@@ -18,8 +18,6 @@
         </div>
     </div>
 </div>
-<!-- Breadcrumb End -->
-<!-- Shop Details Section Begin -->
 <section class="product-details spad">
     <div class="container">
         <div class="row">
@@ -34,6 +32,7 @@
                 <div class="product__details__text">
                     <a id="category-id" class="product__label" asp-area="" asp-controller="Shop" asp-action="GetAllCurrentCategory" asp-route-id="@Model.CategoryId">@Model.CategoryName</a>
                     <h4 class="text-uppercase">@Model.Name</h4>
+                    <div id="dessert-id" hidden>@Model.Id</div>
                     <h5>$ @Model.Price</h5>
                     <p>
                         @Model.Description
@@ -50,7 +49,21 @@
                             </div>
                         </div>
                         <a href="#" class="primary-btn">Add to cart</a>
-                        <a href="#" class="heart__btn"><span class="icon_heart_alt"></span></a>
+                        <form id="likes" method="post"></form>
+                        <div id="like-dessert" class="heart__btn">
+                            @if (Model.IsFavourite)
+                            {
+                                <span>
+                                    <i class="fa fa-heart"></i>
+                                </span>
+                            }
+                            else
+                            {
+                                <span>
+                                    <i class="far fa-heart"></i>
+                                </span>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -59,5 +72,10 @@
 </section>
 <vc:dessert-reviews dessert-id="@Model.Id"></vc:dessert-reviews>
 <vc:related-products category-id="@Model.CategoryId" tag-tag-names="@Model.TagNames"></vc:related-products>
+
+@section Scripts {
+    <script src="~/js/likeDessert.js" asp-append-version="true"></script>
+    <script>likeDessert();</script>
+}
 
 

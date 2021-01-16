@@ -10,6 +10,8 @@
     {
         public string Description { get; set; }
 
+        public bool IsFavourite { get; set; }
+
         public string[] TagNames { get; set; }
 
         public string[] IngredientNames { get; set; }

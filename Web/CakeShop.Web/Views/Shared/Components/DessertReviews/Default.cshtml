@@ -62,6 +62,12 @@
                     </div>
                 }
             </div>
+            @if (Model.Reviews.Count() == 0)
+            {
+                <h5 class="mb-3 ml-md-3">
+                    Sorry, but there aren't any reviews yet! :(
+                </h5>
+            }
         </div>
     </div>
 </section>

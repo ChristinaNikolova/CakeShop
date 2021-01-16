@@ -4,23 +4,28 @@
     using System.Threading.Tasks;
 
     using CakeShop.Common;
+    using CakeShop.Data.Models;
     using CakeShop.Services.Data.Categories;
     using CakeShop.Services.Data.Desserts;
     using CakeShop.Web.ViewModels.Categories.ViewModels;
     using CakeShop.Web.ViewModels.Desserts.ViewModels;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     public class ShopController : BaseController
     {
         private readonly ICategoriesService categoriesService;
         private readonly IDessertsService dessertsService;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public ShopController(
             ICategoriesService categoriesService,
-            IDessertsService dessertsService)
+            IDessertsService dessertsService,
+            UserManager<ApplicationUser> userManager)
         {
             this.categoriesService = categoriesService;
             this.dessertsService = dessertsService;
+            this.userManager = userManager;
         }
 
         public async Task<IActionResult> GetAllCategories()
@@ -51,7 +56,10 @@
 
         public async Task<IActionResult> DessertDetails(string id)
         {
+            var userId = this.userManager.GetUserId(this.User);
+
             var model = await this.dessertsService.GetDetailsAsync<DessertDetailsViewModel>(id);
+            model.IsFavourite = await this.dessertsService.IsFavouriteAsync(id, userId);
 
             return this.View(model);
         }

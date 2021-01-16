@@ -122,3 +122,12 @@ html {
 .fa-calendar-alt:before {
     color: #F08632;
 }
+
+.heart__btn {
+    font-size: 20px;
+    border: 1px solid #e1e1e1;
+    display: inline-block;
+    color: #f08632;
+    padding: 14px;
+    line-height: 16px;
+}

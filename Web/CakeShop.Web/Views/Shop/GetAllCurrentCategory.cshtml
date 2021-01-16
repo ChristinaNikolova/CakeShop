@@ -25,16 +25,6 @@
     <div class="container">
         <h2 class="mb-2 mt-3 text-center text-uppercase">@ViewData["Title"]</h2>
         <hr />
-        <div class="shop__option">
-            <div class="shop__option__right">
-                <select>
-                    <option>Default sorting</option>
-                    <option>Names</option>
-                    <option>Price</option>
-                    <option>Likes</option>
-                </select>
-            </div>
-        </div>
         <div class="row m-2">
             @foreach (var dessert in Model.Desserts)
             {
