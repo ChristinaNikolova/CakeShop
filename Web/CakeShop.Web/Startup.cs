@@ -10,6 +10,7 @@
     using CakeShop.Data.Seeding;
     using CakeShop.Services.Data.Categories;
     using CakeShop.Services.Data.Desserts;
+    using CakeShop.Services.Data.Orders;
     using CakeShop.Services.Data.Reviews;
     using CakeShop.Services.Data.Users;
     using CakeShop.Services.Mapping;
@@ -74,6 +75,7 @@
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IDessertsService, DessertsService>();
             services.AddTransient<IReviewsService, ReviewsService>();
+            services.AddTransient<IOrdersService, OrdersService>();
 
             // Add Antiforgery
             services.AddAntiforgery(options =>

@@ -40,10 +40,9 @@
         <div class="offcanvas__cart">
             <div class="offcanvas__cart__links">
                 <a href="#" class="search-switch"><img src="/img/icon/search.png" alt=""></a>
-                <a href="#"><img src="/img/icon/heart.png" alt=""></a>
+                <a asp-area="" asp-controller="Desser" asp-action="DessertDetails"><img src="/img/icon/heart.png" alt="heart-icon"></a>
             </div>
             <div class="offcanvas__cart__item">
-                <a href="#"><img src="/img/icon/cart.png" alt=""> <span>0</span></a>
                 <div class="cart__price">Cart: <span>$0.00</span></div>
             </div>
         </div>
@@ -77,8 +76,7 @@
                                     <a href="#"><img src="/img/icon/heart.png" alt=""></a>
                                 </div>
                                 <div class="header__top__right__cart">
-                                    <a href="#"><img src="/img/icon/cart.png" alt=""> <span>0</span></a>
-                                    <div class="cart__price">Cart: <span>$0.00</span></div>
+                                    <div class="cart__price">Cart: <span id="total-price">$0.00</span></div>
                                 </div>
                             </div>
                         </div>

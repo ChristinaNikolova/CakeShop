@@ -38,6 +38,10 @@
         // Order
         public const int OrderDeliveryAddressMaxLenght = 200;
 
+        public const string MinQuantity = "1";
+
+        public const string MaxQuantity = "120";
+
         // Recipe
         public const int RecipeTitleMaxLenght = 200;
 

@@ -1,9 +1,17 @@
 ﻿namespace CakeShop.Data.Models
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class DessertOrder
+    using CakeShop.Data.Common.Models;
+
+    public class DessertOrder : BaseDeletableModel<string>
     {
+        public DessertOrder()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
+
         [Required]
         public string DessertId { get; set; }
 

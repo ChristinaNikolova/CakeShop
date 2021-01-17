@@ -47,6 +47,17 @@
             return desserts;
         }
 
+        public async Task<decimal> GetDessertPriceAsync(string dessertId)
+        {
+            var price = await this.dessertsRepository
+                .All()
+                .Where(d => d.Id == dessertId)
+                .Select(d => d.Price)
+                .FirstOrDefaultAsync();
+
+            return price;
+        }
+
         public async Task<T> GetDetailsAsync<T>(string id)
         {
             var dessert = await this.dessertsRepository

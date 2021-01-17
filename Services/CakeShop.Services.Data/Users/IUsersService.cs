@@ -7,5 +7,7 @@
     public interface IUsersService
     {
         Task<ApplicationUser> UpdateUserProfileAsync(string id, string firstName, string lastName, string address, string phoneNumber);
+
+        Task<string> GetUserAddressByIdAsync(string userId);
     }
 }

@@ -20,6 +20,8 @@
 
         public const string ErrorMessagePasswords = "The password and confirmation password do not match.";
 
+        public const string ErrorDessertQuantity = "Invalid quantity! Quantity shoud be between 1 and 120.";
+
         // messages SendGrid
         public const string CakeShopEmail = "christina.b.nikolova@gmail.com";
 
@@ -33,5 +35,8 @@
 
         // pagination
         public const int DessertsPerPage = 8;
+
+        // basket
+        public const string AddedToBasketSuccessfully = "Successfully added!";
     }
 }

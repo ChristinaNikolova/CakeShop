@@ -16,5 +16,7 @@
         Task<bool> LikeDessertAsync(string dessertId, string userId);
 
         Task<bool> IsFavouriteAsync(string dessertId, string userId);
+
+        Task<decimal> GetDessertPriceAsync(string dessertId);
     }
 }

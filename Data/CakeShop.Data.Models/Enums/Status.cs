@@ -3,9 +3,10 @@
     public enum Status
     {
         Default = 0,
-        Processing = 1,
-        Approved = 2,
-        Cancelled = 3,
-        Delivered = 4,
+        NotFinish = 1,
+        Processing = 2,
+        Approved = 3,
+        Cancelled = 4,
+        Delivered = 5,
     }
 }

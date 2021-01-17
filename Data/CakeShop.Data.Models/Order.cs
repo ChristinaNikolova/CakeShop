@@ -1,6 +1,7 @@
 ﻿namespace CakeShop.Data.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using CakeShop.Common;
@@ -12,6 +13,10 @@
         public Order()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.Status = Status.NotFinish;
+            this.IsPaid = false;
+            this.TotalPrice = 0;
+            this.DessertOrders = new HashSet<DessertOrder>();
         }
 
         public decimal TotalPrice { get; set; }
@@ -28,5 +33,7 @@
         public string ClientId { get; set; }
 
         public virtual ApplicationUser Client { get; set; }
+
+        public virtual ICollection<DessertOrder> DessertOrders { get; set; }
     }
 }
