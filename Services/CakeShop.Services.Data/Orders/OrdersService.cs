@@ -13,18 +13,15 @@
     public class OrdersService : IOrdersService
     {
         private readonly IRepository<Order> ordersRepository;
-        private readonly IRepository<DessertOrder> dessertOrdersRepository;
         private readonly IUsersService usersService;
         private readonly IDessertsService dessertsService;
 
         public OrdersService(
             IRepository<Order> ordersRepository,
-            IRepository<DessertOrder> dessertOrdersRepository,
             IUsersService usersService,
             IDessertsService dessertsService)
         {
             this.ordersRepository = ordersRepository;
-            this.dessertOrdersRepository = dessertOrdersRepository;
             this.usersService = usersService;
             this.dessertsService = dessertsService;
         }
@@ -84,7 +81,7 @@
             return order.Id;
         }
 
-        public async Task<decimal> GetTotalPriceCurrentOrderAsync(string orderId)
+        public async Task<decimal> GetTotalPriceCurrentOrderByOrderAsync(string orderId)
         {
             var totalSum = await this.ordersRepository
                 .All()
@@ -93,6 +90,17 @@
                 .FirstOrDefaultAsync();
 
             return totalSum;
+        }
+
+        public async Task<decimal> GetTotalPriceCurrentOrderByUserAsync(string userId)
+        {
+            var totalPrice = await this.ordersRepository
+                 .All()
+                 .Where(o => o.ClientId == userId && o.Status == Status.NotFinish)
+                 .Select(o => o.TotalPrice)
+                 .FirstOrDefaultAsync();
+
+            return totalPrice;
         }
     }
 }

@@ -6,6 +6,8 @@
     {
         Task<string> AddToBasketAsync(string userId, string dessertId, int quantity);
 
-        Task<decimal> GetTotalPriceCurrentOrderAsync(string orderId);
+        Task<decimal> GetTotalPriceCurrentOrderByOrderAsync(string orderId);
+
+        Task<decimal> GetTotalPriceCurrentOrderByUserAsync(string userId);
     }
 }

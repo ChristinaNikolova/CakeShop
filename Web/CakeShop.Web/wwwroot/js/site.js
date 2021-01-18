@@ -1,4 +1,15 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function loadBasketTotalPrice() {
+    var token = $("#load-basket-total-price input[name=__RequestVerificationToken]").val();
 
-// Write your JavaScript code.
+    $.ajax({
+        url: "/Orders/GetTotalPrice/",
+        type: "POST",
+        data: JSON.stringify(),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: { 'X-CSRF-TOKEN': token },
+        success: function (data) {
+            $('#total-price').html('$' + `${data.formatTotalPrice}`);
+        }
+    });
+};

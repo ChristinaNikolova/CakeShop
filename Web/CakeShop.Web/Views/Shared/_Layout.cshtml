@@ -111,6 +111,7 @@
                 </div>
             </div>
         </div>
+        <form id="load-basket-total-price" method="post"></form>
     </header>
     <!-- Header Section End -->
 
@@ -203,6 +204,8 @@
     <script src="~/js/owl.carousel.min.js"></script>
     <script src="~/js/jquery.nicescroll.min.js"></script>
     <script src="~/js/main.js"></script>
+
+    <script>loadBasketTotalPrice();</script>
 
     @await this.RenderSectionAsync("Scripts", required: false)
 </body>
