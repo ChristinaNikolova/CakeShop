@@ -38,5 +38,7 @@
 
         // basket
         public const string AddedToBasketSuccessfully = "Successfully added!";
+
+        public const decimal EmptyBasketPrice = 0;
     }
 }

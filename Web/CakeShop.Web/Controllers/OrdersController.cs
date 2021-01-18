@@ -55,20 +55,16 @@
         [HttpPost]
         public async Task<ActionResult<UserBasketViewModel>> GetTotalPrice()
         {
-            //to do without user
             var userId = this.userManager.GetUserId(this.User);
+
+            if (userId == null)
+            {
+                return new UserBasketViewModel { TotalPrice = GlobalConstants.EmptyBasketPrice };
+            }
 
             var totalPrice = await this.ordersService.GetTotalPriceCurrentOrderByUserAsync(userId);
 
             return new UserBasketViewModel { TotalPrice = totalPrice };
         }
-    }
-
-    public class UserBasketViewModel
-    {
-        public decimal TotalPrice { get; set; }
-
-        public string FormatTotalPrice
-            => this.TotalPrice.ToString("F2");
     }
 }

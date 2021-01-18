@@ -1,31 +1,7 @@
 ﻿@using CakeShop.Web.ViewModels.Desserts.ViewModels;
 @model DessertDetailsViewModel;
-@if (this.TempData["ErrorMessage"] != null)
-{
-    <div id="notification" class="alert alert-danger text-center alert-dismissible fade show custom-margin-identity" role="alert">
-        @this.TempData["ErrorMessage"]
-        <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">OK</span>
-        </button>
-    </div>
-}
-<div class="breadcrumb-option">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="breadcrumb__text">
-                    <h2 class="offset-1">Product detail</h2>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="breadcrumb__links">
-                    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    <a asp-area="" asp-controller="Shop" asp-action="GetAllCategories">Shop</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+<partial name="_DessertDetailsBreadCrumbPartial" />
 <section class="product-details spad">
     <div class="container">
         <div class="row">

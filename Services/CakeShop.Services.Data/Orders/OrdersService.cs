@@ -37,43 +37,11 @@
 
             if (hasUserAlreadyBasket)
             {
-                order = await this.ordersRepository
-                    .All()
-                    .FirstOrDefaultAsync(o => o.ClientId == userId && o.Status == Status.NotFinish);
-
-                var dessertOrder = new DessertOrder()
-                {
-                    DessertId = dessertId,
-                    OrderId = order.Id,
-                    Quantity = quantity,
-                };
-
-                order.DessertOrders.Add(dessertOrder);
-                order.TotalPrice += dessertPrice * quantity;
-
-                this.ordersRepository.Update(order);
+                order = await this.AddDessertToAlreadyExistingOrderAsync(userId, dessertId, quantity, dessertPrice, order);
             }
             else
             {
-                var clientAddress = await this.usersService.GetUserAddressByIdAsync(userId);
-
-                order = new Order()
-                {
-                    ClientId = userId,
-                    DeliveryAddress = clientAddress,
-                };
-
-                var dessertOrder = new DessertOrder()
-                {
-                    DessertId = dessertId,
-                    OrderId = order.Id,
-                    Quantity = quantity,
-                };
-
-                order.DessertOrders.Add(dessertOrder);
-                order.TotalPrice += dessertPrice * quantity;
-
-                await this.ordersRepository.AddAsync(order);
+                order = await this.AddDessertToNewOrderAsync(userId, dessertId, quantity, dessertPrice, order);
             }
 
             await this.ordersRepository.SaveChangesAsync();
@@ -101,6 +69,50 @@
                  .FirstOrDefaultAsync();
 
             return totalPrice;
+        }
+
+        private async Task<Order> AddDessertToNewOrderAsync(string userId, string dessertId, int quantity, decimal dessertPrice, Order order)
+        {
+            var clientAddress = await this.usersService.GetUserAddressByIdAsync(userId);
+
+            order = new Order()
+            {
+                ClientId = userId,
+                DeliveryAddress = clientAddress,
+            };
+
+            var dessertOrder = new DessertOrder()
+            {
+                DessertId = dessertId,
+                OrderId = order.Id,
+                Quantity = quantity,
+            };
+
+            order.DessertOrders.Add(dessertOrder);
+            order.TotalPrice += dessertPrice * quantity;
+
+            await this.ordersRepository.AddAsync(order);
+            return order;
+        }
+
+        private async Task<Order> AddDessertToAlreadyExistingOrderAsync(string userId, string dessertId, int quantity, decimal dessertPrice, Order order)
+        {
+            order = await this.ordersRepository
+                                .All()
+                                .FirstOrDefaultAsync(o => o.ClientId == userId && o.Status == Status.NotFinish);
+
+            var dessertOrder = new DessertOrder()
+            {
+                DessertId = dessertId,
+                OrderId = order.Id,
+                Quantity = quantity,
+            };
+
+            order.DessertOrders.Add(dessertOrder);
+            order.TotalPrice += dessertPrice * quantity;
+
+            this.ordersRepository.Update(order);
+            return order;
         }
     }
 }
