@@ -18,5 +18,9 @@
         Task<bool> IsFavouriteAsync(string dessertId, string userId);
 
         Task<decimal> GetDessertPriceAsync(string dessertId);
+
+        Task<IEnumerable<T>> GetUserFavouriteDessertsAsync<T>(string userId);
+
+        Task<IEnumerable<T>> UnlikeDessertAsync<T>(string dessertId, string userId);
     }
 }

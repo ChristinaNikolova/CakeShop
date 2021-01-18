@@ -79,6 +79,18 @@
             return count;
         }
 
+        public async Task<IEnumerable<T>> GetUserFavouriteDessertsAsync<T>(string userId)
+        {
+            var desserts = await this.dessertsRepository
+                .All()
+                .Where(d => d.DessertLikes.Any(dl => dl.ClientId == userId))
+                .OrderBy(d => d.Name)
+                .To<T>()
+                .ToListAsync();
+
+            return desserts;
+        }
+
         public async Task<bool> IsFavouriteAsync(string dessertId, string userId)
         {
             var isFavourite = await this.dessertLikesRepository
@@ -105,6 +117,17 @@
             await this.dessertLikesRepository.SaveChangesAsync();
 
             return isAdded;
+        }
+
+        public async Task<IEnumerable<T>> UnlikeDessertAsync<T>(string dessertId, string userId)
+        {
+            await this.RemoveFromFavouriteAsync(dessertId, userId, true);
+
+            await this.dessertLikesRepository.SaveChangesAsync();
+
+            var favouriteDesserts = await this.GetUserFavouriteDessertsAsync<T>(userId);
+
+            return favouriteDesserts;
         }
 
         private async Task AddToFavouriteAsync(string dessertId, string userId)

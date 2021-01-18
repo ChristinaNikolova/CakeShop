@@ -1,0 +1,91 @@
+﻿@using CakeShop.Web.ViewModels.Desserts.ViewModels;
+@model AllFavouriteDessertsViewModel;
+
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="breadcrumb__text">
+                    <h2 class="mb-4">My Favourite Desserts</h2>
+                    <hr />
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="breadcrumb__links">
+                    <a href="./index.html">Home</a>
+                    <span>Wishlist</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="wishlist spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="wishlist__cart__table">
+                    <form id="remove-from-favourite" method="post"></form>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Category</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            @foreach (var dessert in Model.FavouriteDesserts)
+                            {
+                                <tr>
+                                    <td class="product__cart__item">
+                                        <div class="product__cart__item__pic">
+                                            <img class="small-pic" src="@dessert.Picture" alt="dessert">
+                                        </div>
+                                        <div class="product__cart__item__text">
+                                            <h6>@dessert.Name</h6>
+                                        </div>
+                                    </td>
+                                    <td class="cart__price">$ @dessert.Price</td>
+                                    <td class="cart__btn"><a asp-area="" asp-controller="Shop" asp-action="GetAllCurrentCategory" asp-route-id="@dessert.CategoryId" class="color-black">@dessert.CategoryName</a></td>
+                                    <td class="cart__btn"><a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id="@dessert.Id" class="primary-btn">See details</a></td>
+                                    <td id="@dessert.Id" class="cart__close"><span class="icon_close"></span></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    [...document.getElementsByClassName("cart__close")].forEach((element) => {
+        element.addEventListener("click", removeFromFavourite);
+    });
+
+    function removeFromFavourite(event) {
+        var token = $("#remove-from-favourite input[name=__RequestVerificationToken]").val();
+        var dessertId = event.target.parentNode.id;
+
+        $.ajax({
+            url: "/Desserts/RemoveFromFavouriteDesserts/",
+            type: "POST",
+            data: JSON.stringify(dessertId),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            headers: { 'X-CSRF-TOKEN': token },
+            success: function (data) {
+                var result = "";
+                //todo href
+                data.favouriteDesserts.forEach((dessert) => {
+                    result += `<tr><td class="product__cart__item"><div class="product__cart__item__pic"><img class="small-pic" src="${dessert.picture}" alt="dessert"></div><div class="product__cart__item__text"><h6>${dessert.name}</h6></div></td><td class="cart__price">$ ${dessert.formattedPrice}</td><td class="cart__btn"><a asp-area="" asp-controller="Shop" asp-action="GetAllCurrentCategory" asp-route-id="dessert.categoryId" class="color-black">${dessert.categoryName}</a></td><td class="cart__btn"><a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id=dessert.id" class="primary-btn">See details</a></td><td id="dessert.id" class="cart__close"><span class="icon_close"></span></td></tr>`;
+                });
+
+                $('#table-body').html(result);
+            }
+        });
+    }
+</script>

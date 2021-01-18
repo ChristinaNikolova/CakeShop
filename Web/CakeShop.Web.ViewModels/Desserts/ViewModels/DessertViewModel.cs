@@ -11,6 +11,9 @@
 
         public decimal Price { get; set; }
 
+        public string FormattedPrice
+            => this.Price.ToString("F2");
+
         public string Picture { get; set; }
 
         public string CategoryName { get; set; }
