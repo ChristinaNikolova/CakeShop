@@ -22,5 +22,7 @@
         Task<IEnumerable<T>> GetUserFavouriteDessertsAsync<T>(string userId);
 
         Task<IEnumerable<T>> UnlikeDessertAsync<T>(string dessertId, string userId);
+
+        Task<IEnumerable<T>> OrderDessertsAsync<T>(string targetCriteria, string categoryId);
     }
 }

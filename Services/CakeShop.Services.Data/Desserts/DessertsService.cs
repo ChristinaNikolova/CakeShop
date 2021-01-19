@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using CakeShop.Common;
     using CakeShop.Data.Common.Repositories;
     using CakeShop.Data.Models;
     using CakeShop.Services.Mapping;
@@ -20,6 +21,36 @@
         {
             this.dessertsRepository = dessertsRepository;
             this.dessertLikesRepository = dessertLikesRepository;
+        }
+
+        public async Task<IEnumerable<T>> OrderDessertsAsync<T>(string targetCriteria, string categoryId)
+        {
+            var query = this.dessertsRepository
+                .All()
+                .Where(d => d.CategoryId == categoryId)
+                .AsQueryable();
+
+            if (targetCriteria.ToLower() == GlobalConstants.CriteriaPrice)
+            {
+                query = query
+                     .OrderBy(d => d.Price);
+            }
+            else if (targetCriteria.ToLower() == GlobalConstants.CriteriaName)
+            {
+                query = query
+                    .OrderBy(d => d.Name);
+            }
+            else
+            {
+                query = query
+                    .OrderByDescending(d => d.CreatedOn);
+            }
+
+            var orderedDesserts = await query
+                .To<T>()
+                .ToListAsync();
+
+            return orderedDesserts;
         }
 
         public async Task<IEnumerable<T>> GetAllCurrentCategoryAsync<T>(string categoryId, int take, int skip)

@@ -8,6 +8,7 @@
     using CakeShop.Services.Data.Categories;
     using CakeShop.Services.Data.Desserts;
     using CakeShop.Web.ViewModels.Categories.ViewModels;
+    using CakeShop.Web.ViewModels.Desserts.InputModels;
     using CakeShop.Web.ViewModels.Desserts.ViewModels;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -62,6 +63,23 @@
             model.IsFavourite = await this.dessertsService.IsFavouriteAsync(id, userId);
 
             return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<OrderDessertsViewModel>> Order([FromBody] OrderDessertsInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction(nameof(this.GetAllCurrentCategory), new { id = input.CategoryId });
+            }
+
+            var orderedDesserts = await this.dessertsService.OrderDessertsAsync<DessertViewModel>(input.TargetCriteria, input.CategoryId);
+
+            return new OrderDessertsViewModel
+            {
+                OrderedDesserts = orderedDesserts,
+                TargetCriteria = input.TargetCriteria,
+            };
         }
     }
 }

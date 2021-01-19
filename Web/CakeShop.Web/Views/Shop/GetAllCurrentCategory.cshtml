@@ -3,29 +3,17 @@
 
 @{
     ViewData["Title"] = Model.Desserts.FirstOrDefault().CategoryName;
+    var categoryId = Model.Desserts.FirstOrDefault().CategoryId;
 }
-<div class="breadcrumb-option">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="breadcrumb__text">
-                    <h2>Shop</h2>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="breadcrumb__links">
-                    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    <span>Shop</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+<partial name="_GetAllCurrentCategoryBreadCrumbPartial" />
 <section class="shop spad">
     <div class="container">
+        <partial name="_OrderDessertsPartial" />
         <h2 class="mb-2 mt-3 text-center text-uppercase">@ViewData["Title"]</h2>
+        <div id="category-id" hidden>@categoryId</div>
         <hr />
-        <div class="row m-2">
+        <div id="desserts" class="row m-2">
             @foreach (var dessert in Model.Desserts)
             {
                 <div class="col-lg-3 col-md-6 col-sm-6">
@@ -49,3 +37,7 @@
     </div>
     <partial name="_ShopPaginationPartial" model="@Model" />
 </section>
+
+@section Scripts {
+    <script src="~/js/orderDesserts.js" asp-append-version="true"></script>
+}

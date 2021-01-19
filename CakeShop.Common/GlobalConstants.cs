@@ -40,5 +40,10 @@
         public const string AddedToBasketSuccessfully = "Successfully added!";
 
         public const decimal EmptyBasketPrice = 0;
+
+        // filter criterias
+        public const string CriteriaPrice = "price";
+
+        public const string CriteriaName = "name";
     }
 }
