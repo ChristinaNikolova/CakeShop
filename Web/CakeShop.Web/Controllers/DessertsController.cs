@@ -47,7 +47,6 @@
         [HttpPost]
         public async Task<ActionResult<AllFavouriteDessertsViewModel>> RemoveFromFavouriteDesserts([FromBody] string dessertId)
         {
-            //validate
             var userId = this.userManager.GetUserId(this.User);
 
             var favouriteDessets = await this.dessertsService.UnlikeDessertAsync<DessertViewModel>(dessertId, userId);
