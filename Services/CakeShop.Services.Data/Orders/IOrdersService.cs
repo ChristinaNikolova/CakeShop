@@ -16,5 +16,7 @@
         Task<IEnumerable<T>> GetDessertsInBasketAsync<T>(string userId);
 
         Task<IEnumerable<T>> RemoveFromBasketAsync<T>(string dessertOrderId, string userId);
+
+        Task<string> GetOrderIdByUserAsync(string userId);
     }
 }

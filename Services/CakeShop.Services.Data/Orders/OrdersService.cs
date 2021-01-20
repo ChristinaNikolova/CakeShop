@@ -98,7 +98,7 @@
                 .FirstOrDefaultAsync(o => o.ClientId == userId && o.Status == Status.NotFinish);
 
             var dessertPrice = await this.dessertsService.GetDessertPriceAsync(dessertOrderToRemove.DessertId);
-            order.TotalPrice -= dessertPrice;
+            order.TotalPrice -= dessertPrice * dessertOrderToRemove.Quantity;
 
             this.dessertOrdersRepository.Delete(dessertOrderToRemove);
             this.ordersRepository.Update(order);
@@ -118,6 +118,17 @@
                 .SumAsync(deo => deo.Quantity);
 
             return quantities;
+        }
+
+        public async Task<string> GetOrderIdByUserAsync(string userId)
+        {
+            var orderId = await this.ordersRepository
+                .All()
+                .Where(o => o.ClientId == userId && o.Status == Status.NotFinish)
+                .Select(o => o.Id)
+                .FirstOrDefaultAsync();
+
+            return orderId;
         }
 
         private async Task<Order> AddDessertToNewOrderAsync(string userId, string dessertId, int quantity, decimal dessertPrice, Order order)

@@ -81,7 +81,7 @@
         }
 
         [HttpPost]
-        public async Task<ActionResult<AllDessertsBasketViewModel>> RemoveFromBasket([FromBody] RemoveFromOrderInputModel input)
+        public async Task<ActionResult<RemoveFromOrderViewModel>> RemoveFromBasket([FromBody] RemoveFromOrderInputModel input)
         {
             if (string.IsNullOrWhiteSpace(input.Id))
             {
@@ -92,7 +92,16 @@
 
             var dessertsInBasket = await this.ordersService.RemoveFromBasketAsync<DessertBasketViewModel>(input.Id, userId);
 
-            return new AllDessertsBasketViewModel { DessertsInBasket = dessertsInBasket };
+            var totalPrice = await this.ordersService.GetTotalPriceCurrentOrderByUserAsync(userId);
+            var orderId = await this.ordersService.GetOrderIdByUserAsync(userId);
+            var quantities = await this.ordersService.GetTotalQuantitiesCurrentOrderAsync(orderId);
+
+            return new RemoveFromOrderViewModel
+            {
+                DessertsInBasket = dessertsInBasket,
+                TotalPrice = totalPrice,
+                Quantities = quantities,
+            };
         }
     }
 }

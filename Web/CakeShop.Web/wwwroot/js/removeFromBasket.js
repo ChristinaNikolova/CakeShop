@@ -41,6 +41,9 @@
                                 </tr>`
             });
 
+            $('.total-price').html(data.formattedTotalPrice);
+            $('#quantities').html(data.formattedQuantities);
+
             if (!result) {
                 $('#empty-result').html(`<h5>You don't have any desserts in your basket yet!<a href="/Shop/GetAllCategories" class="color-black"> Go</a> and check out desserts!</h5>`);
             }
