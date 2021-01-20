@@ -1,0 +1,13 @@
+﻿@using CakeShop.Web.ViewModels.Orders.ViewModels;
+@model OrderTotalPriceAndQuantitiesViewModel;
+
+<div class="col-lg-4">
+    <div class="cart__total">
+        <h6>Cart total</h6>
+        <ul>
+            <li>Total Quantities: <span> @Model.Quantities pcs</span></li>
+            <li>Total Sum: <span>$ @Model.TotalPrice</span></li>
+        </ul>
+        <a href="#" class="primary-btn hover-effect-orange">Proceed to checkout</a>
+    </div>
+</div>

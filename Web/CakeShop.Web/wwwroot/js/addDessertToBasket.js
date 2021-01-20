@@ -15,7 +15,7 @@
             dataType: "json",
             headers: { 'X-CSRF-TOKEN': token },
             success: function (data) {
-                $('#total-price').html('$' + `${data.formatTotalPrice}`);
+                $('.total-price').html('$' + `${data.formatTotalPrice}`);
 
                 if (data.isSuccess) {
                     document.getElementById('added-message-error').style.display = "none";

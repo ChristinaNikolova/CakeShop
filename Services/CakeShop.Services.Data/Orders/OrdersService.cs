@@ -101,6 +101,16 @@
             return desserts;
         }
 
+        public async Task<int> GetTotalQuantitiesCurrentOrderAsync(string orderId)
+        {
+            var quantities = await this.dessertOrdersRepository
+                .All()
+                .Where(deo => deo.OrderId == orderId)
+                .SumAsync(deo => deo.Quantity);
+
+            return quantities;
+        }
+
         private async Task<Order> AddDessertToNewOrderAsync(string userId, string dessertId, int quantity, decimal dessertPrice, Order order)
         {
             var clientAddress = await this.usersService.GetUserAddressByIdAsync(userId);

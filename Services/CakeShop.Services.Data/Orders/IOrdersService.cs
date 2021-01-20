@@ -11,6 +11,8 @@
 
         Task<decimal> GetTotalPriceCurrentOrderByUserAsync(string userId);
 
+        Task<int> GetTotalQuantitiesCurrentOrderAsync(string orderId);
+
         Task<IEnumerable<T>> GetDessertsInBasketAsync<T>(string userId);
 
         Task<IEnumerable<T>> RemoveFromBasketAsync<T>(string dessertOrderId, string userId);

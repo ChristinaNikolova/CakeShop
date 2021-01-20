@@ -1,0 +1,78 @@
+﻿@using CakeShop.Web.ViewModels.Orders.ViewModels;
+@model AllDessertsBasketViewModel;
+
+@{
+    var orderId = Model.DessertsInBasket.Select(deo => deo.OrderId).FirstOrDefault();
+}
+<partial name="_SeeBasketBreadCrumbPartial" />
+<section class="shopping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="shopping__cart__table">
+                    <form id="remove-dessert-from-basket" method="post"></form>
+                    <div id="empty-result">
+                        @if (Model.DessertsInBasket.Count() == 0)
+                        {
+
+                            <h5>You don't have any desserts in your basket yet!<a asp-area="" asp-controller="Shop" asp-action="GetAllCategories" class="color-black"> Go</a> and check out desserts!</h5>
+                        }
+                        else
+                        {
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="desserts-in-basket">
+                                    @foreach (var dessert in Model.DessertsInBasket)
+                                    {
+                                        <tr>
+                                            <td class="product__cart__item">
+                                                <div class="product__cart__item__pic">
+                                                    <a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id="@dessert.DessertId">
+                                                        <img class="small-pic" src="@dessert.DessertPicture" alt="dessert">
+                                                    </a>
+                                                </div>
+                                                <div class="product__cart__item__text">
+                                                    <h6><a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id="@dessert.DessertId" class="color-black">@dessert.DessertName</a></h6>
+                                                    <h5>$ @dessert.DessertPrice</h5>
+                                                </div>
+                                            </td>
+                                            <td class="quantity__item">
+                                                <div class="quantity">
+                                                    <div class="dessert-quantity">
+                                                        @dessert.Quantity
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="cart__price">$ @dessert.TotalPrice</td>
+                                            <td class="cart__close"><span id="@dessert.Id" class="icon_close remove-from-basket"></span></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="continue__btn">
+                            <a asp-area="" asp-controller="Shop" asp-action="GetAllCategories" class="hover-effect-orange mb-2">Continue Shopping</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <vc:get-total-price-and-quantities-current-order order-id=@orderId></vc:get-total-price-and-quantities-current-order>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/seeBasket.js" asp-append-version="true"></script>
+    <script>seeBasket();</script>
+}

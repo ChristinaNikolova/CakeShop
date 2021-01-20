@@ -7,6 +7,8 @@
     {
         public string Id { get; set; }
 
+        public string OrderId { get; set; }
+
         public string DessertId { get; set; }
 
         public string DessertName { get; set; }

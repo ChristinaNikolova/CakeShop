@@ -53,7 +53,6 @@
             };
         }
 
-        //orderController
         public async Task<IActionResult> SeeBasket()
         {
             var userId = this.userManager.GetUserId(this.User);
@@ -69,6 +68,7 @@
         [HttpPost]
         public async Task<ActionResult<UserBasketViewModel>> GetTotalPrice()
         {
+            ;
             var userId = this.userManager.GetUserId(this.User);
 
             if (userId == null)
@@ -82,9 +82,12 @@
         }
 
         [HttpPost]
-        public async Task<ActionResult<AllDessertsBasketViewModel>> RemoveFromBasket([FromBody] RemoveFromBasketInputModel input)
+        public async Task<ActionResult<AllDessertsBasketViewModel>> RemoveFromBasket([FromBody] RemoveFromOrderInputModel input)
         {
-            //todo validate
+            if (string.IsNullOrWhiteSpace(input.Id))
+            {
+                return this.RedirectToAction(nameof(this.SeeBasket));
+            }
 
             var userId = this.userManager.GetUserId(this.User);
 
@@ -92,11 +95,5 @@
 
             return new AllDessertsBasketViewModel { DessertsInBasket = dessertsInBasket };
         }
-    }
-
-    public class RemoveFromBasketInputModel
-    {
-        //validate
-        public string Id { get; set; }
     }
 }
