@@ -1,5 +1,6 @@
 ﻿namespace CakeShop.Services.Data.Orders
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -8,20 +9,24 @@
     using CakeShop.Data.Models.Enums;
     using CakeShop.Services.Data.Desserts;
     using CakeShop.Services.Data.Users;
+    using CakeShop.Services.Mapping;
     using Microsoft.EntityFrameworkCore;
 
     public class OrdersService : IOrdersService
     {
         private readonly IRepository<Order> ordersRepository;
+        private readonly IRepository<DessertOrder> dessertOrdersRepository;
         private readonly IUsersService usersService;
         private readonly IDessertsService dessertsService;
 
         public OrdersService(
             IRepository<Order> ordersRepository,
+            IRepository<DessertOrder> dessertOrdersRepository,
             IUsersService usersService,
             IDessertsService dessertsService)
         {
             this.ordersRepository = ordersRepository;
+            this.dessertOrdersRepository = dessertOrdersRepository;
             this.usersService = usersService;
             this.dessertsService = dessertsService;
         }
@@ -69,6 +74,31 @@
                  .FirstOrDefaultAsync();
 
             return totalPrice;
+        }
+
+        public async Task<IEnumerable<T>> GetDessertsInBasketAsync<T>(string userId)
+        {
+            var desserts = await this.dessertOrdersRepository
+                .All()
+                .Where(deo => deo.Order.Status == Status.NotFinish && deo.Order.ClientId == userId)
+                .To<T>()
+                .ToListAsync();
+
+            return desserts;
+        }
+
+        public async Task<IEnumerable<T>> RemoveFromBasketAsync<T>(string dessertOrderId, string userId)
+        {
+            var dessertOrderToRemove = await this.dessertOrdersRepository
+                .All()
+                .FirstOrDefaultAsync(deo => deo.Id == dessertOrderId);
+
+            this.dessertOrdersRepository.Delete(dessertOrderToRemove);
+            await this.dessertOrdersRepository.SaveChangesAsync();
+
+            var desserts = await this.GetDessertsInBasketAsync<T>(userId);
+
+            return desserts;
         }
 
         private async Task<Order> AddDessertToNewOrderAsync(string userId, string dessertId, int quantity, decimal dessertPrice, Order order)

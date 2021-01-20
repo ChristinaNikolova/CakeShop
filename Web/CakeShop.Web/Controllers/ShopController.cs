@@ -7,9 +7,11 @@
     using CakeShop.Data.Models;
     using CakeShop.Services.Data.Categories;
     using CakeShop.Services.Data.Desserts;
+    using CakeShop.Services.Data.Orders;
     using CakeShop.Web.ViewModels.Categories.ViewModels;
     using CakeShop.Web.ViewModels.Desserts.InputModels;
     using CakeShop.Web.ViewModels.Desserts.ViewModels;
+    using CakeShop.Web.ViewModels.Orders.ViewModels;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
@@ -17,15 +19,18 @@
     {
         private readonly ICategoriesService categoriesService;
         private readonly IDessertsService dessertsService;
+        private readonly IOrdersService ordersService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public ShopController(
             ICategoriesService categoriesService,
             IDessertsService dessertsService,
+            IOrdersService ordersService,
             UserManager<ApplicationUser> userManager)
         {
             this.categoriesService = categoriesService;
             this.dessertsService = dessertsService;
+            this.ordersService = ordersService;
             this.userManager = userManager;
         }
 
@@ -80,6 +85,19 @@
                 OrderedDesserts = orderedDesserts,
                 TargetCriteria = input.TargetCriteria,
             };
+        }
+
+        //orderController
+        public async Task<IActionResult> SeeBasket()
+        {
+            var userId = this.userManager.GetUserId(this.User);
+
+            var model = new AllDessertsBasketViewModel()
+            {
+                DessertsInBasket = await this.ordersService.GetDessertsInBasketAsync<DessertBasketViewModel>(userId),
+            };
+
+            return this.View(model);
         }
     }
 }

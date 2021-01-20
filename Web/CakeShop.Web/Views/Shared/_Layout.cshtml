@@ -33,17 +33,15 @@
     <div id="preloder">
         <div class="loader"></div>
     </div>
-
     <!-- Offcanvas Menu Begin -->
     <div class="offcanvas-menu-overlay"></div>
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__cart">
             <div class="offcanvas__cart__links">
-                <a href="#" class="search-switch"><img src="/img/icon/search.png" alt=""></a>
-                <a asp-area="" asp-controller="Desser" asp-action="DessertDetails"><img src="/img/icon/heart.png" alt="heart-icon"></a>
+                <a asp-area="" asp-controller="Desserts" asp-action="FavouriteDesserts"><img src="/img/icon/heart.png" alt="heart-icon"></a>
             </div>
             <div class="offcanvas__cart__item">
-                <div class="cart__price">Cart: <span>$0.00</span></div>
+                <div class="cart__price"><a asp-area="" asp-controller="Shop" asp-action="SeeBasket" class="color-black">Cart:</a> <span>$0.00</span></div>
             </div>
         </div>
         <div class="offcanvas__logo">
@@ -72,11 +70,12 @@
                             </div>
                             <div class="header__top__right">
                                 <div class="header__top__right__links">
-                                    <a href="#" class="search-switch"><i class="far fa-bookmark"></i></a>
+                                    <a href="#" class="search-switch"><i class="fas fa-truck"></i></a>
+                                    <a href="#" class="search-switch"><i class="fas fa-book"></i></a>
                                     <a asp-area="" asp-controller="Desserts" asp-action="FavouriteDesserts"><img src="/img/icon/heart.png" alt="heart-icon"></a>
                                 </div>
                                 <div class="header__top__right__cart">
-                                    <div class="cart__price">Cart: <span id="total-price">$0.00</span></div>
+                                    <div class="cart__price"><a asp-area="" asp-controller="Shop" asp-action="SeeBasket" class="color-black">Cart:</a> <span id="total-price">$0.00</span></div>
                                 </div>
                             </div>
                         </div>

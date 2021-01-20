@@ -7,6 +7,7 @@
     using CakeShop.Services.Data.Orders;
     using CakeShop.Web.ViewModels.DessertOrders.ViewModels;
     using CakeShop.Web.ViewModels.Orders.InputModels;
+    using CakeShop.Web.ViewModels.Orders.ViewModels;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
@@ -66,5 +67,23 @@
 
             return new UserBasketViewModel { TotalPrice = totalPrice };
         }
+
+        [HttpPost]
+        public async Task<ActionResult<AllDessertsBasketViewModel>> RemoveFromBasket([FromBody] RemoveFromBasketInputModel input)
+        {
+            //todo validate
+
+            var userId = this.userManager.GetUserId(this.User);
+
+            var dessertsInBasket = await this.ordersService.RemoveFromBasketAsync<DessertBasketViewModel>(input.Id, userId);
+
+            return new AllDessertsBasketViewModel { DessertsInBasket = dessertsInBasket };
+        }
+    }
+
+    public class RemoveFromBasketInputModel
+    {
+        //validate
+        public string Id { get; set; }
     }
 }

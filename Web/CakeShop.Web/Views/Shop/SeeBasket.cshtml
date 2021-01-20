@@ -1,0 +1,135 @@
+﻿@using CakeShop.Web.ViewModels.Orders.ViewModels;
+@model AllDessertsBasketViewModel;
+
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="breadcrumb__text">
+                    <h2 class="mb-4">Shopping cart</h2>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="breadcrumb__links">
+                    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    <span>Shopping cart</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="shopping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="shopping__cart__table">
+                    <form id="remove-dessert-from-basket" method="post"></form>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="desserts-in-basket">
+                            @foreach (var dessert in Model.DessertsInBasket)
+                            {
+                                <tr>
+                                    <td class="product__cart__item">
+                                        <div class="product__cart__item__pic">
+                                            <a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id="@dessert.DessertId">
+                                                <img class="small-pic" src="@dessert.DessertPicture" alt="dessert">
+                                            </a>
+                                        </div>
+                                        <div class="product__cart__item__text">
+                                            <h6><a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id="@dessert.DessertId" class="color-black">@dessert.DessertName</a></h6>
+                                            <h5>$ @dessert.DessertPrice</h5>
+                                        </div>
+                                    </td>
+                                    <td class="quantity__item">
+                                        <div class="quantity">
+                                            <div class="dessert-quantity">
+                                                @dessert.Quantity
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="cart__price">$ @dessert.TotalPrice</td>
+                                    <td class="cart__close"><span id="@dessert.Id" class="icon_close remove-from-basket"></span></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="continue__btn">
+                            <a asp-area="" asp-controller="Shop" asp-action="GetAllCategories">Continue Shopping</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="cart__total">
+                    <h6>Cart total</h6>
+                    <ul>
+                        <li>Total <span>$ 169.50</span></li>
+                    </ul>
+                    <a href="#" class="primary-btn">Proceed to checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    [...document.getElementsByClassName("remove-from-basket")].forEach((element) => {
+        element.addEventListener("click", removeFromBasket);
+    });
+
+    function removeFromBasket(event) {
+        var id = event.target.id;
+
+        var token = $("#remove-dessert-from-basket input[name=__RequestVerificationToken]").val();
+
+        $.ajax({
+            url: "/Orders/RemoveFromBasket/",
+            type: "POST",
+            data: JSON.stringify({ id }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            headers: { 'X-CSRF-TOKEN': token },
+            success: function (data) {
+                var result = "";
+
+                data.dessertsInBasket.forEach((dessert) => {
+                    result += `<tr>
+                                    <td class="product__cart__item">
+                                        <div class="product__cart__item__pic">
+                                            <a href="/Shop/DessertDetails/${dessert.dessertId}">
+                                                <img class="small-pic" src="${dessert.dessertPicture}" alt="dessert">
+                                            </a>
+                                        </div>
+                                        <div class="product__cart__item__text">
+                                            <h6><a href="/Shop/DessertDetails/${dessert.dessertId}" class="color-black">${dessert.dessertName}</a></h6>
+                                            <h5>$ ${dessert.formattedDessertPrice}</h5>
+                                        </div>
+                                    </td>
+                                    <td class="quantity__item">
+                                        <div class="quantity">
+                                            <div class="dessert-quantity">
+                                                ${dessert.quantity}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="cart__price">$ ${dessert.formattedTotalPrice}</td>
+                                    <td class="cart__close"><span id="${dessert.id}" class="icon_close remove-from-basket"></span></td>
+                                </tr>`
+                });
+
+                $('#desserts-in-basket').html(result);
+            }
+        });
+    };
+</script>
