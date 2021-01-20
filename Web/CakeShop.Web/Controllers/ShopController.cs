@@ -11,7 +11,6 @@
     using CakeShop.Web.ViewModels.Categories.ViewModels;
     using CakeShop.Web.ViewModels.Desserts.InputModels;
     using CakeShop.Web.ViewModels.Desserts.ViewModels;
-    using CakeShop.Web.ViewModels.Orders.ViewModels;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
@@ -70,9 +69,8 @@
             return this.View(model);
         }
 
-        //orderController
         [HttpPost]
-        public async Task<ActionResult<OrderDessertsViewModel>> Order([FromBody] OrderDessertsInputModel input)
+        public async Task<ActionResult<OrderDessertsViewModel>> OrderByCriteria([FromBody] OrderDessertsInputModel input)
         {
             if (!this.ModelState.IsValid)
             {
@@ -86,19 +84,6 @@
                 OrderedDesserts = orderedDesserts,
                 TargetCriteria = input.TargetCriteria,
             };
-        }
-
-        //orderController
-        public async Task<IActionResult> SeeBasket()
-        {
-            var userId = this.userManager.GetUserId(this.User);
-
-            var model = new AllDessertsBasketViewModel()
-            {
-                DessertsInBasket = await this.ordersService.GetDessertsInBasketAsync<DessertBasketViewModel>(userId),
-            };
-
-            return this.View(model);
         }
     }
 }

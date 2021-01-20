@@ -171,3 +171,7 @@ html {
 .cart__price:hover {
     cursor: default;
 }
+
+.hover-effect-orange:hover {
+    background-color: #f08632;
+}

@@ -53,6 +53,19 @@
             };
         }
 
+        //orderController
+        public async Task<IActionResult> SeeBasket()
+        {
+            var userId = this.userManager.GetUserId(this.User);
+
+            var model = new AllDessertsBasketViewModel()
+            {
+                DessertsInBasket = await this.ordersService.GetDessertsInBasketAsync<DessertBasketViewModel>(userId),
+            };
+
+            return this.View(model);
+        }
+
         [HttpPost]
         public async Task<ActionResult<UserBasketViewModel>> GetTotalPrice()
         {

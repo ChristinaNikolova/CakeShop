@@ -1,4 +1,4 @@
-﻿function orderDesserts() {
+﻿function orderDessertsByCriteria() {
     var targetCriteria = "";
     var criterias = [...document.getElementById("order-dessert").children];
 
@@ -12,7 +12,7 @@
     var categoryId = document.getElementById("category-id").innerHTML;
 
     $.ajax({
-        url: "/Shop/Order/",
+        url: "/Shop/OrderByCriteria/",
         type: "POST",
         data: JSON.stringify({ targetCriteria, categoryId }),
         contentType: "application/json; charset=utf-8",
@@ -30,12 +30,12 @@
                     <div class="product__item">
                         <div class="product__item__pic set-bg" style="background-image:url(${dessert.picture});">
                             <div class="product__label">
-                                <span>"${dessert.categoryName}</span>
+                                <span>${dessert.categoryName}</span>
                             </div>
                         </div>
                         <div class="product__item__text">
-                            <h6><a href="/Shop/DessertDetails/${dessert.id}">"${dessert.name}</a></h6>
-                            <div class="product__item__price">$ "${dessert.formattedPrice}</div>
+                            <h6><a href="/Shop/DessertDetails/${dessert.id}">${dessert.name}</a></h6>
+                            <div class="product__item__price">$ ${dessert.formattedPrice}</div>
                             <div class="cart_add">
                                 <a href="/Shop/DessertDetails/${dessert.id}">See details</a>
                             </div>
