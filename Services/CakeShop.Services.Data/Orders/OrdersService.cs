@@ -93,7 +93,16 @@
                 .All()
                 .FirstOrDefaultAsync(deo => deo.Id == dessertOrderId);
 
+            var order = await this.ordersRepository
+                .All()
+                .FirstOrDefaultAsync(o => o.ClientId == userId && o.Status == Status.NotFinish);
+
+            var dessertPrice = await this.dessertsService.GetDessertPriceAsync(dessertOrderToRemove.DessertId);
+            order.TotalPrice -= dessertPrice;
+
             this.dessertOrdersRepository.Delete(dessertOrderToRemove);
+            this.ordersRepository.Update(order);
+            await this.ordersRepository.SaveChangesAsync();
             await this.dessertOrdersRepository.SaveChangesAsync();
 
             var desserts = await this.GetDessertsInBasketAsync<T>(userId);

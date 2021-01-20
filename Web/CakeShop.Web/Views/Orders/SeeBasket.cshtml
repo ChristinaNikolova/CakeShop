@@ -51,7 +51,7 @@
                                                 </div>
                                             </td>
                                             <td class="cart__price">$ @dessert.TotalPrice</td>
-                                            <td class="cart__close"><span id="@dessert.Id" class="icon_close remove-from-basket"></span></td>
+                                            <td class="cart__close"><span id="@dessert.Id" onclick="removeFromBasket(event);" class="icon_close remove-from-basket"></span></td>
                                         </tr>
                                     }
                                 </tbody>
@@ -73,6 +73,6 @@
 </section>
 
 @section Scripts {
-    <script src="~/js/seeBasket.js" asp-append-version="true"></script>
-    <script>seeBasket();</script>
+    <script src="~/js/removeFromBasket.js" asp-append-version="true"></script>
+    <script>removeFromBasket(event);</script>
 }

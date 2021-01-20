@@ -39,7 +39,7 @@
                                         <td class="cart__price">$ @dessert.Price</td>
                                         <td class="cart__btn"><a asp-area="" asp-controller="Shop" asp-action="GetAllCurrentCategory" asp-route-id="@dessert.CategoryId" class="color-black">@dessert.CategoryName</a></td>
                                         <td class="cart__btn"><a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id="@dessert.Id" class="site-btn">See details</a></td>
-                                        <td id="@dessert.Id" class="cart__close"><span class="icon_close"></span></td>
+                                        <td id="@dessert.Id" class="cart__close" onclick="removeFromFavourite(event)"><span class="icon_close"></span></td>
                                     </tr>
                                 }
                             </tbody>
@@ -52,6 +52,6 @@
 </section>
 
 @section Scripts {
-    <script src="~/js/removeFromFavouriteDesserts.js" asp-append-version="true"></script>
-    <script>removeFromFavouriteDesserts();</script>
+    <script src="~/js/removeFromFavourite.js" asp-append-version="true"></script>
+    <script>removeFromFavourite();</script>
 }

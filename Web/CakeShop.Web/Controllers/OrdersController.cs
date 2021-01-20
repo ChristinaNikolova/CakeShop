@@ -68,7 +68,6 @@
         [HttpPost]
         public async Task<ActionResult<UserBasketViewModel>> GetTotalPrice()
         {
-            ;
             var userId = this.userManager.GetUserId(this.User);
 
             if (userId == null)
