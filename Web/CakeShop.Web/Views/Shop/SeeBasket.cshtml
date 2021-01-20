@@ -24,43 +24,52 @@
             <div class="col-lg-8">
                 <div class="shopping__cart__table">
                     <form id="remove-dessert-from-basket" method="post"></form>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="desserts-in-basket">
-                            @foreach (var dessert in Model.DessertsInBasket)
-                            {
+                    @if (Model.DessertsInBasket.Count() == 0)
+                    {
+                        <div id="empty-result">
+                            <h5>You don't have any desserts in your basket yet!<a asp-area="" asp-controller="Shop" asp-action="GetAllCategories" class="color-black"> Go</a> and check out desserts!</h5>
+                        </div>
+                    }
+                    else
+                    {
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id="@dessert.DessertId">
-                                                <img class="small-pic" src="@dessert.DessertPicture" alt="dessert">
-                                            </a>
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6><a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id="@dessert.DessertId" class="color-black">@dessert.DessertName</a></h6>
-                                            <h5>$ @dessert.DessertPrice</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="dessert-quantity">
-                                                @dessert.Quantity
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">$ @dessert.TotalPrice</td>
-                                    <td class="cart__close"><span id="@dessert.Id" class="icon_close remove-from-basket"></span></td>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody id="desserts-in-basket">
+                                @foreach (var dessert in Model.DessertsInBasket)
+                                {
+                                    <tr>
+                                        <td class="product__cart__item">
+                                            <div class="product__cart__item__pic">
+                                                <a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id="@dessert.DessertId">
+                                                    <img class="small-pic" src="@dessert.DessertPicture" alt="dessert">
+                                                </a>
+                                            </div>
+                                            <div class="product__cart__item__text">
+                                                <h6><a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id="@dessert.DessertId" class="color-black">@dessert.DessertName</a></h6>
+                                                <h5>$ @dessert.DessertPrice</h5>
+                                            </div>
+                                        </td>
+                                        <td class="quantity__item">
+                                            <div class="quantity">
+                                                <div class="dessert-quantity">
+                                                    @dessert.Quantity
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="cart__price">$ @dessert.TotalPrice</td>
+                                        <td class="cart__close"><span id="@dessert.Id" class="icon_close remove-from-basket"></span></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6">
@@ -74,7 +83,8 @@
                 <div class="cart__total">
                     <h6>Cart total</h6>
                     <ul>
-                        <li>Total <span>$ 169.50</span></li>
+                        <li>Total Quantities: <span> 169.50</span></li>
+                        <li>Total Sum: <span>$ 169.50</span></li>
                     </ul>
                     <a href="#" class="primary-btn">Proceed to checkout</a>
                 </div>
@@ -128,7 +138,13 @@
                                 </tr>`
                 });
 
-                $('#desserts-in-basket').html(result);
+                //test
+                if (data.dessertsInBasket.count() === 0) {
+                    $('#empty-result').html("<h5>You don't have any desserts in your basket yet!</h5>");
+                }
+                else {
+                    $('#desserts-in-basket').html(result);
+                }
             }
         });
     };
