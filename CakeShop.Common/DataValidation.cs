@@ -36,11 +36,15 @@
         public const int IngredientNameMaxLenght = 150;
 
         // Order
+        public const int OrderDeliveryAddressMinLenght = 10;
+
         public const int OrderDeliveryAddressMaxLenght = 200;
 
         public const string MinQuantity = "1";
 
         public const string MaxQuantity = "120";
+
+        public const int OrderNotesMaxLenght = 500;
 
         // Recipe
         public const int RecipeTitleMaxLenght = 200;

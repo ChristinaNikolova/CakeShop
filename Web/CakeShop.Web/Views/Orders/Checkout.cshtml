@@ -1,0 +1,95 @@
+﻿@using CakeShop.Web.ViewModels.Orders.InputModels;
+@model CheckoutInputModel;
+
+<div class="breadcrumb-option mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="breadcrumb__text">
+                    <h2>Checkout</h2>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="breadcrumb__links">
+                    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    <span>Checkout</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="checkout spad">
+    <div class="container">
+        <div class="checkout__form">
+            <form asp-area="" asp-controller="" asp-action="" method="post">
+                <div class="row">
+                    <div class="col-lg-8 col-md-6">
+                        <h6 class="checkout__title">Billing Details</h6>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>First Name<span>*</span></p>
+                                    <input asp-for="@Model.User.FirstName" type="text" disabled />
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Last Name<span>*</span></p>
+                                    <input asp-for="@Model.User.LastName" type="text" disabled />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Phone<span>*</span></p>
+                                    <input asp-for="@Model.User.PhoneNumber" type="text" disabled />
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Email<span>*</span></p>
+                                    <input asp-for="@Model.User.Email" type="text" disabled />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout__input">
+                            <p>Address<span>*</span></p>
+                            <input asp-for="@Model.User.Address" type="text" disabled />
+                        </div>
+                        <div class="checkout__input">
+                            <p>Delivery Address<span>*</span></p>
+                            <input asp-for="@Model.DeliveryAddress" type="text" placeholder="Enter the delivery address" />
+                            <span asp-validation-for="@Model.DeliveryAddress" class="text-danger"></span>
+                        </div>
+                        <div class="checkout__input">
+                            <p>Order notes</p>
+                            <input asp-for="@Model.Notes" type="text"
+                                   placeholder="Notes about your order, e.g. special notes for delivery." />
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="checkout__order">
+                            <h6 class="order__title">Your order</h6>
+                            <div class="checkout__order__products">Product <span>Total</span></div>
+                            <ul class="checkout__total__products">
+                                @for (int i = 0; i < Model.Desserts.Count(); i++)
+                                {
+                                    <li>
+                                        <samp>0@(i + 1).</samp>
+                                        @Model.Desserts.ToList()[i].DessertName (@Model.Desserts.ToList()[i].Quantity pcs)<span>$ @Model.Desserts.ToList()[i].TotalPrice</span>
+                                    </li>
+                                }
+                            </ul>
+                            <ul class="checkout__total__all">
+                                <li>Total Quantities: <span>@Model.Quantities  pcs</span></li>
+                                <li>Total Sum <span>$@Model.TotalPrice</span></li>
+                            </ul>
+                            <button type="submit" class="site-btn">PLACE ORDER</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

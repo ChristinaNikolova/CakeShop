@@ -4,10 +4,14 @@
 
     using CakeShop.Common;
     using CakeShop.Data.Models;
+    using CakeShop.Services.Data.Desserts;
     using CakeShop.Services.Data.Orders;
+    using CakeShop.Services.Data.Users;
     using CakeShop.Web.ViewModels.DessertOrders.ViewModels;
+    using CakeShop.Web.ViewModels.Desserts.ViewModels;
     using CakeShop.Web.ViewModels.Orders.InputModels;
     using CakeShop.Web.ViewModels.Orders.ViewModels;
+    using CakeShop.Web.ViewModels.Users.ViewModels;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
@@ -15,13 +19,16 @@
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IOrdersService ordersService;
+        private readonly IUsersService usersService;
 
         public OrdersController(
             UserManager<ApplicationUser> userManager,
-            IOrdersService ordersService)
+            IOrdersService ordersService,
+            IUsersService usersService)
         {
             this.userManager = userManager;
             this.ordersService = ordersService;
+            this.usersService = usersService;
         }
 
         [HttpPost]
@@ -102,6 +109,22 @@
                 TotalPrice = totalPrice,
                 Quantities = quantities,
             };
+        }
+
+        public async Task<IActionResult> Checkout()
+        {
+            var userId = this.userManager.GetUserId(this.User);
+            var orderId = await this.ordersService.GetOrderIdByUserAsync(userId);
+
+            var model = new CheckoutInputModel()
+            {
+                User = await this.usersService.GetUserDataAsync<UserCheckoutViewModel>(userId),
+                Desserts = await this.ordersService.GetDessertsInBasketAsync<DessertBaseViewModel>(userId),
+                TotalPrice = await this.ordersService.GetTotalPriceCurrentOrderByUserAsync(userId),
+                Quantities = await this.ordersService.GetTotalQuantitiesCurrentOrderAsync(orderId),
+            };
+
+            return this.View(model);
         }
     }
 }

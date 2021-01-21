@@ -8,6 +8,9 @@
             <li>Total Quantities: <span id="quantities"> @Model.Quantities pcs</span></li>
             <li>Total Sum: <span class="total-price">$ @Model.TotalPrice</span></li>
         </ul>
-        <a href="#" class="primary-btn hover-effect-orange">Proceed to checkout</a>
+        @if (Model.TotalPrice > 0 && Model.Quantities > 0)
+        {
+            <a asp-area="" asp-controller="Orders" asp-action="Checkout" class="primary-btn hover-effect-orange">Proceed to checkout</a>
+        }
     </div>
 </div>

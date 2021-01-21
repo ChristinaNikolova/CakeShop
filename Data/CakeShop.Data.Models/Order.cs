@@ -29,6 +29,9 @@
 
         public Status Status { get; set; }
 
+        [MaxLength(DataValidation.OrderNotesMaxLenght)]
+        public string Notes { get; set; }
+
         [Required]
         public string ClientId { get; set; }
 
