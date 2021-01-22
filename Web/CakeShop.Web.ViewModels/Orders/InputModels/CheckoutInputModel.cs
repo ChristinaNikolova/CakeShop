@@ -1,11 +1,10 @@
-﻿namespace CakeShop.Web.ViewModels.Orders.InputModels
+﻿namespace CakeShop.Web.ViewModels.Orders.ViewModels
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using CakeShop.Common;
     using CakeShop.Web.ViewModels.Desserts.ViewModels;
-    using CakeShop.Web.ViewModels.Orders.ViewModels;
     using CakeShop.Web.ViewModels.Users.ViewModels;
 
     public class CheckoutInputModel : OrderTotalPriceAndQuantitiesViewModel

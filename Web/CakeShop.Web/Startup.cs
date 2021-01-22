@@ -8,6 +8,7 @@
     using CakeShop.Data.Models;
     using CakeShop.Data.Repositories;
     using CakeShop.Data.Seeding;
+    using CakeShop.Services.Cloudinary;
     using CakeShop.Services.Data.Categories;
     using CakeShop.Services.Data.Desserts;
     using CakeShop.Services.Data.Orders;
@@ -15,6 +16,7 @@
     using CakeShop.Services.Data.Users;
     using CakeShop.Services.Mapping;
     using CakeShop.Services.Messaging;
+    using CakeShop.Services.Paypal;
     using CakeShop.Web.SecurityModels;
     using CakeShop.Web.ViewModels;
     using CloudinaryDotNet;
@@ -70,6 +72,8 @@
 
             // Application services
             services.AddTransient<IEmailSender, SendGridEmailSender>();
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
+            services.AddTransient<IPaypalService, PaypalService>();
 
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<ICategoriesService, CategoriesService>();

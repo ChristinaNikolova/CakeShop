@@ -18,5 +18,9 @@
         Task<IEnumerable<T>> RemoveFromBasketAsync<T>(string dessertOrderId, string userId);
 
         Task<string> GetOrderIdByUserAsync(string userId);
+
+        Task FinishOrderAsync(string userId);
+
+        Task AddDetailsToCurrentOrderAsync(string orderId, string deliveryAddress, string notes);
     }
 }

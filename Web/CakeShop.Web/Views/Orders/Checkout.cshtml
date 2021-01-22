@@ -1,27 +1,11 @@
-﻿@using CakeShop.Web.ViewModels.Orders.InputModels;
+﻿@using CakeShop.Web.ViewModels.Orders.ViewModels;
 @model CheckoutInputModel;
 
-<div class="breadcrumb-option mb-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="breadcrumb__text">
-                    <h2>Checkout</h2>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="breadcrumb__links">
-                    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    <span>Checkout</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<partial name="_CheckoutBreadCrumbPartial" />
 <section class="checkout spad">
     <div class="container">
         <div class="checkout__form">
-            <form asp-area="" asp-controller="" asp-action="" method="post">
+            <form asp-area="" asp-controller="Orders" asp-action="Buy" method="post">
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
                         <h6 class="checkout__title">Billing Details</h6>

@@ -131,6 +131,32 @@
             return orderId;
         }
 
+        public async Task FinishOrderAsync(string userId)
+        {
+            var order = await this.ordersRepository
+                .All()
+                .FirstOrDefaultAsync(o => o.ClientId == userId && o.Status == Status.NotFinish);
+
+            order.IsPaid = true;
+            order.Status = Status.Processing;
+
+            this.ordersRepository.Update(order);
+            await this.ordersRepository.SaveChangesAsync();
+        }
+
+        public async Task AddDetailsToCurrentOrderAsync(string orderId, string deliveryAddress, string notes)
+        {
+            var order = await this.ordersRepository
+                .All()
+                .FirstOrDefaultAsync(o => o.Id == orderId);
+
+            order.DeliveryAddress = deliveryAddress;
+            order.Notes = notes;
+
+            this.ordersRepository.Update(order);
+            await this.ordersRepository.SaveChangesAsync();
+        }
+
         private async Task<Order> AddDessertToNewOrderAsync(string userId, string dessertId, int quantity, decimal dessertPrice, Order order)
         {
             var clientAddress = await this.usersService.GetUserAddressByIdAsync(userId);

@@ -4,7 +4,6 @@
 
     using CakeShop.Common;
     using CakeShop.Data.Models;
-    using CakeShop.Services.Data.Desserts;
     using CakeShop.Services.Data.Orders;
     using CakeShop.Services.Data.Users;
     using CakeShop.Web.ViewModels.DessertOrders.ViewModels;
@@ -125,6 +124,29 @@
             };
 
             return this.View(model);
+        }
+
+        public async Task<IActionResult> Buy(CheckoutInputModel input)
+        {
+            var userId = this.userManager.GetUserId(this.User);
+            var orderId = await this.ordersService.GetOrderIdByUserAsync(userId);
+            var totalPrice = await this.ordersService.GetTotalPriceCurrentOrderByUserAsync(userId);
+
+            if (!this.ModelState.IsValid)
+            {
+                input.User = await this.usersService.GetUserDataAsync<UserCheckoutViewModel>(userId);
+                input.Desserts = await this.ordersService.GetDessertsInBasketAsync<DessertBaseViewModel>(userId);
+                input.TotalPrice = totalPrice;
+                input.Quantities = await this.ordersService.GetTotalQuantitiesCurrentOrderAsync(orderId);
+
+                return this.View(input);
+            }
+
+            await this.ordersService.AddDetailsToCurrentOrderAsync(orderId, input.DeliveryAddress, input.Notes);
+
+            totalPrice /= 100M;
+
+            return this.Redirect($"/Paypal/CreatePayment?totalPrice={totalPrice}");
         }
     }
 }
