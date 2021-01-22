@@ -172,6 +172,17 @@
             return desserts;
         }
 
+        public async Task<T> GetOrderDetailsAsync<T>(string orderId)
+        {
+            var orderDetails = await this.ordersRepository
+                .All()
+                .Where(o => o.Id == orderId)
+                .To<T>()
+                .FirstOrDefaultAsync();
+
+            return orderDetails;
+        }
+
         private async Task<Order> AddDessertToNewOrderAsync(string userId, string dessertId, int quantity, decimal dessertPrice, Order order)
         {
             var clientAddress = await this.usersService.GetUserAddressByIdAsync(userId);

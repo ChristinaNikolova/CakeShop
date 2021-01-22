@@ -1,20 +1,16 @@
 ﻿@using CakeShop.Web.ViewModels.Orders.ViewModels;
 @model AllDessertsBasketViewModel;
 
+@{
+    var orderId = Model.DessertsInBasket.Select(deo => deo.OrderId).FirstOrDefault();
+}
+
 <partial name="_GetOrderDetailsBreadCrumbPartial" />
 <section class="shopping-cart spad">
     <div class="container">
         <div class="row">
             <partial name="_DessertListDetailsPartial" model="Model" />
-            <div class="col-lg-4">
-                <div class="cart__total">
-                    <ul>
-                        <li>Subtotal <span>$ 169.50</span></li>
-                        <li>Total <span>$ 169.50</span></li>
-                    </ul>
-                    <a href="#" class="primary-btn">Proceed to checkout</a>
-                </div>
-            </div>
+            <vc:get-order-details order-id="@orderId"></vc:get-order-details>
         </div>
     </div>
 </section>
