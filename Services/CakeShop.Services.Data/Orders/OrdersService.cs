@@ -159,6 +159,19 @@
             await this.ordersRepository.SaveChangesAsync();
         }
 
+        public async Task<IEnumerable<T>> GetDessertsCurrentOrderAsync<T>(string orderId)
+        {
+            var desserts = await this.dessertOrdersRepository
+                .All()
+                .Where(deo => deo.OrderId == orderId)
+                .OrderByDescending(deo => deo.Quantity)
+                .ThenBy(deo => deo.Dessert.Name)
+                .To<T>()
+                .ToListAsync();
+
+            return desserts;
+        }
+
         private async Task<Order> AddDessertToNewOrderAsync(string userId, string dessertId, int quantity, decimal dessertPrice, Order order)
         {
             var clientAddress = await this.usersService.GetUserAddressByIdAsync(userId);

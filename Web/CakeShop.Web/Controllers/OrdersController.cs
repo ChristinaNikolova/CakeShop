@@ -66,6 +66,7 @@
             var model = new AllDessertsBasketViewModel()
             {
                 DessertsInBasket = await this.ordersService.GetDessertsInBasketAsync<DessertBasketViewModel>(userId),
+                IsAlreadyPaid = false,
             };
 
             return this.View(model);
@@ -149,10 +150,15 @@
             return this.Redirect($"/Paypal/CreatePayment?totalPrice={totalPrice}");
         }
 
-        public async Task<IActionResult> GetOrderDetails(string orderId)
+        public async Task<IActionResult> GetOrderDetails(string id)
         {
-            ;
-            return this.View();
+            var model = new AllDessertsBasketViewModel()
+            {
+                DessertsInBasket = await this.ordersService.GetDessertsCurrentOrderAsync<DessertBasketViewModel>(id),
+                IsAlreadyPaid = true,
+            };
+
+            return this.View(model);
         }
     }
 }

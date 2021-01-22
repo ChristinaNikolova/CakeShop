@@ -22,5 +22,7 @@
         Task FinishOrderAsync(string userId);
 
         Task AddDetailsToCurrentOrderAsync(string orderId, string deliveryAddress, string notes);
+
+        Task<IEnumerable<T>> GetDessertsCurrentOrderAsync<T>(string orderId);
     }
 }

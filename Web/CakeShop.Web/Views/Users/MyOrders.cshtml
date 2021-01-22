@@ -1,23 +1,7 @@
 ﻿@using CakeShop.Web.ViewModels.Users.ViewModels;
 @model AllUserOrdersBaseViewModel;
 
-<div class="breadcrumb-option mb-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="breadcrumb__text">
-                    <h2>My Orders</h2>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="breadcrumb__links">
-                    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    <span>My Orders</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<partial name="_MyOrdersBreadCrumbPartial" />
 <section class="wishlist spad">
     <div class="container">
         <div class="row">

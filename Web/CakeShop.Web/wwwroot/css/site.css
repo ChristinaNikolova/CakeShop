@@ -141,9 +141,9 @@ html {
     color: black;
 }
 
-.search-switch:hover {
-    color: #f08632;
-}
+    .search-switch:hover {
+        color: #f08632;
+    }
 
 .fa-book:before,
 .fa-truck:before,
@@ -155,9 +155,9 @@ html {
     color: black;
 }
 
-.fav-heart:hover {
-    color: #f08632;
-}
+    .fav-heart:hover {
+        color: #f08632;
+    }
 
 .cart__price:hover {
     cursor: pointer;
@@ -183,4 +183,8 @@ html {
 
 .hover-effect-orange:hover {
     background-color: #f08632;
+}
+
+.shopping__cart__table table tbody tr td.cart__close span:hover {
+    cursor: pointer;
 }
