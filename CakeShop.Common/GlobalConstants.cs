@@ -45,5 +45,14 @@
         public const string CriteriaPrice = "price";
 
         public const string CriteriaName = "name";
+
+        // status messages
+        public const string ProcessingStatus = "Processing";
+
+        public const string ApprovedStatus = "Approved";
+
+        public const string CancelledStatus = "Cancelled";
+
+        public const string DeliveredStatus = "Delivered";
     }
 }

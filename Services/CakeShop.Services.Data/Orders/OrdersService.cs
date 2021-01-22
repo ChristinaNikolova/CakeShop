@@ -1,5 +1,6 @@
 ﻿namespace CakeShop.Services.Data.Orders
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -139,6 +140,7 @@
 
             order.IsPaid = true;
             order.Status = Status.Processing;
+            order.FinalizeOrder = DateTime.UtcNow;
 
             this.ordersRepository.Update(order);
             await this.ordersRepository.SaveChangesAsync();

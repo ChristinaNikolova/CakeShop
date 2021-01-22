@@ -1,0 +1,79 @@
+﻿@using CakeShop.Web.ViewModels.Users.ViewModels;
+@model AllUserOrdersBaseViewModel;
+
+<div class="breadcrumb-option mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="breadcrumb__text">
+                    <h2>My Orders</h2>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="breadcrumb__links">
+                    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    <span>My Orders</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="wishlist spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="wishlist__cart__table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order Date</th>
+                                <th>Total Price</th>
+                                <th>Paid</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model.UserOrders)
+                            {
+                                <tr>
+                                    <td class="product__cart__item">
+                                        <div class="product__cart__item__text">
+                                            <h6>@order.FormattedFinalizeOrder</h6>
+                                        </div>
+                                    </td>
+                                    <td class="cart__price">$ @order.TotalPrice</td>
+                                    @if (order.IsPaid)
+                                    {
+                                        <td class="cart__stock text-success">@order.PaidAsString</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="cart__stock text-danger">@order.PaidAsString</td>
+                                    }
+                                    @if (order.Status == GlobalConstants.ApprovedStatus)
+                                    {
+                                        <td class="cart__stock text-info">@order.Status</td>
+                                    }
+                                    else if (order.Status == GlobalConstants.CancelledStatus)
+                                    {
+                                        <td class="cart__stock text-danger">@order.Status</td>
+                                    }
+                                    else if (order.Status == GlobalConstants.DeliveredStatus)
+                                    {
+                                        <td class="cart__stock text-success">@order.Status</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="cart__stock text-warning">@order.Status</td>
+                                    }
+                                    <td class="cart__btn"><a asp-area="" asp-controller="Orders" asp-action="GetOrderDetails" asp-route-id="@order.Id" class="site-btn">Details</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -148,5 +148,11 @@
 
             return this.Redirect($"/Paypal/CreatePayment?totalPrice={totalPrice}");
         }
+
+        public async Task<IActionResult> GetOrderDetails(string orderId)
+        {
+            ;
+            return this.View();
+        }
     }
 }

@@ -49,7 +49,7 @@
 
             //this.TempData["InfoMessage"] = GlobalMessages.SuccessBoughtCard;
             //Redirect to order details page
-            return this.Redirect("/Home/Index");
+            return this.Redirect("/Users/MyOrders");
         }
     }
 }

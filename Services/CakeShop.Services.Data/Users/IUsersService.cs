@@ -1,5 +1,6 @@
 ﻿namespace CakeShop.Services.Data.Users
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using CakeShop.Data.Models;
@@ -11,5 +12,7 @@
         Task<string> GetUserAddressByIdAsync(string userId);
 
         Task<T> GetUserDataAsync<T>(string userId);
+
+        Task<IEnumerable<T>> GetUserOrdersListAsync<T>(string userId);
     }
 }

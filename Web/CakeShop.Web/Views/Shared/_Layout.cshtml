@@ -38,7 +38,9 @@
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__cart">
             <div class="offcanvas__cart__links">
-                <a asp-area="" asp-controller="Desserts" asp-action="FavouriteDesserts"><img src="/img/icon/heart.png" alt="heart-icon"></a>
+                <a asp-area="" asp-controller="Users" asp-action="MyOrders" class="search-switch" data-toggle="tooltip" title="My Orders"><i class="fas fa-truck"></i></a>
+                <a href="#" class="search-switch"><i class="fas fa-book"></i></a>
+                <a asp-area="" asp-controller="Desserts" asp-action="FavouriteDesserts" class="fav-heart"><i class="fas fa-heart"></i></a>
             </div>
             <div class="offcanvas__cart__item">
                 <div class="cart__price"><a asp-area="" asp-controller="Orders" asp-action="SeeBasket" class="color-black">Cart:</a> <span class="total-price">$0.00</span></div>
@@ -70,9 +72,9 @@
                             </div>
                             <div class="header__top__right">
                                 <div class="header__top__right__links">
-                                    <a href="#" class="search-switch"><i class="fas fa-truck"></i></a>
+                                    <a asp-area="" asp-controller="Users" asp-action="MyOrders" class="search-switch" data-toggle="tooltip" title="My Orders"><i class="fas fa-truck"></i></a>
                                     <a href="#" class="search-switch"><i class="fas fa-book"></i></a>
-                                    <a asp-area="" asp-controller="Desserts" asp-action="FavouriteDesserts"><img src="/img/icon/heart.png" alt="heart-icon"></a>
+                                    <a asp-area="" asp-controller="Desserts" asp-action="FavouriteDesserts" class="fav-heart"><i class="fas fa-heart"></i></a>
                                 </div>
                                 <div class="header__top__right__cart">
                                     <div class="cart__price"><a asp-area="" asp-controller="Orders" asp-action="SeeBasket" class="color-black">Cart:</a> <span class="total-price">$0.00</span></div>

@@ -1,20 +1,27 @@
 ﻿namespace CakeShop.Services.Data.Users
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using CakeShop.Data.Common.Repositories;
     using CakeShop.Data.Models;
+    using CakeShop.Data.Models.Enums;
+    using CakeShop.Services.Data.Orders;
     using CakeShop.Services.Mapping;
     using Microsoft.EntityFrameworkCore;
 
     public class UsersService : IUsersService
     {
         private readonly IRepository<ApplicationUser> usersRepository;
+        private readonly IRepository<Order> ordersRepository;
 
-        public UsersService(IRepository<ApplicationUser> usersRepository)
+        public UsersService(
+            IRepository<ApplicationUser> usersRepository,
+            IRepository<Order> ordersRepository)
         {
             this.usersRepository = usersRepository;
+            this.ordersRepository = ordersRepository;
         }
 
         public async Task<string> GetUserAddressByIdAsync(string userId)
@@ -37,6 +44,18 @@
                 .FirstOrDefaultAsync();
 
             return user;
+        }
+
+        public async Task<IEnumerable<T>> GetUserOrdersListAsync<T>(string userId)
+        {
+            var orders = await this.ordersRepository
+                .All()
+                .Where(o => o.ClientId == userId && o.Status != Status.NotFinish && o.Status != Status.Default)
+                .OrderByDescending(o => o.CreatedOn)
+                .To<T>()
+                .ToListAsync();
+
+            return orders;
         }
 
         public async Task<ApplicationUser> UpdateUserProfileAsync(string id, string firstName, string lastName, string address, string phoneNumber)

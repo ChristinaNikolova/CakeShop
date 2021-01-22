@@ -141,13 +141,22 @@ html {
     color: black;
 }
 
-    .search-switch:hover {
-        color: #f08632;
-    }
+.search-switch:hover {
+    color: #f08632;
+}
 
 .fa-book:before,
-.fas fa-truck:before {
+.fa-truck:before,
+.fa-heart:before {
     font-size: 20px;
+}
+
+.fav-heart {
+    color: black;
+}
+
+.fav-heart:hover {
+    color: #f08632;
 }
 
 .cart__price:hover {

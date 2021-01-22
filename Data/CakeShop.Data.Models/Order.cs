@@ -32,6 +32,8 @@
         [MaxLength(DataValidation.OrderNotesMaxLenght)]
         public string Notes { get; set; }
 
+        public DateTime FinalizeOrder { get; set; }
+
         [Required]
         public string ClientId { get; set; }
 
