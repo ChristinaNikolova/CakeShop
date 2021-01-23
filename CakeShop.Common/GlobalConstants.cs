@@ -64,5 +64,8 @@
 
         // content lenght
         public const int RepiceShortDescriptionLength = 200;
+
+        // alert messages
+        public const string SuccessDeleteMessage = "Successfully deleted!";
     }
 }

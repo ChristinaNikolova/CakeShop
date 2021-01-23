@@ -26,5 +26,7 @@
         Task<IEnumerable<T>> OrderDessertsAsync<T>(string targetCriteria, string categoryId);
 
         Task<IEnumerable<T>> GetAllAsync<T>();
+
+        Task DeleteAsync(string id);
     }
 }

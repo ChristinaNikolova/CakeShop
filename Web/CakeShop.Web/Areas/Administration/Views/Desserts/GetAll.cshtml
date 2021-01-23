@@ -1,6 +1,15 @@
 ﻿@using CakeShop.Web.ViewModels.Administration.Desserts.ViewModels;
 @model AllDessertsAdminViewModel;
 
+@if (this.TempData["InfoMessage"] != null)
+{
+    <div id="notification" class="alert alert-success text-center alert-dismissible fade show custom-margin-identity mt-3" role="alert">
+        @this.TempData["InfoMessage"]
+        <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">OK</span>
+        </button>
+    </div>
+}
 <div class="breadcrumb-option">
     <div class="container">
         <div class="row">
@@ -48,7 +57,11 @@
                                     <td class="cart__price">$ @dessert.Price</td>
                                     <td class="cart__stock">@dessert.CategoryName</td>
                                     <td class="cart__btn"><a asp-area="Administration" asp-controller="Desserts" asp-action="Update" asp-route-id="@dessert.Id" class="site-btn">Update</a></td>
-                                    <td class="cart__close"><span class="icon_close delete-dessert"></span></td>
+                                    <td class="cart__close">
+                                        <form method="post" asp-area="Administration" asp-controller="Desserts" asp-action="Delete" asp-route-id="@dessert.Id">
+                                            <button type="submit" class="site-btn">Delete</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             }
                         </tbody>
@@ -67,13 +80,13 @@
         });
     </script>
 
-    <script>
-        [...document.getElementsByClassName("delete-dessert")].forEach((element => {
-            element.addEventListener("click", deleteDessert);
-        }))
+    @*<script>
+            [...document.getElementsByClassName("delete-dessert")].forEach((element => {
+                element.addEventListener("click", deleteDessert);
+            }))
 
-        function deleteDessert(event) {
-            console.log(event.target);
-        }
-    </script>
+            function deleteDessert(event) {
+                console.log(event.target.id);
+            }
+        </script>*@
 }

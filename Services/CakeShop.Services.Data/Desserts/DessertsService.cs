@@ -173,6 +173,18 @@
             return favouriteDesserts;
         }
 
+        public async Task DeleteAsync(string id)
+        {
+            var dessert = await this.dessertsRepository
+                .All()
+                .FirstOrDefaultAsync(d => d.Id == id);
+
+            dessert.IsDeleted = true;
+
+            this.dessertsRepository.Update(dessert);
+            await this.dessertsRepository.SaveChangesAsync();
+        }
+
         private async Task AddToFavouriteAsync(string dessertId, string userId)
         {
             var dessertLike = new DessertLike()

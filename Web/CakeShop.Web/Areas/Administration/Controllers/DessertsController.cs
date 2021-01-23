@@ -1,10 +1,11 @@
-﻿using CakeShop.Services.Data.Desserts;
-using CakeShop.Web.ViewModels.Administration.Desserts.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-
-namespace CakeShop.Web.Areas.Administration.Controllers
+﻿namespace CakeShop.Web.Areas.Administration.Controllers
 {
+    using System.Threading.Tasks;
+    using CakeShop.Common;
+    using CakeShop.Services.Data.Desserts;
+    using CakeShop.Web.ViewModels.Administration.Desserts.ViewModels;
+    using Microsoft.AspNetCore.Mvc;
+
     public class DessertsController : AdministrationController
     {
         private readonly IDessertsService dessertsService;
@@ -22,6 +23,16 @@ namespace CakeShop.Web.Areas.Administration.Controllers
             };
 
             return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await this.dessertsService.DeleteAsync(id);
+
+            this.TempData["InfoMessage"] = GlobalConstants.SuccessDeleteMessage;
+
+            return this.RedirectToAction(nameof(this.GetAll));
         }
     }
 }
