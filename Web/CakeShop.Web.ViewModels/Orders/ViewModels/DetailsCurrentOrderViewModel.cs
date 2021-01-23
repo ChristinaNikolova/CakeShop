@@ -9,5 +9,7 @@
         public string DeliveryAddress { get; set; }
 
         public string Notes { get; set; }
+
+        public UserOrderDetailsViewModel User { get; set; }
     }
 }

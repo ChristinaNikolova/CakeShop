@@ -202,3 +202,7 @@ html {
     background: #fdf3ea;
     padding: 30px;
 }
+
+#user-data:hover {
+    cursor: pointer;
+}

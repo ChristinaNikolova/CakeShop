@@ -1,7 +1,14 @@
 ﻿@using CakeShop.Web.ViewModels.Orders.ViewModels;
 @model AllDessertsBasketViewModel;
 
-<div class="col-lg-8">
+@{ 
+    var classCol = "col-lg-8";
+    if (Model.IsAlreadyPaid)
+    {
+        classCol = "col-lg-7";
+    }
+}
+<div class="@classCol">
     <div class="shopping__cart__table">
         <form id="remove-dessert-from-basket" method="post"></form>
         <div id="empty-result">
