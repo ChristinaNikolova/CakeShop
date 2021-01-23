@@ -36,7 +36,7 @@
 
         public const int DessertDescriptionMaxLenght = 2000;
 
-        public const string DessertMinPrice = "0,10";
+        public const string DessertMinPrice = "1";
 
         public const string DessertMaxPrice = "2000";
 

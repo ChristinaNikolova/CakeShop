@@ -6,6 +6,7 @@
     using CakeShop.Common;
     using CakeShop.Data.Models;
     using CakeShop.Services.Mapping;
+    using CakeShop.Web.Infrastructure.ValidationAttributes;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -26,7 +27,6 @@
 
         public string Picture { get; set; }
 
-
         [Display(Name = "New Picture")]
         [DataType(DataType.Upload)]
         public IFormFile NewPicture { get; set; }
@@ -35,7 +35,7 @@
 
         [Required]
         [Display(Name = "Category")]
-        //[ValidateSelectedDropDownOption]
+        [ValidateSelectedDropDownOption]
         public string CategoryId { get; set; }
 
         //public IEnumerable<DessertTag> DessertTags { get; set; }

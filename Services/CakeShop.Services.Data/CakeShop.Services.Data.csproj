@@ -23,6 +23,7 @@
     <ProjectReference Include="..\..\Data\CakeShop.Data.Common\CakeShop.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\CakeShop.Data.Models\CakeShop.Data.Models.csproj" />
     <ProjectReference Include="..\CakeShop.Services.Mapping\CakeShop.Services.Mapping.csproj" />
+    <ProjectReference Include="..\CakeShop.Services\CakeShop.Services.csproj" />
   </ItemGroup>
 
 </Project>

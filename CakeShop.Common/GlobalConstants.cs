@@ -67,5 +67,7 @@
 
         // alert messages
         public const string SuccessDeleteMessage = "Successfully deleted!";
+
+        public const string SuccessUpdateMessage = "Successfully updated!";
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace CakeShop.Web.ViewModels.Recipes.ViewModels
 {
     using System;
+
     using CakeShop.Common;
     using CakeShop.Data.Models;
     using CakeShop.Services.Mapping;

@@ -36,8 +36,27 @@
         {
             var model = await this.dessertsService.GetDetailsForUpdateAsync<UpdateDessertInputModel>(id);
             model.Categories = await this.categoriesService.GetAllAsSelectListItemAsync();
-
+            ;
             return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(UpdateDessertInputModel input)
+        {
+            ;
+            if (!this.ModelState.IsValid)
+            {
+                input.Categories = await this.categoriesService.GetAllAsSelectListItemAsync();
+                input.Picture = await this.dessertsService.GetPictureAsync(input.Id);
+
+                return this.View(input);
+            }
+
+            await this.dessertsService.UpdateAsync(input.Id, input.Name, input.Description, input.Price, input.NewPicture, input.CategoryId);
+
+            this.TempData["InfoMessage"] = GlobalConstants.SuccessUpdateMessage;
+
+            return this.RedirectToAction(nameof(this.GetAll));
         }
 
         [HttpPost]

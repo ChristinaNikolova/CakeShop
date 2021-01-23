@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Http;
+
     public interface IDessertsService
     {
         Task<IEnumerable<T>> GetAllCurrentCategoryAsync<T>(string categoryId, int take, int skip);
@@ -30,5 +32,9 @@
         Task DeleteAsync(string id);
 
         Task<T> GetDetailsForUpdateAsync<T>(string id);
+
+        Task UpdateAsync(string id, string name, string description, decimal price, IFormFile newPicture, string categoryId);
+
+        Task<string> GetPictureAsync(string id);
     }
 }
