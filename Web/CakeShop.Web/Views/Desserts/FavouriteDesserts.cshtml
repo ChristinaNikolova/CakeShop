@@ -33,7 +33,7 @@
                                                 <img class="small-pic" src="@dessert.Picture" alt="dessert">
                                             </div>
                                             <div class="product__cart__item__text">
-                                                <h6>@dessert.Name</h6>
+                                                <a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id="@dessert.Id"><h6>@dessert.Name</h6></a>
                                             </div>
                                         </td>
                                         <td class="cart__price">$ @dessert.Price</td>

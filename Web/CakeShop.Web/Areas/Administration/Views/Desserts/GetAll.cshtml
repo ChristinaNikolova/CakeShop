@@ -27,8 +27,8 @@
                         <thead>
                             <tr>
                                 <th>Product</th>
-                                <th>Unit Price</th>
-                                <th>Stock</th>
+                                <th>Price</th>
+                                <th>Category</th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -41,14 +41,14 @@
                                         <div class="product__cart__item__pic">
                                             <img class="small-pic" src="@dessert.Picture" alt="dessert">
                                         </div>
-                                        <div class="product__cart__item__text dessert-name">
-                                            <a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id="@dessert.Id" class="dessert-name"><h6>@dessert.Name</h6></a>
+                                        <div class="product__cart__item__text">
+                                            <a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id="@dessert.Id"><h6>@dessert.Name</h6></a>
                                         </div>
                                     </td>
                                     <td class="cart__price">$ @dessert.Price</td>
                                     <td class="cart__stock">@dessert.CategoryName</td>
-                                    <td class="cart__btn"><a href="#" class="primary-btn">Update</a></td>
-                                    <td class="cart__close"><span class="icon_close"></span></td>
+                                    <td class="cart__btn"><a asp-area="Administration" asp-controller="Desserts" asp-action="Update" asp-route-id="@dessert.Id" class="site-btn">Update</a></td>
+                                    <td class="cart__close"><span class="icon_close delete-dessert"></span></td>
                                 </tr>
                             }
                         </tbody>
@@ -62,8 +62,18 @@
 @section Scripts
 {
     <script>
-        $(document).ready( function () {
+        $(document).ready(function () {
             $("#desserts-table").DataTable();
-        } );
+        });
+    </script>
+
+    <script>
+        [...document.getElementsByClassName("delete-dessert")].forEach((element => {
+            element.addEventListener("click", deleteDessert);
+        }))
+
+        function deleteDessert(event) {
+            console.log(event.target);
+        }
     </script>
 }

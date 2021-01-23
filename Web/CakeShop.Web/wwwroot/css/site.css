@@ -207,6 +207,14 @@ html {
     cursor: pointer;
 }
 
-.dessert-name:hover {
+.wishlist__cart__table table tbody tr td.product__cart__item .product__cart__item__text h6:hover {
     color: #f08632;
+}
+
+#desserts-table_wrapper {
+    margin-top: 30px;
+}
+
+.icon_close:hover {
+    cursor: pointer;
 }
