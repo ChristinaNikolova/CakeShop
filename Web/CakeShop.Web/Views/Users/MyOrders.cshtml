@@ -1,7 +1,11 @@
 ﻿@using CakeShop.Web.ViewModels.Users.ViewModels;
 @model AllUserOrdersBaseViewModel;
 
-<partial name="_MyOrdersBreadCrumbPartial" />
+@{
+    ViewData["Title"] = "My Orders";
+}
+
+<partial name="_BreadCrumbPartial" />
 <section class="wishlist spad">
     <div class="container">
         <div class="row">

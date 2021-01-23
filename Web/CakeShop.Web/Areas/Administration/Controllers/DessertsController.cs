@@ -1,6 +1,7 @@
 ﻿namespace CakeShop.Web.Areas.Administration.Controllers
 {
     using System.Threading.Tasks;
+
     using CakeShop.Common;
     using CakeShop.Services.Data.Desserts;
     using CakeShop.Web.ViewModels.Administration.Desserts.ViewModels;
@@ -23,6 +24,17 @@
             };
 
             return this.View(model);
+        }
+
+        public async Task<IActionResult> Update(string id)
+        {
+            //var model = new AllDessertsAdminViewModel()
+            //{
+            //    Desserts = await this.dessertsService.GetAllAsync<DessertAdminViewModel>(),
+            //};
+
+            return this.View();
+            //return this.View(model);
         }
 
         [HttpPost]

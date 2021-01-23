@@ -1,32 +1,12 @@
 ﻿@using CakeShop.Web.ViewModels.Administration.Desserts.ViewModels;
 @model AllDessertsAdminViewModel;
 
-@if (this.TempData["InfoMessage"] != null)
-{
-    <div id="notification" class="alert alert-success text-center alert-dismissible fade show custom-margin-identity mt-3" role="alert">
-        @this.TempData["InfoMessage"]
-        <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">OK</span>
-        </button>
-    </div>
+@{
+    ViewData["Title"] = "GetAll";
 }
-<div class="breadcrumb-option">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="breadcrumb__text">
-                    <h2>All Desserts</h2>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="breadcrumb__links">
-                    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    <span>All Desserts</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+<partial name="_InfoMessagePartial" />
+<<partial name="_BreadCrumbPartial" />
 <section class="wishlist spad">
     <div class="container">
         <div class="row">
@@ -72,21 +52,7 @@
     </div>
 </section>
 
-@section Scripts
-{
-    <script>
-        $(document).ready(function () {
-            $("#desserts-table").DataTable();
-        });
-    </script>
-
-    @*<script>
-            [...document.getElementsByClassName("delete-dessert")].forEach((element => {
-                element.addEventListener("click", deleteDessert);
-            }))
-
-            function deleteDessert(event) {
-                console.log(event.target.id);
-            }
-        </script>*@
+@section Scripts {
+    <script src="~/js/loadDataTable.js" asp-append-version="true"></script>
+    <script>loadDataTable();</script>
 }

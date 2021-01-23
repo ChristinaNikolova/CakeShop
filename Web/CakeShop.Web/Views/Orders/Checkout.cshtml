@@ -1,7 +1,11 @@
 ﻿@using CakeShop.Web.ViewModels.Orders.ViewModels;
 @model CheckoutInputModel;
 
-<partial name="_CheckoutBreadCrumbPartial" />
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<partial name="_BreadCrumbPartial" />
 <section class="checkout spad">
     <div class="container">
         <div class="checkout__form">

@@ -1,7 +1,11 @@
 ﻿@using CakeShop.Web.ViewModels.Recipes.ViewModels;
 @model AllRecipesViewModel;
 
-<partial name="_GetAllBreadCrumbPartial" />
+@{
+    ViewData["Title"] = "Recipes";
+}
+
+<partial name="_BreadCrumbPartial" />
 <section class="blog spad">
     <div class="container">
         <div class="row">

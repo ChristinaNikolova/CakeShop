@@ -3,9 +3,10 @@
 
 @{
     var orderId = Model.DessertsInBasket.Select(deo => deo.OrderId).FirstOrDefault();
+    ViewData["Title"] = "Order's Details";
 }
 
-<partial name="_GetOrderDetailsBreadCrumbPartial" />
+<partial name="_BreadCrumbPartial" />
 <section class="shopping-cart spad">
     <div class="container">
         <div class="row">

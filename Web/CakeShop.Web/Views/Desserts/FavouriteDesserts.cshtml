@@ -1,7 +1,11 @@
 ﻿@using CakeShop.Web.ViewModels.Desserts.ViewModels;
 @model AllFavouriteDessertsViewModel;
 
-<partial name="_FavouriteDessertsBreadCrumbPartial" />
+@{
+    ViewData["Title"] = "Favourite Desserts";
+}
+
+<partial name="_BreadCrumbPartial" />
 <section class="wishlist spad">
     <div class="container">
         <div class="row">
