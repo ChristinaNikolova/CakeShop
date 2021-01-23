@@ -59,5 +59,8 @@
         public const string DateTimeFormat = "{0:d}";
 
         public const string LocalTimeZone = "E. Europe Standard Time";
+
+        // content lenght
+        public const int RepiceShortDescriptionLength = 200;
     }
 }
