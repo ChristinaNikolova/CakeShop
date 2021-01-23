@@ -206,3 +206,7 @@ html {
 #user-data:hover {
     cursor: pointer;
 }
+
+.dessert-name:hover {
+    color: #f08632;
+}

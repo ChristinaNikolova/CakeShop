@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="~/css/style.css" type="text/css">
+    <link href="~/lib/datatables/media/css/jquery.dataTables.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
 </head>
@@ -94,19 +95,21 @@
                             <li class="active"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                             <li><a href="./about.html">About</a></li>
                             <li><a asp-area="" asp-controller="Shop" asp-action="GetAllCategories">Shop</a></li>
-                            <li>
-                                <a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./wisslist.html">Wisslist</a></li>
-                                    <li><a href="./Class.html">Class</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
                             <li><a asp-area="" asp-controller="Recipes" asp-action="GetAll">Blog</a></li>
                             <li><a href="./contact.html">Contact</a></li>
+                            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                            {
+                                <li>
+                                    <a asp-area="Administration" asp-controller="Dashboard" asp-action="Index">Administation</a>
+                                    <ul class="dropdown">
+                                        <li><a asp-area="Administration" asp-controller="Dashboard" asp-action="Index">Index</a></li>
+                                        <li><a asp-area="Administration" asp-controller="Orders" asp-action="Index">Orders</a></li>
+                                        <li><a asp-area="Administration" asp-controller="Recipes" asp-action="Index">Repices</a></li>
+                                        <li><a asp-area="Administration" asp-controller="Desserts" asp-action="GetAll">Desserts</a></li>
+                                        <li><a asp-area="Administration" asp-controller="Messages" asp-action="Index">Messages</a></li>
+                                    </ul>
+                                </li>
+                            }
                         </ul>
                     </nav>
                 </div>
@@ -197,7 +200,7 @@
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
     <script src="~/js/site.min.js" asp-append-version="true"></script>
-
+    <script src="~/lib/datatables/media/js/jquery.dataTables.js"></script>
     <script src="~/js/jquery.nice-select.min.js"></script>
     <script src="~/js/jquery.barfiller.js"></script>
     <script src="~/js/jquery.magnific-popup.min.js"></script>

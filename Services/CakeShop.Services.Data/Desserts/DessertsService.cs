@@ -67,6 +67,18 @@
             return desserts;
         }
 
+        public async Task<IEnumerable<T>> GetAllAsync<T>()
+        {
+            var desserts = await this.dessertsRepository
+                .All()
+                .OrderBy(d => d.Category.Name)
+                .ThenBy(d => d.Name)
+                .To<T>()
+                .ToListAsync();
+
+            return desserts;
+        }
+
         public async Task<IEnumerable<T>> GetAllWithCurrentTagsAsync<T>(string categoryId, string[] tagTagNames)
         {
             var desserts = await this.dessertsRepository
