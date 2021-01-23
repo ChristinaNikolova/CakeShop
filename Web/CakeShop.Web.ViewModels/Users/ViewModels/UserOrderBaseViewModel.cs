@@ -2,6 +2,7 @@
 {
     using System;
 
+    using CakeShop.Common;
     using CakeShop.Data.Models;
     using CakeShop.Services.Mapping;
 
@@ -22,6 +23,8 @@
 
         //date as Eng utc now
         public string FormattedFinalizeOrder
-            => string.Format("{0:d}", this.FinalizeOrder);
+            => string.Format(
+                 GlobalConstants.DateTimeFormat,
+                 TimeZoneInfo.ConvertTimeFromUtc(this.FinalizeOrder, TimeZoneInfo.FindSystemTimeZoneById(GlobalConstants.LocalTimeZone)));
     }
 }

@@ -54,5 +54,10 @@
         public const string CancelledStatus = "Cancelled";
 
         public const string DeliveredStatus = "Delivered";
+
+        // format time
+        public const string DateTimeFormat = "{0:d}";
+
+        public const string LocalTimeZone = "E. Europe Standard Time";
     }
 }

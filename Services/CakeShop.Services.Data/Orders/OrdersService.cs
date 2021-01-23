@@ -132,7 +132,7 @@
             return orderId;
         }
 
-        public async Task FinishOrderAsync(string userId)
+        public async Task<string> FinishOrderAsync(string userId)
         {
             var order = await this.ordersRepository
                 .All()
@@ -144,6 +144,8 @@
 
             this.ordersRepository.Update(order);
             await this.ordersRepository.SaveChangesAsync();
+
+            return order.Id;
         }
 
         public async Task AddDetailsToCurrentOrderAsync(string orderId, string deliveryAddress, string notes)

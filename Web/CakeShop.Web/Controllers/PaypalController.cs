@@ -45,11 +45,10 @@
 
             var userId = this.userManager.GetUserId(this.User);
 
-            await this.ordersService.FinishOrderAsync(userId);
+            var orderId = await this.ordersService.FinishOrderAsync(userId);
 
             //this.TempData["InfoMessage"] = GlobalMessages.SuccessBoughtCard;
-            //Redirect to order details page
-            return this.Redirect("/Users/MyOrders");
+            return this.Redirect($"/Orders/GetOrderDetails/{orderId}");
         }
     }
 }

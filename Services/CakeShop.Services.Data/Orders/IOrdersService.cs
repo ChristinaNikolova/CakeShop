@@ -19,7 +19,7 @@
 
         Task<string> GetOrderIdByUserAsync(string userId);
 
-        Task FinishOrderAsync(string userId);
+        Task<string> FinishOrderAsync(string userId);
 
         Task AddDetailsToCurrentOrderAsync(string orderId, string deliveryAddress, string notes);
 
