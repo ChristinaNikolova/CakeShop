@@ -28,9 +28,17 @@
         public const int CommentContentMaxLenght = 1000;
 
         // Dessert
+        public const int DessertNameMinLenght = 2;
+
         public const int DessertNameMaxLenght = 200;
 
+        public const int DessertDescriptionMinLenght = 10;
+
         public const int DessertDescriptionMaxLenght = 2000;
+
+        public const string DessertMinPrice = "0,10";
+
+        public const string DessertMaxPrice = "2000";
 
         // Ingredient
         public const int IngredientNameMaxLenght = 150;

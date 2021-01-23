@@ -28,5 +28,7 @@
         Task<IEnumerable<T>> GetAllAsync<T>();
 
         Task DeleteAsync(string id);
+
+        Task<T> GetDetailsForUpdateAsync<T>(string id);
     }
 }

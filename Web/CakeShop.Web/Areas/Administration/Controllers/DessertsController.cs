@@ -3,17 +3,23 @@
     using System.Threading.Tasks;
 
     using CakeShop.Common;
+    using CakeShop.Services.Data.Categories;
     using CakeShop.Services.Data.Desserts;
+    using CakeShop.Web.ViewModels.Administration.Desserts.InputModels;
     using CakeShop.Web.ViewModels.Administration.Desserts.ViewModels;
     using Microsoft.AspNetCore.Mvc;
 
     public class DessertsController : AdministrationController
     {
         private readonly IDessertsService dessertsService;
+        private readonly ICategoriesService categoriesService;
 
-        public DessertsController(IDessertsService dessertsService)
+        public DessertsController(
+            IDessertsService dessertsService,
+            ICategoriesService categoriesService)
         {
             this.dessertsService = dessertsService;
+            this.categoriesService = categoriesService;
         }
 
         public async Task<IActionResult> GetAll()
@@ -28,13 +34,10 @@
 
         public async Task<IActionResult> Update(string id)
         {
-            //var model = new AllDessertsAdminViewModel()
-            //{
-            //    Desserts = await this.dessertsService.GetAllAsync<DessertAdminViewModel>(),
-            //};
+            var model = await this.dessertsService.GetDetailsForUpdateAsync<UpdateDessertInputModel>(id);
+            model.Categories = await this.categoriesService.GetAllAsSelectListItemAsync();
 
-            return this.View();
-            //return this.View(model);
+            return this.View(model);
         }
 
         [HttpPost]

@@ -218,3 +218,8 @@ html {
 .icon_close:hover {
     cursor: pointer;
 }
+
+#new-pic {
+    background-color: transparent;
+    margin-bottom: 0px;
+}
