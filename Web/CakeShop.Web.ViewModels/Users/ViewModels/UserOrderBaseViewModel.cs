@@ -20,8 +20,8 @@
 
         public DateTime FinalizeOrder { get; set; }
 
-        //date as Eng
+        //date as Eng utc now
         public string FormattedFinalizeOrder
-            => string.Format("{0:f}", this.FinalizeOrder);
+            => string.Format("{0:d}", this.FinalizeOrder);
     }
 }

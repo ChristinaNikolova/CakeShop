@@ -188,3 +188,17 @@ html {
 .shopping__cart__table table tbody tr td.cart__close span:hover {
     cursor: pointer;
 }
+
+.title {
+    font-size: 20px;
+    color: #111111;
+    line-height: 28px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+.form-background {
+    background: #fdf3ea;
+    padding: 30px;
+}
