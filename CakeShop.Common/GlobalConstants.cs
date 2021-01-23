@@ -6,6 +6,8 @@
 
         public const string AdministratorRoleName = "Administrator";
 
+        public const string AdminEmail = "admin@cakeshop.com";
+
         // seed data
         public const string TagSeederPath = @"../../Data/CakeShop.Data/Seeding/Data/Tags.json";
 

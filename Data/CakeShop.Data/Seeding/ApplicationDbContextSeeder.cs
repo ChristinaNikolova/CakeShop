@@ -31,6 +31,7 @@
                               new IngredientsSeeder(),
                               new CategoriesSeeder(),
                               new DessertsSeeder(),
+                              new UsersToRolesSeeder(),
                           };
 
             foreach (var seeder in seeders)
