@@ -56,5 +56,8 @@
 
         // Tag
         public const int TagNameMaxLenght = 200;
+
+        // RecipeIngredient
+        public const int RepiceIngredientQuantityMaxLenght = 100;
     }
 }

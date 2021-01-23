@@ -46,6 +46,8 @@
 
         public DbSet<RecipeLike> RecipeLikes { get; set; }
 
+        public DbSet<RepiceIngredient> RepiceIngredients { get; set; }
+
         public DbSet<Review> Reviews { get; set; }
 
         public DbSet<Tag> Tags { get; set; }

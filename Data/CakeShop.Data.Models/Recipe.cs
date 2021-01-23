@@ -13,6 +13,7 @@
         {
             this.Id = Guid.NewGuid().ToString();
             this.Author = GlobalConstants.SystemName;
+            this.RepiceIngredients = new HashSet<RepiceIngredient>();
             this.Comments = new HashSet<Comment>();
             this.RecipeLikes = new HashSet<RecipeLike>();
         }
@@ -43,6 +44,8 @@
         public string CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
+
+        public virtual ICollection<RepiceIngredient> RepiceIngredients { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
 
