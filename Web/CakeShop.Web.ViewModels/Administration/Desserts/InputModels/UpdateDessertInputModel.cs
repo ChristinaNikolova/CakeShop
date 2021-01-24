@@ -37,9 +37,5 @@
         [Display(Name = "Category")]
         [ValidateSelectedDropDownOption]
         public string CategoryId { get; set; }
-
-        //public IEnumerable<DessertTag> DessertTags { get; set; }
-
-        //public IEnumerable<DessertIngredient> DessertIngredients { get; set; }
     }
 }

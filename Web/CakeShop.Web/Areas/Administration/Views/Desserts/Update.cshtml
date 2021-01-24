@@ -36,12 +36,12 @@
                             <span asp-validation-for="@Model.Description" class="text-danger"></span>
                         </div>
                         <div class="row">
-                            <div class="form-group col-5">
+                            <div class="form-group col-md-5">
                                 <label asp-for="@Model.NewPicture"></label>
                                 <input id="new-pic" type="file" asp-for="@Model.NewPicture" />
                                 <span asp-validation-for="@Model.NewPicture" class="text-danger"></span>
                             </div>
-                            <div class="form-group col-3 mt-4 ml-5">
+                            <div class="form-group col-md-3 mt-4 ml-5">
                                 <button type="submit" class="site-btn mb-4">Update</button>
                             </div>
                         </div>
@@ -50,6 +50,10 @@
             </div>
             <div div class="col-lg-4 align-self-center">
                 <img class="big_img" src="@Model.Picture" alt="dessert-picture">
+                <div class="row mt-4">
+                    <a asp-area="Administration" asp-controller="Desserts" asp-action="UpdateDessertIngredients" asp-route-id="@Model.Id" class="site-btn btn-dessert-update col-md-5 mr-2 mb-2  text-center">Ingredients</a>
+                    <a asp-area="Administration" asp-controller="Desserts" asp-action="UpdateDessertTags" asp-route-id="@Model.Id" class="site-btn btn-dessert-update col-md-5 mr-2 mb-2  text-center">Tags</a>
+                </div>
             </div>
         </div>
     </div>

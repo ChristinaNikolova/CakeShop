@@ -1,0 +1,55 @@
+﻿@using CakeShop.Web.ViewModels.Administration.DessertIngredients.InputModels;
+@model UpdateDessertIngredientsInputModel;
+
+@{
+    this.ViewData["Title"] = "Update Ingredients";
+}
+
+<partial name="_InfoMessagePartial" />
+<partial name="_ErrorMessagePartial" />
+<partial name="_BreadCrumbPartial" />
+<section>
+    <form asp-area="Administration" asp-controller="Desserts" asp-action="AddIngredient" method="post">
+        <input asp-for="@Model.Dessert.Id" type="hidden" />
+        <div class="px-3 pb-0 pt-4">
+            <div class="input-group">
+                <input asp-for="@Model.Name" class="form-control col-8 ml-2 p-2" placeholder="Ingredient Name">
+                <input type="submit" value="Add Ingredient" class="site-btn ml-2 px-2 py-2">
+            </div>
+        </div>
+        <span asp-validation-for="@Model.Name" class="text-danger ml-5"></span>
+    </form>
+    <form id="form-delete-ingredient" method="post"></form>
+</section>
+<hr />
+<section class="product-details spad">
+    <div class="container m-3">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="product__details__img">
+                    <div class="product__details__big__img">
+                        <img class="big_img" src="@Model.Dessert.Picture" alt="dessert-picture">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="product__details__text">
+                    <div class="product__label">@Model.Dessert.CategoryName</div>
+                    <h4 class="text-uppercase">@Model.Dessert.Name</h4>
+                    <div id="dessert-id" hidden>@Model.Dessert.Id</div>
+                    <h5>$ @Model.Dessert.FormattedPrice</h5>
+                    <h4>Ingredients:</h4>
+                    <ul>
+                        @foreach (var ingredient in Model.DessertIngredients)
+                        {
+                            <li class="remove-ingredient">
+                                @ingredient.IngredientName
+                                <span class="cart__close"><span class="icon_close"></span></span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

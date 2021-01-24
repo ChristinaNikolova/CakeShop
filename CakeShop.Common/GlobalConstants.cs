@@ -68,6 +68,10 @@
         // alert messages
         public const string SuccessDeleteMessage = "Successfully deleted!";
 
+        public const string SuccessAddedMessage = "Successfully added!";
+
         public const string SuccessUpdateMessage = "Successfully updated!";
+
+        public const string ProblemWithAddingIngredient = "Ingredient doesn't exist or ingredient is already added!";
     }
 }

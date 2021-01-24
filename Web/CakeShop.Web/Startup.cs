@@ -10,7 +10,9 @@
     using CakeShop.Data.Seeding;
     using CakeShop.Services.Cloudinary;
     using CakeShop.Services.Data.Categories;
+    using CakeShop.Services.Data.DessertIngredients;
     using CakeShop.Services.Data.Desserts;
+    using CakeShop.Services.Data.Ingredients;
     using CakeShop.Services.Data.Orders;
     using CakeShop.Services.Data.Recipes;
     using CakeShop.Services.Data.Reviews;
@@ -82,6 +84,8 @@
             services.AddTransient<IReviewsService, ReviewsService>();
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<IRecipesService, RecipesService>();
+            services.AddTransient<IDessertIngredientsService, DessertIngredientsService>();
+            services.AddTransient<IIngredientsService, IngredientsService>();
 
             // Add Antiforgery
             services.AddAntiforgery(options =>

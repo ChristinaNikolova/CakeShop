@@ -41,6 +41,8 @@
         public const string DessertMaxPrice = "2000";
 
         // Ingredient
+        public const int IngredientNameMinLenght = 3;
+
         public const int IngredientNameMaxLenght = 150;
 
         // Order

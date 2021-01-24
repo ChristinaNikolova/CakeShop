@@ -224,3 +224,10 @@ html {
     margin-bottom: 0px;
 }
 
+.btn-dessert-update {
+    font-size: 12px;
+}
+
+.remove-ingredient span:hover {
+    color: #f08632;
+}
