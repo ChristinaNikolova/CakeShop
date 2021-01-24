@@ -39,7 +39,7 @@
                     <div id="dessert-id" hidden>@Model.Dessert.Id</div>
                     <h5>$ @Model.Dessert.FormattedPrice</h5>
                     <h4>Ingredients:</h4>
-                    <ul>
+                    <ul id="ingredients-list">
                         @foreach (var ingredient in Model.DessertIngredients)
                         {
                             <li class="remove-ingredient">
@@ -53,3 +53,35 @@
         </div>
     </div>
 </section>
+
+<script>
+    [...document.getElementsByClassName("remove-ingredient")].forEach((element) => {
+        element.addEventListener("click", removeIngredient);
+    });
+
+    function removeIngredient(event) {
+        var ingredientName = event.target.parentElement.parentElement.innerText;
+        var dessertId = document.getElementById("dessert-id").innerHTML;
+
+        var token = $("#form-delete-ingredient input[name=__RequestVerificationToken]").val();
+
+        $.ajax({
+            url: "/Administration/Desserts/RemoveIngredientFromDessert",
+            type: "POST",
+            data: JSON.stringify({ ingredientName, dessertId }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            headers: { 'X-CSRF-TOKEN': token },
+            success: function (data) {
+                var result = "";
+
+                data.dessertIngredients.forEach((element) => {
+                    result += `<li class="remove-ingredient" onclick="removeIngredient(event)">${element.ingredientName}<span class="cart__close"><span class="icon_close"></span></span>
+                            </li>`
+                });
+
+                $('#ingredients-list').html(result);
+            }
+        });
+    };
+</script>

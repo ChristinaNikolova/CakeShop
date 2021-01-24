@@ -21,7 +21,7 @@
         {
             var id = await this.ingredientsRepository
                 .All()
-                .Where(i => i.Name == name)
+                .Where(i => i.Name.ToLower() == name.ToLower())
                 .Select(i => i.Id)
                 .FirstOrDefaultAsync();
 

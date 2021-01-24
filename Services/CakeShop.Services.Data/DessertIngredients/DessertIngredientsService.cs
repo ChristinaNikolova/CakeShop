@@ -67,5 +67,17 @@
 
             return ingredients;
         }
+
+        public async Task RemoveAsync(string dessertId, string ingredientName)
+        {
+            var ingredientId = await this.ingredientsService.GetIngredientIdByNameAsync(ingredientName);
+
+            var dessertIngredient = await this.dessertIngredientsRepository
+                .All()
+                .FirstOrDefaultAsync(di => di.DessertId == dessertId && di.IngredientId == ingredientId);
+
+            this.dessertIngredientsRepository.Delete(dessertIngredient);
+            await this.dessertIngredientsRepository.SaveChangesAsync();
+        }
     }
 }

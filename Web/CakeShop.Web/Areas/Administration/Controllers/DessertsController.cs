@@ -6,6 +6,7 @@
     using CakeShop.Services.Data.Categories;
     using CakeShop.Services.Data.DessertIngredients;
     using CakeShop.Services.Data.Desserts;
+    using CakeShop.Web.ViewModels.Administration.DessertIngredients.InputModel;
     using CakeShop.Web.ViewModels.Administration.DessertIngredients.InputModels;
     using CakeShop.Web.ViewModels.Administration.DessertIngredients.ViewModels;
     using CakeShop.Web.ViewModels.Administration.Desserts.InputModels;
@@ -89,7 +90,7 @@
         public async Task<IActionResult> AddIngredient(UpdateDessertIngredientsInputModel input)
         {
             var dessertId = input.Dessert.Id;
-            ;
+
             if (!this.ModelState.IsValid)
             {
                 input.DessertIngredients = await this.dessertIngredientsService.GetAllCurrentDessertAsync<DessertIngredientViewModel>(dessertId);
@@ -112,8 +113,17 @@
             return this.RedirectToAction(nameof(this.UpdateDessertIngredients), new { Id = dessertId });
         }
 
+        [HttpPost]
+        public async Task<ActionResult<AllDessertIngredientsInputModel>> RemoveIngredientFromDessert([FromBody] RemoveIngredientFromDessertInputModel input)
+        {
+            await this.dessertIngredientsService.RemoveAsync(input.DessertId, input.IngredientName);
 
-        public async Task<IActionResult> UpdateDessertTags(string id)
+            var dessertIngredient = await this.dessertIngredientsService.GetAllCurrentDessertAsync<DessertIngredientViewModel>(input.DessertId);
+
+            return new AllDessertIngredientsInputModel { DessertIngredients = dessertIngredient };
+        }
+
+        public async Task<IActionResult> UpdateDessertTags(RemoveIngredientFromDessertInputModel input)
         {
             //var model = new AllDessertsAdminViewModel()
             //{
