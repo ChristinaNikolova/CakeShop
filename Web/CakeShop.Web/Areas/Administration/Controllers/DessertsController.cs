@@ -36,14 +36,13 @@
         {
             var model = await this.dessertsService.GetDetailsForUpdateAsync<UpdateDessertInputModel>(id);
             model.Categories = await this.categoriesService.GetAllAsSelectListItemAsync();
-            ;
+
             return this.View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Update(UpdateDessertInputModel input)
         {
-            ;
             if (!this.ModelState.IsValid)
             {
                 input.Categories = await this.categoriesService.GetAllAsSelectListItemAsync();

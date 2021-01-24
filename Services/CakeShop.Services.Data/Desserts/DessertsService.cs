@@ -218,6 +218,17 @@
             await this.dessertsRepository.SaveChangesAsync();
         }
 
+        public async Task<string> GetPictureAsync(string id)
+        {
+            var picture = await this.dessertsRepository
+                 .All()
+                 .Where(d => d.Id == id)
+                 .Select(d => d.Picture)
+                 .FirstOrDefaultAsync();
+
+            return picture;
+        }
+
         private async Task<Dessert> GetByIdAsync(string id)
         {
             return await this.dessertsRepository
@@ -251,17 +262,6 @@
         private async Task<string> GetPictureAsStringAsync(string name, IFormFile picture)
         {
             return await this.cloudinaryService.UploudAsync(picture, name);
-        }
-
-        public async Task<string> GetPictureAsync(string id)
-        {
-            var picture = await this.dessertsRepository
-                 .All()
-                 .Where(d => d.Id == id)
-                 .Select(d => d.Picture)
-                 .FirstOrDefaultAsync();
-
-            return picture;
         }
     }
 }

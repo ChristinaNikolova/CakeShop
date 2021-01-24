@@ -9,7 +9,7 @@
 <section class="class spad">
     <div class="container">
         <div class="row">
-            <div class="col-lg-9">
+            <div class="col-lg-8">
                 <div class="class__form">
                     <form asp-area="Administration" asp-controller="Desserts" asp-action="Update" method="post" enctype="multipart/form-data" class="mt-4">
                         <input asp-for="@Model.Id" type="hidden" />
@@ -35,20 +35,22 @@
                             <textarea asp-for="@Model.Description" rows="4" class="form-control"></textarea>
                             <span asp-validation-for="@Model.Description" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="@Model.NewPicture"></label>
-                            <input id="new-pic" type="file" asp-for="@Model.NewPicture" />
-                            <span asp-validation-for="@Model.NewPicture" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <button type="submit" class="site-btn mb-4">Update</button>
+                        <div class="row">
+                            <div class="form-group col-5">
+                                <label asp-for="@Model.NewPicture"></label>
+                                <input id="new-pic" type="file" asp-for="@Model.NewPicture" />
+                                <span asp-validation-for="@Model.NewPicture" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-3 mt-4 ml-5">
+                                <button type="submit" class="site-btn mb-4">Update</button>
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
-        <div class="class__video set-bg">
-            <img class="big_img" src="@Model.Picture" alt="dessert-picture">
+            <div div class="col-lg-4 align-self-center">
+                <img class="big_img" src="@Model.Picture" alt="dessert-picture">
+            </div>
         </div>
     </div>
 </section>
