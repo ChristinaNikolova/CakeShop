@@ -7,8 +7,8 @@
     {
         Task<IEnumerable<T>> GetAllCurrentDessertAsync<T>(string dessertId);
 
-        Task<bool> AddAsync(string dessertId, string name);
+        Task<bool> AddIngredientToDessertAsync(string dessertId, string name);
 
-        Task RemoveAsync(string dessertId, string ingredientName);
+        Task RemoveIngredientFromDessertAsync(string dessertId, string ingredientName);
     }
 }

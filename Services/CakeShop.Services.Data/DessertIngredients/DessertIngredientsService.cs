@@ -24,7 +24,7 @@
             this.ingredientsService = ingredientsService;
         }
 
-        public async Task<bool> AddAsync(string dessertId, string name)
+        public async Task<bool> AddIngredientToDessertAsync(string dessertId, string name)
         {
             var isAdded = true;
 
@@ -68,7 +68,7 @@
             return ingredients;
         }
 
-        public async Task RemoveAsync(string dessertId, string ingredientName)
+        public async Task RemoveIngredientFromDessertAsync(string dessertId, string ingredientName)
         {
             var ingredientId = await this.ingredientsService.GetIngredientIdByNameAsync(ingredientName);
 

@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class AllDessertIngredientsInputModel
+    public class AllDessertIngredientsViewModel
     {
         public IEnumerable<DessertIngredientViewModel> DessertIngredients { get; set; }
     }

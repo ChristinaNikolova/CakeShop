@@ -65,6 +65,8 @@
         public const int ReviewContentMaxLenght = 1000;
 
         // Tag
+        public const int TagNameMinLenght = 3;
+
         public const int TagNameMaxLenght = 200;
 
         // RecipeIngredient

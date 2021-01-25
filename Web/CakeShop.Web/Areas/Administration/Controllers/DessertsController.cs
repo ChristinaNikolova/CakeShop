@@ -6,11 +6,14 @@
     using CakeShop.Services.Data.Categories;
     using CakeShop.Services.Data.DessertIngredients;
     using CakeShop.Services.Data.Desserts;
+    using CakeShop.Services.Data.DessertTags;
     using CakeShop.Web.ViewModels.Administration.DessertIngredients.InputModel;
     using CakeShop.Web.ViewModels.Administration.DessertIngredients.InputModels;
     using CakeShop.Web.ViewModels.Administration.DessertIngredients.ViewModels;
     using CakeShop.Web.ViewModels.Administration.Desserts.InputModels;
     using CakeShop.Web.ViewModels.Administration.Desserts.ViewModels;
+    using CakeShop.Web.ViewModels.Administration.DessertTags.InputModels;
+    using CakeShop.Web.ViewModels.Administration.DessertTags.ViewModels;
     using CakeShop.Web.ViewModels.Desserts.ViewModels;
     using Microsoft.AspNetCore.Mvc;
 
@@ -19,15 +22,18 @@
         private readonly IDessertsService dessertsService;
         private readonly ICategoriesService categoriesService;
         private readonly IDessertIngredientsService dessertIngredientsService;
+        private readonly IDessertTagsService dessertTagsService;
 
         public DessertsController(
             IDessertsService dessertsService,
             ICategoriesService categoriesService,
-            IDessertIngredientsService dessertIngredientsService)
+            IDessertIngredientsService dessertIngredientsService,
+            IDessertTagsService dessertTagsService)
         {
             this.dessertsService = dessertsService;
             this.categoriesService = categoriesService;
             this.dessertIngredientsService = dessertIngredientsService;
+            this.dessertTagsService = dessertTagsService;
         }
 
         public async Task<IActionResult> GetAll()
@@ -126,7 +132,7 @@
                 return this.View(input);
             }
 
-            var isAdded = await this.dessertIngredientsService.AddAsync(dessertId, input.Name);
+            var isAdded = await this.dessertIngredientsService.AddIngredientToDessertAsync(dessertId, input.Name);
 
             if (!isAdded)
             {
@@ -141,24 +147,60 @@
         }
 
         [HttpPost]
-        public async Task<ActionResult<AllDessertIngredientsInputModel>> RemoveIngredientFromDessert([FromBody] RemoveIngredientFromDessertInputModel input)
+        public async Task<ActionResult<AllDessertIngredientsViewModel>> RemoveIngredientFromDessert([FromBody] RemoveIngredientFromDessertInputModel input)
         {
-            await this.dessertIngredientsService.RemoveAsync(input.DessertId, input.IngredientName);
+            await this.dessertIngredientsService.RemoveIngredientFromDessertAsync(input.DessertId, input.IngredientName);
 
-            var dessertIngredient = await this.dessertIngredientsService.GetAllCurrentDessertAsync<DessertIngredientViewModel>(input.DessertId);
+            var dessertIngredients = await this.dessertIngredientsService.GetAllCurrentDessertAsync<DessertIngredientViewModel>(input.DessertId);
 
-            return new AllDessertIngredientsInputModel { DessertIngredients = dessertIngredient };
+            return new AllDessertIngredientsViewModel { DessertIngredients = dessertIngredients };
         }
 
-        public async Task<IActionResult> UpdateDessertTags(RemoveIngredientFromDessertInputModel input)
+        public async Task<IActionResult> UpdateDessertTags(string id)
         {
-            //var model = new AllDessertsAdminViewModel()
-            //{
-            //    Desserts = await this.dessertsService.GetAllAsync<DessertAdminViewModel>(),
-            //};
+            var model = new UpdateDessertTagsInputModel()
+            {
+                DessertTags = await this.dessertTagsService.GetAllCurrentDessertAsync<DessertTagViewModel>(id),
+                Dessert = await this.dessertsService.GetDetailsAsync<DessertViewModel>(id),
+            };
 
-            //return this.View(model);
-            return this.View();
+            return this.View(model);
+        }
+
+        public async Task<IActionResult> AddTagToDessert(UpdateDessertTagsInputModel input)
+        {
+            var dessertId = input.Dessert.Id;
+
+            if (!this.ModelState.IsValid)
+            {
+                input.DessertTags = await this.dessertTagsService.GetAllCurrentDessertAsync<DessertTagViewModel>(dessertId);
+                input.Dessert = await this.dessertsService.GetDetailsAsync<DessertViewModel>(dessertId);
+
+                return this.View(input);
+            }
+
+            var isAdded = await this.dessertTagsService.AddTagToDessertAsync(dessertId, input.Name);
+
+            if (!isAdded)
+            {
+                this.TempData["ErrorMessage"] = GlobalConstants.ProblemWithAddingTag;
+            }
+            else
+            {
+                this.TempData["InfoMessage"] = GlobalConstants.SuccessAddedMessage;
+            }
+
+            return this.RedirectToAction(nameof(this.UpdateDessertTags), new { Id = dessertId });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<AllDessertTagsViewModel>> RemoveTagFromDessert([FromBody] RemoveTagFromDessertInputModel input)
+        {
+            await this.dessertTagsService.RemoveTagFromDessertAsync(input.DessertId, input.TagName);
+
+            var dessertTags = await this.dessertTagsService.GetAllCurrentDessertAsync<DessertTagViewModel>(input.DessertId);
+
+            return new AllDessertTagsViewModel { DessertTags = dessertTags };
         }
     }
 }
