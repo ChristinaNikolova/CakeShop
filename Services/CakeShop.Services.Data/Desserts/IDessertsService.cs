@@ -36,5 +36,7 @@
         Task UpdateAsync(string id, string name, string description, decimal price, IFormFile newPicture, string categoryId);
 
         Task<string> GetPictureAsync(string id);
+
+        Task AddAsync(string name, IFormFile picture, decimal price, string description, string categoryId);
     }
 }

@@ -14,5 +14,7 @@
         public string Picture { get; set; }
 
         public string CategoryName { get; set; }
+
+        public int DessertLikesCount { get; set; }
     }
 }

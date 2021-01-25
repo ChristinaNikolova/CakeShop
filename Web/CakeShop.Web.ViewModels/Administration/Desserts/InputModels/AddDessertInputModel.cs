@@ -4,16 +4,12 @@
     using System.ComponentModel.DataAnnotations;
 
     using CakeShop.Common;
-    using CakeShop.Data.Models;
-    using CakeShop.Services.Mapping;
     using CakeShop.Web.Infrastructure.ValidationAttributes;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc.Rendering;
 
-    public class UpdateDessertInputModel : IMapFrom<Dessert>
+    public class AddDessertInputModel
     {
-        public string Id { get; set; }
-
         [Required]
         [StringLength(DataValidation.DessertNameMaxLenght, ErrorMessage = GlobalConstants.ErrorMessage, MinimumLength = DataValidation.DessertNameMinLenght)]
         public string Name { get; set; }
@@ -25,11 +21,9 @@
         [StringLength(DataValidation.DessertDescriptionMaxLenght, ErrorMessage = GlobalConstants.ErrorMessage, MinimumLength = DataValidation.DessertDescriptionMinLenght)]
         public string Description { get; set; }
 
-        public string Picture { get; set; }
-
-        [Display(Name = "New Picture")]
+        [Required]
         [DataType(DataType.Upload)]
-        public IFormFile NewPicture { get; set; }
+        public IFormFile Picture { get; set; }
 
         public IEnumerable<SelectListItem> Categories { get; set; }
 

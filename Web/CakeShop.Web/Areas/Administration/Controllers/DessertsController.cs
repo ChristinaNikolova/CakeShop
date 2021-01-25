@@ -40,6 +40,33 @@
             return this.View(model);
         }
 
+        public async Task<IActionResult> Add()
+        {
+            var model = new AddDessertInputModel()
+            {
+                Categories = await this.categoriesService.GetAllAsSelectListItemAsync(),
+            };
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(AddDessertInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                input.Categories = await this.categoriesService.GetAllAsSelectListItemAsync();
+
+                return this.View(input);
+            }
+
+            await this.dessertsService.AddAsync(input.Name, input.Picture, input.Price, input.Description, input.CategoryId);
+
+            this.TempData["InfoMessage"] = GlobalConstants.SuccessAddedMessage;
+
+            return this.RedirectToAction(nameof(this.GetAll));
+        }
+
         public async Task<IActionResult> Update(string id)
         {
             var model = await this.dessertsService.GetDetailsForUpdateAsync<UpdateDessertInputModel>(id);
@@ -87,7 +114,7 @@
             return this.View(model);
         }
 
-        public async Task<IActionResult> AddIngredient(UpdateDessertIngredientsInputModel input)
+        public async Task<IActionResult> AddIngredientToDessert(UpdateDessertIngredientsInputModel input)
         {
             var dessertId = input.Dessert.Id;
 

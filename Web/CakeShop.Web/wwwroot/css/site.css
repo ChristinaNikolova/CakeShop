@@ -231,3 +231,8 @@ html {
 .remove-ingredient span:hover {
     color: #f08632;
 }
+
+.add-title {
+    color: grey;
+    font-size: 30px;
+}

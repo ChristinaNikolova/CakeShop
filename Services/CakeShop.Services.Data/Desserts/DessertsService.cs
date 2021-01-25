@@ -28,6 +28,23 @@
             this.cloudinaryService = cloudinaryService;
         }
 
+        public async Task AddAsync(string name, IFormFile picture, decimal price, string description, string categoryId)
+        {
+            var pictureAsString = await this.GetPictureAsStringAsync(name, picture);
+
+            var dessert = new Dessert()
+            {
+                Name = name,
+                Price = price,
+                Description = description,
+                CategoryId = categoryId,
+                Picture = pictureAsString,
+            };
+
+            await this.dessertsRepository.AddAsync(dessert);
+            await this.dessertsRepository.SaveChangesAsync();
+        }
+
         public async Task UpdateAsync(string id, string name, string description, decimal price, IFormFile newPicture, string categoryId)
         {
             var dessert = await this.GetByIdAsync(id);
