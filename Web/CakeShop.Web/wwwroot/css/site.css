@@ -151,6 +151,20 @@ html {
     font-size: 20px;
 }
 
+.fa-egg {
+    padding-top: 20px
+}
+
+    .fa-egg:before {
+        font-size: 100px;
+        color: #f08632;
+    }
+
+.fav-icon:hover {
+    cursor: pointer;
+}
+
+
 .fav-heart {
     color: black;
 }
@@ -235,4 +249,12 @@ html {
 .add-title {
     color: grey;
     font-size: 30px;
+}
+
+.update-section {
+    background: rgba(240, 135, 50, 0.1);
+}
+
+.danger:hover {
+    background-color: red;
 }
