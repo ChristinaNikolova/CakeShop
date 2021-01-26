@@ -206,6 +206,7 @@
             order.TotalPrice += dessertPrice * quantity;
 
             await this.ordersRepository.AddAsync(order);
+
             return order;
         }
 
@@ -226,6 +227,7 @@
             order.TotalPrice += dessertPrice * quantity;
 
             this.ordersRepository.Update(order);
+
             return order;
         }
     }

@@ -1,17 +1,15 @@
-﻿@using CakeShop.Web.ViewModels.Administration.Categories.InputModels;
-@model AllCategoriesAdminInputModel;
+﻿@using CakeShop.Web.ViewModels.Administration.Categories.ViewModels;
+@model AllCategoriesAdminViewModel;
 
 @{
     this.ViewData["Title"] = "Categories";
+    this.ViewData["ViewName"] = "category";
 }
 
 <partial name="_InfoMessagePartial" />
 <partial name="_ErrorMessagePartial" />
 <partial name="_BreadCrumbPartial" />
-<div class="text-center">
-    <span class="add-title">Add category </span><a asp-area="Administration" asp-controller="Categories" asp-action="Add" class="site-btn ml-2 px-6 py-2">Add</a>
-    <hr />
-</div>
+<partial name="_AddFormAnotherViewPartial" />
 <section class="wishlist spad">
     <div class="container">
         <div class="row">

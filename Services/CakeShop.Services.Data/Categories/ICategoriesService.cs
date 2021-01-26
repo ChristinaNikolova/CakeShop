@@ -19,5 +19,7 @@
         Task UpdateAsync(string id, string name, IFormFile newPicture, string description);
 
         Task DeleteAsync(string id);
+
+        Task<string> GetPictureAsync(string id);
     }
 }

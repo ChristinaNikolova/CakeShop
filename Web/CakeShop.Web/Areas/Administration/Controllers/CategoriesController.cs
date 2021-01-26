@@ -19,7 +19,7 @@
 
         public async Task<IActionResult> GetAll()
         {
-            var model = new AllCategoriesAdminInputModel()
+            var model = new AllCategoriesAdminViewModel()
             {
                 Categories = await this.categoriesService.GetAllAsync<CategoryAdminViewModel>(),
             };
@@ -68,7 +68,8 @@
         {
             if (!this.ModelState.IsValid)
             {
-                //get picture
+                input.Picture = await this.categoriesService.GetPictureAsync(input.Id);
+
                 return this.View(input);
             }
 

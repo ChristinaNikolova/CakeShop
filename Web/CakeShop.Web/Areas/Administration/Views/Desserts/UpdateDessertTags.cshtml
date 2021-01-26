@@ -35,7 +35,7 @@
             <div class="col-lg-6">
                 <div class="product__details__text">
                     <div class="product__label">@Model.Dessert.CategoryName</div>
-                    <h4 class="text-uppercase">@Model.Dessert.Name</h4>
+                    <h4 class="text-uppercase"><a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id="@Model.Dessert.Id" class="color-black">@Model.Dessert.Name</a></h4>
                     <div id="dessert-id" hidden>@Model.Dessert.Id</div>
                     <h5>$ @Model.Dessert.FormattedPrice</h5>
                     <h4>Tags:</h4>

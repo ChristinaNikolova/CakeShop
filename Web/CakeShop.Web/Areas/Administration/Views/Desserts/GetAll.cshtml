@@ -3,14 +3,12 @@
 
 @{
     this.ViewData["Title"] = "Desserts";
+    this.ViewData["ViewName"] = "dessert";
 }
 
 <partial name="_InfoMessagePartial" />
 <partial name="_BreadCrumbPartial" />
-<div class="text-center">
-    <span class="add-title">Add dessert </span><a asp-area="Administration" asp-controller="Desserts" asp-action="Add" class="site-btn ml-2 px-6 py-2">Add</a>
-    <hr />
-</div>
+<partial name="_AddFormAnotherViewPartial" />
 <section class="wishlist spad">
     <div class="container">
         <div class="row">

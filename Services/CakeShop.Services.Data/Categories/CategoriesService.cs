@@ -120,6 +120,17 @@
             await this.categoriesRepository.SaveChangesAsync();
         }
 
+        public async Task<string> GetPictureAsync(string id)
+        {
+            var picture = await this.categoriesRepository
+                 .All()
+                 .Where(d => d.Id == id)
+                 .Select(d => d.Picture)
+                 .FirstOrDefaultAsync();
+
+            return picture;
+        }
+
         private async Task<string> GetPictureAsStringAsync(string name, IFormFile picture)
         {
             return await this.cloudinaryService.UploudAsync(picture, name);
