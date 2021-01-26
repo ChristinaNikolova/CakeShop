@@ -58,5 +58,41 @@
 
             return this.RedirectToAction(nameof(this.GetAll));
         }
+
+        public async Task<IActionResult> Update(string id)
+        {
+            var model = await this.recipesService.GetDetailsForUpdateAsync<UpdateRecipeInputModel>(id);
+            model.Categories = await this.categoriesService.GetAllAsSelectListItemAsync();
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(UpdateRecipeInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                input.Categories = await this.categoriesService.GetAllAsSelectListItemAsync();
+                input.Picture = await this.recipesService.GetPictureAsync(input.Id);
+
+                return this.View(input);
+            }
+
+            await this.recipesService.UpdateAsync(input.Id, input.Title, input.Content, input.NewPicture, input.Portions, input.CookingTime, input.PreparationTime, input.CategoryId);
+
+            this.TempData["InfoMessage"] = GlobalConstants.SuccessUpdateMessage;
+
+            return this.RedirectToAction(nameof(this.GetAll));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await this.recipesService.DeleteAsync(id);
+
+            this.TempData["InfoMessage"] = GlobalConstants.SuccessDeleteMessage;
+
+            return this.RedirectToAction(nameof(this.GetAll));
+        }
     }
 }

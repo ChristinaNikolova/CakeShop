@@ -67,7 +67,7 @@
 
         public const int RecipeContentMinLenght = 10;
 
-        public const int RecipeContentMaxLenght = 3000;
+        public const int RecipeContentMaxLenght = 5000;
 
         public const string MinPortionsValue = "1";
 
