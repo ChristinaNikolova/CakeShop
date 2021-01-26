@@ -1,43 +1,42 @@
 ﻿namespace CakeShop.Web.Areas.Administration.Controllers
 {
     using System.Threading.Tasks;
-
     using CakeShop.Common;
-    using CakeShop.Services.Data.Ingredients;
-    using CakeShop.Web.ViewModels.Administration.Ingredients.InputModels;
-    using CakeShop.Web.ViewModels.Administration.Ingredients.ViewModels;
+    using CakeShop.Services.Data.Tags;
+    using CakeShop.Web.ViewModels.Administration.Tags.InputModels;
+    using CakeShop.Web.ViewModels.Administration.Tags.ViewModels;
     using Microsoft.AspNetCore.Mvc;
 
-    public class IngredientsController : AdministrationController
+    public class TagsController : AdministrationController
     {
-        private readonly IIngredientsService ingredientsService;
+        private readonly ITagsService tagsService;
 
-        public IngredientsController(IIngredientsService ingredientsService)
+        public TagsController(ITagsService tagsService)
         {
-            this.ingredientsService = ingredientsService;
+            this.tagsService = tagsService;
         }
 
         public async Task<IActionResult> GetAll()
         {
-            var model = new AllIngredientsAdminInputModel()
+            var model = new AllTagsAdminInputModel()
             {
-                Ingredients = await this.ingredientsService.GetAllAsync<IngredientAdminViewModel>(),
+                Tags = await this.tagsService.GetAllAsync<TagAdminViewModel>(),
             };
 
             return this.View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AllIngredientsAdminInputModel input)
+        public async Task<IActionResult> Add(AllTagsAdminInputModel input)
         {
             if (!this.ModelState.IsValid)
             {
-                input.Ingredients = await this.ingredientsService.GetAllAsync<IngredientAdminViewModel>();
+                input.Tags = await this.tagsService.GetAllAsync<TagAdminViewModel>();
 
                 return this.View(input);
             }
 
-            var isAdded = await this.ingredientsService.AddAsync(input.Name);
+            var isAdded = await this.tagsService.AddAsync(input.Name);
 
             if (isAdded)
             {
@@ -45,7 +44,7 @@
             }
             else
             {
-                this.TempData["ErrorMessage"] = GlobalConstants.AlreadyExistingIngredient;
+                this.TempData["ErrorMessage"] = GlobalConstants.AlreadyExistingTag;
             }
 
             return this.RedirectToAction(nameof(this.GetAll));
@@ -53,20 +52,20 @@
 
         public async Task<IActionResult> Update(string id)
         {
-            var model = await this.ingredientsService.GetDetailsForUpdateAsync<UpdateIngredientInputModel>(id);
-
+            var model = await this.tagsService.GetDetailsForUpdateAsync<UpdateTagInputModel>(id);
+            ;
             return this.View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(UpdateIngredientInputModel input)
+        public async Task<IActionResult> Update(UpdateTagInputModel input)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.View(input);
             }
 
-            await this.ingredientsService.UpdateAsync(input.Id, input.Name);
+            await this.tagsService.UpdateAsync(input.Id, input.Name);
 
             this.TempData["InfoMessage"] = GlobalConstants.SuccessUpdateMessage;
 
@@ -76,7 +75,7 @@
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
-            await this.ingredientsService.DeleteAsync(id);
+            await this.tagsService.DeleteAsync(id);
 
             this.TempData["InfoMessage"] = GlobalConstants.SuccessDeleteMessage;
 

@@ -77,5 +77,7 @@
         public const string ProblemWithAddingTag = "Tag doesn't exist or tag is already added!";
 
         public const string AlreadyExistingIngredient = "Ingredient already exists!";
+
+        public const string AlreadyExistingTag = "Tag already exists!";
     }
 }

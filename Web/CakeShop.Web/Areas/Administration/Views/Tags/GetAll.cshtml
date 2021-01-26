@@ -1,0 +1,61 @@
+﻿@using CakeShop.Web.ViewModels.Administration.Tags.InputModels;
+@model AllTagsAdminInputModel;
+
+@{
+    this.ViewData["Title"] = "Tags";
+}
+
+<partial name="_InfoMessagePartial" />
+<partial name="_ErrorMessagePartial" />
+<partial name="_BreadCrumbPartial" />
+<section class="mb-2">
+    <form asp-area="Administration" asp-controller="Tags" asp-action="Add" method="post">
+        <div class="px-3 pb-0 pt-4">
+            <div class="input-group">
+                <input asp-for="@Model.Name" class="form-control col-6 ml-2 p-2" placeholder="Tag Name">
+                <input type="submit" value="Add Tag" class="site-btn ml-2 px-2 py-2">
+            </div>
+        </div>
+        <span asp-validation-for="@Model.Name" class="text-danger ml-5"></span>
+    </form>
+</section>
+<section class="wishlist spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="wishlist__cart__table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Desserts</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var tag in Model.Tags)
+                            {
+                                <tr>
+                                    <td class="cart__price">@tag.Name</td>
+                                    <td class="cart__stock">@tag.CupcakeTagsCount</td>
+                                    <td class="cart__btn"><a asp-area="Administration" asp-controller="Tags" asp-action="Update" asp-route-id="@tag.Id" class="site-btn">Update</a></td>
+                                    <td class="cart__close">
+                                        <form method="post" asp-area="Administration" asp-controller="Tags" asp-action="Delete" asp-route-id="@tag.Id">
+                                            <button type="submit" class="site-btn danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/loadDataTable.js" asp-append-version="true"></script>
+    <script>loadDataTable();</script>
+}
