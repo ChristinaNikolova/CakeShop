@@ -1,6 +1,7 @@
 ﻿namespace CakeShop.Web.Areas.Administration.Controllers
 {
     using System.Threading.Tasks;
+
     using CakeShop.Common;
     using CakeShop.Services.Data.Tags;
     using CakeShop.Web.ViewModels.Administration.Tags.InputModels;
@@ -53,7 +54,7 @@
         public async Task<IActionResult> Update(string id)
         {
             var model = await this.tagsService.GetDetailsForUpdateAsync<UpdateTagInputModel>(id);
-            ;
+
             return this.View(model);
         }
 

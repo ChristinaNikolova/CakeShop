@@ -1,0 +1,35 @@
+﻿@using CakeShop.Web.ViewModels.Administration.Categories.InputModels;
+@model AddCategoryInputModel;
+
+@{
+    this.ViewData["Title"] = "Add";
+}
+
+<partial name="_BreadCrumbPartial" />
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="class__form">
+            <form asp-area="Administration" asp-controller="Categories" asp-action="Add" method="post" enctype="multipart/form-data" class="update-section mt-4">
+                <div class="form-group col-md-8 pt-2">
+                    <label asp-for="@Model.Name"></label>
+                    <input asp-for="@Model.Name" class="form-control" />
+                    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-8">
+                    <label asp-for="@Model.Description"></label>
+                    <textarea asp-for="@Model.Description" rows="6" class="form-control"></textarea>
+                    <span asp-validation-for="@Model.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="@Model.Picture"></label>
+                    <input id="new-pic" type="file" asp-for="@Model.Picture" />
+                    <span asp-validation-for="@Model.Picture" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4 mt-2">
+                    <button type="submit" class="site-btn mb-4">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -20,7 +20,11 @@
         public const int UserPasswordMaxLenght = 100;
 
         // Category
+        public const int CategotyNameMinLenght = 2;
+
         public const int CategotyNameMaxLenght = 50;
+
+        public const int CategotyDescriptionMinLenght = 10;
 
         public const int CategotyDescriptionMaxLenght = 500;
 
