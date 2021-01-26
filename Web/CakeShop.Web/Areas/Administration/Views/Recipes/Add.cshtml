@@ -1,0 +1,58 @@
+﻿@using CakeShop.Web.ViewModels.Administration.Recipes.InputModels;
+@model AddRecipeInputModel;
+
+@{
+    this.ViewData["Title"] = "Add";
+}
+
+<partial name="_BreadCrumbPartial" />
+<div class="row">
+    <div class="col-lg-12">
+        <div class="class__form">
+            <form asp-area="Administration" asp-controller="Desserts" asp-action="Add" method="post" enctype="multipart/form-data" class="update-section mt-4">
+                <div class="row ml-2">
+                    <div class="form-group col-md-6 mt-2">
+                        <label asp-for="@Model.Title"></label>
+                        <input asp-for="@Model.Title" class="form-control" />
+                        <span asp-validation-for="@Model.Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label asp-for="@Model.CategoryId"></label>
+                        <select id="category" asp-for="@Model.CategoryId" class="form-control col-md-12" asp-items="@Model.Categories">
+                            <option selected>Please select dessert category</option>
+                        </select>
+                        <span asp-validation-for="@Model.CategoryId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-11">
+                        <label asp-for="@Model.Content"></label>
+                        <input asp-for="@Model.Content" class="form-control" />
+                        <span asp-validation-for="@Model.Content" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="@Model.CookingTime"></label>
+                        <input asp-for="@Model.CookingTime" class="form-control" />
+                        <span asp-validation-for="@Model.CookingTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="@Model.PreparationTime"></label>
+                        <input asp-for="@Model.PreparationTime" class="form-control" />
+                        <span asp-validation-for="@Model.PreparationTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label asp-for="@Model.Portions"></label>
+                        <input asp-for="@Model.Portions" class="form-control" />
+                        <span asp-validation-for="@Model.Portions" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label asp-for="@Model.Picture"></label>
+                        <input id="new-pic" type="file" asp-for="@Model.Picture" />
+                        <span asp-validation-for="@Model.Picture" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4 mt-2 offset-sm-4">
+                        <button type="submit" class="site-btn mb-4">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

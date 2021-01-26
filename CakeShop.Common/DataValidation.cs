@@ -61,9 +61,25 @@
         public const int OrderNotesMaxLenght = 500;
 
         // Recipe
+        public const int RecipeTitleMinLenght = 3;
+
         public const int RecipeTitleMaxLenght = 200;
 
+        public const int RecipeContentMinLenght = 10;
+
         public const int RecipeContentMaxLenght = 3000;
+
+        public const string MinPortionsValue = "1";
+
+        public const string MaxPortionsValue = "100";
+
+        public const string MinPreparationTimeValue = "0";
+
+        public const string MaxPreparationTimeValue = "5000";
+
+        public const string MinCookingTimeValue = "0";
+
+        public const string MaxCookingTimeValue = "5000";
 
         // Review
         public const int ReviewContentMaxLenght = 1000;
