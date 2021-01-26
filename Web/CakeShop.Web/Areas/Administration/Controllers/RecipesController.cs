@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
 
+    using CakeShop.Common;
     using CakeShop.Services.Data.Categories;
     using CakeShop.Services.Data.Recipes;
     using CakeShop.Web.ViewModels.Administration.Recipes.InputModels;
@@ -39,6 +40,23 @@
             };
 
             return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(AddRecipeInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                input.Categories = await this.categoriesService.GetAllAsSelectListItemAsync();
+
+                return this.View(input);
+            }
+
+            await this.recipesService.AddAsync(input.Title, input.Content, input.Picture, input.Portions, input.PreparationTime, input.CookingTime, input.CategoryId);
+
+            this.TempData["InfoMessage"] = GlobalConstants.SuccessAddedMessage;
+
+            return this.RedirectToAction(nameof(this.GetAll));
         }
     }
 }

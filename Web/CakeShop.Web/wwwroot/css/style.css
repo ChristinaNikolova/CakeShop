@@ -692,7 +692,7 @@ ol {
 }
 
 .class__form {
-  height: 620px;
+  max-height: 3000px;
 }
 .class__form form input {
   height: 50px;
