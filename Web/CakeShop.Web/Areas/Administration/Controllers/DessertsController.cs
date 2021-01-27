@@ -75,7 +75,7 @@
 
         public async Task<IActionResult> Update(string id)
         {
-            var model = await this.dessertsService.GetDetailsForUpdateAsync<UpdateDessertInputModel>(id);
+            var model = await this.dessertsService.GetDetailsAsync<UpdateDessertInputModel>(id);
             model.Categories = await this.categoriesService.GetAllAsSelectListItemAsync();
 
             return this.View(model);

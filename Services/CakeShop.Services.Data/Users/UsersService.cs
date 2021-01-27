@@ -24,6 +24,17 @@
             this.ordersRepository = ordersRepository;
         }
 
+        public async Task<IEnumerable<T>> GetAllAsync<T>()
+        {
+            var users = await this.usersRepository
+                .All()
+                .OrderBy(u => u.UserName)
+                .To<T>()
+                .ToListAsync();
+
+            return users;
+        }
+
         public async Task<string> GetUserAddressByIdAsync(string userId)
         {
             var address = await this.usersRepository

@@ -64,17 +64,6 @@
             await this.dessertsRepository.SaveChangesAsync();
         }
 
-        public async Task<T> GetDetailsForUpdateAsync<T>(string id)
-        {
-            var dessert = await this.dessertsRepository
-                .All()
-                .Where(d => d.Id == id)
-                .To<T>()
-                .FirstOrDefaultAsync();
-
-            return dessert;
-        }
-
         public async Task<IEnumerable<T>> OrderDessertsAsync<T>(string targetCriteria, string categoryId)
         {
             var query = this.dessertsRepository

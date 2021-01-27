@@ -31,8 +31,6 @@
 
         Task DeleteAsync(string id);
 
-        Task<T> GetDetailsForUpdateAsync<T>(string id);
-
         Task UpdateAsync(string id, string name, string description, decimal price, IFormFile newPicture, string categoryId);
 
         Task<string> GetPictureAsync(string id);
