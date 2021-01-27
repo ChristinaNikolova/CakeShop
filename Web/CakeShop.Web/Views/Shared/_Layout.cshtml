@@ -93,10 +93,8 @@
                     <nav class="header__menu mobile-menu">
                         <ul>
                             <li class="active"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                            <li><a href="./about.html">About</a></li>
                             <li><a asp-area="" asp-controller="Shop" asp-action="GetAllCategories">Shop</a></li>
                             <li><a asp-area="" asp-controller="Recipes" asp-action="GetAll">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
                             @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                             {
                                 <li>
@@ -106,8 +104,6 @@
                                         <li><a asp-area="Administration" asp-controller="Orders" asp-action="Index">Orders</a></li>
                                         <li><a asp-area="Administration" asp-controller="Recipes" asp-action="GetAll">Repices</a></li>
                                         <li><a asp-area="Administration" asp-controller="Desserts" asp-action="GetAll">Desserts</a></li>
-                                        <li><a asp-area="Administration" asp-controller="Messages" asp-action="Index">Messages</a></li>
-                                        <li><a asp-area="Administration" asp-controller="Users" asp-action="GetAll">Users</a></li>
                                     </ul>
                                 </li>
                             }

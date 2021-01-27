@@ -242,7 +242,8 @@ html {
     font-size: 12px;
 }
 
-.remove-ingredient span:hover {
+.remove-ingredient span:hover,
+.remove-tag span:hover {
     color: #f08632;
 }
 
