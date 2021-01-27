@@ -48,13 +48,19 @@
                                 <input asp-for="@Model.PreparationTime" class="form-control" />
                                 <span asp-validation-for="@Model.PreparationTime" class="text-danger"></span>
                             </div>
-                            <div class="form-group col-md-10">
+                            <div class="form-group col-md-5">
                                 <label asp-for="@Model.NewPicture"></label>
                                 <input id="new-pic" type="file" asp-for="@Model.NewPicture" />
                                 <span asp-validation-for="@Model.NewPicture" class="text-danger"></span>
                             </div>
+                            <div class="form-group col-md-5">
+                                <h5>
+                                    Update ingredients
+                                    <a asp-area="Administration" asp-controller="Recipes" asp-action="UpdateRecipeIngredients" asp-route-id="@Model.Id" class="site-btn btn-dessert-update col-md-5 mr-2 mb-2 text-center">Ingredients</a>
+                                </h5>
+                            </div>
                             <div class="form-group col-md-4 mt-2 offset-sm-4">
-                                <button type="submit" class="site-btn mb-6">Add</button>
+                                <button type="submit" class="site-btn mb-6">Update</button>
                             </div>
                         </div>
                     </form>

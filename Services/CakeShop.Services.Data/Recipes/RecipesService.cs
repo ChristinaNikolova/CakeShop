@@ -74,7 +74,7 @@
             await this.recipesRepository.SaveChangesAsync();
         }
 
-        public async Task<T> GetDetailsForUpdateAsync<T>(string id)
+        public async Task<T> GetDetailsAsync<T>(string id)
         {
             var recipe = await this.recipesRepository
                 .All()

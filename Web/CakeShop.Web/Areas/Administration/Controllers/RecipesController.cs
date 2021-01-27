@@ -4,7 +4,10 @@
 
     using CakeShop.Common;
     using CakeShop.Services.Data.Categories;
+    using CakeShop.Services.Data.RecipeIngredients;
     using CakeShop.Services.Data.Recipes;
+    using CakeShop.Web.ViewModels.Administration.RecipeIngredients.InputModels;
+    using CakeShop.Web.ViewModels.Administration.RecipeIngredients.ViewModels;
     using CakeShop.Web.ViewModels.Administration.Recipes.InputModels;
     using CakeShop.Web.ViewModels.Administration.Recipes.ViewModels;
     using Microsoft.AspNetCore.Mvc;
@@ -13,13 +16,16 @@
     {
         private readonly IRecipesService recipesService;
         private readonly ICategoriesService categoriesService;
+        private readonly IRecipeIngredientsService recipeIngredientsService;
 
         public RecipesController(
             IRecipesService recipesService,
-            ICategoriesService categoriesService)
+            ICategoriesService categoriesService,
+            IRecipeIngredientsService recipeIngredientsService)
         {
             this.recipesService = recipesService;
             this.categoriesService = categoriesService;
+            this.recipeIngredientsService = recipeIngredientsService;
         }
 
         public async Task<IActionResult> GetAll()
@@ -61,7 +67,7 @@
 
         public async Task<IActionResult> Update(string id)
         {
-            var model = await this.recipesService.GetDetailsForUpdateAsync<UpdateRecipeInputModel>(id);
+            var model = await this.recipesService.GetDetailsAsync<UpdateRecipeInputModel>(id);
             model.Categories = await this.categoriesService.GetAllAsSelectListItemAsync();
 
             return this.View(model);
@@ -93,6 +99,53 @@
             this.TempData["InfoMessage"] = GlobalConstants.SuccessDeleteMessage;
 
             return this.RedirectToAction(nameof(this.GetAll));
+        }
+
+        public async Task<IActionResult> UpdateRecipeIngredients(string id)
+        {
+            var model = new UpdateRecipeIngredientsInputModel()
+            {
+                RecipeIngredients = await this.recipeIngredientsService.GetAllCurrentRecipeAsync<RecipeIngredientViewModel>(id),
+                Recipe = await this.recipesService.GetDetailsAsync<RecipeAdminBaseViewModel>(id),
+            };
+
+            return this.View(model);
+        }
+
+        public async Task<IActionResult> AddIngredientToRecipe(UpdateRecipeIngredientsInputModel input)
+        {
+            var recipeId = input.Recipe.Id;
+
+            if (!this.ModelState.IsValid)
+            {
+                input.RecipeIngredients = await this.recipeIngredientsService.GetAllCurrentRecipeAsync<RecipeIngredientViewModel>(recipeId);
+                input.Recipe = await this.recipesService.GetDetailsAsync<RecipeAdminBaseViewModel>(recipeId);
+
+                return this.View(input);
+            }
+
+            var isAdded = await this.recipeIngredientsService.AddIngredientToRecipeAsync(recipeId, input.Name, input.Quantity);
+
+            if (!isAdded)
+            {
+                this.TempData["ErrorMessage"] = GlobalConstants.ProblemWithAddingIngredient;
+            }
+            else
+            {
+                this.TempData["InfoMessage"] = GlobalConstants.SuccessAddedMessage;
+            }
+
+            return this.RedirectToAction(nameof(this.UpdateRecipeIngredients), new { Id = recipeId });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<AllRecipeIngredientsViewModel>> RemoveIngredientFromRecipe([FromBody] RemoveIngredientFromRecipeInputModel input)
+        {
+            await this.recipeIngredientsService.RemoveIngredientFromRecipeAsync(input.RecipeId, input.IngredientName);
+
+            var recipeIngredients = await this.recipeIngredientsService.GetAllCurrentRecipeAsync<RecipeIngredientViewModel>(input.RecipeId);
+
+            return new AllRecipeIngredientsViewModel { RecipeIngredients = recipeIngredients };
         }
     }
 }

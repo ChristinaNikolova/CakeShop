@@ -15,6 +15,7 @@
     using CakeShop.Services.Data.DessertTags;
     using CakeShop.Services.Data.Ingredients;
     using CakeShop.Services.Data.Orders;
+    using CakeShop.Services.Data.RecipeIngredients;
     using CakeShop.Services.Data.Recipes;
     using CakeShop.Services.Data.Reviews;
     using CakeShop.Services.Data.Tags;
@@ -90,6 +91,7 @@
             services.AddTransient<IIngredientsService, IngredientsService>();
             services.AddTransient<IDessertTagsService, DessertTagsService>();
             services.AddTransient<ITagsService, TagsService>();
+            services.AddTransient<IRecipeIngredientsService, RecipeIngredientsService>();
 
             // Add Antiforgery
             services.AddAntiforgery(options =>
