@@ -1,6 +1,5 @@
 ﻿namespace CakeShop.Services.Paypal
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -48,7 +47,7 @@
                         return_url = $@"https://localhost:44319/Paypal/SuccessedPayment?totalPrice={totalPrice}",
                     },
                 };
-
+                ;
                 var createdPayment = await Task.Run(() => payment.Create(apiContext));
 
                 return createdPayment;

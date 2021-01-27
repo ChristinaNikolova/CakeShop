@@ -1,7 +1,7 @@
 ﻿namespace CakeShop.Web.Controllers
 {
     using System.Threading.Tasks;
-
+    using CakeShop.Common;
     using CakeShop.Data.Models;
     using CakeShop.Services.Data.Orders;
     using CakeShop.Services.Paypal;
@@ -47,7 +47,8 @@
 
             var orderId = await this.ordersService.FinishOrderAsync(userId);
 
-            //this.TempData["InfoMessage"] = GlobalMessages.SuccessBoughtCard;
+            this.TempData["InfoMessage"] = GlobalConstants.PaymentSuccess;
+
             return this.Redirect($"/Orders/GetOrderDetails/{orderId}");
         }
     }

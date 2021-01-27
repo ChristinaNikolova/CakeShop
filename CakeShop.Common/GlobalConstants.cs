@@ -81,5 +81,7 @@
         public const string AlreadyExistingIngredient = "Ingredient already exists!";
 
         public const string AlreadyExistingTag = "Tag already exists!";
+
+        public const string PaymentSuccess = "Your payment is successful!";
     }
 }

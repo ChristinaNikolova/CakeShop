@@ -145,8 +145,6 @@
 
             await this.ordersService.AddDetailsToCurrentOrderAsync(orderId, input.DeliveryAddress, input.Notes);
 
-            totalPrice /= 100M;
-
             return this.Redirect($"/Paypal/CreatePayment?totalPrice={totalPrice}");
         }
 
