@@ -1,5 +1,6 @@
 ﻿@using CakeShop.Web.ViewModels.Administration.DessertIngredients.InputModels;
 @model UpdateDessertIngredientsInputModel;
+@inject IOptions<CakeShop.Web.SecurityModels.GoogleReCAPTCHA> GoogleReCAPTCHA;
 
 @{
     this.ViewData["Title"] = "Update Ingredients";
@@ -57,4 +58,12 @@
 @section Scripts {
     <script src="~/js/removeIngredientFromDessert.js" asp-append-version="true"></script>
     <script>removeIngredientFromDessert();</script>
+
+    <script src="https://www.google.com/recaptcha/api.js?render=@GoogleReCAPTCHA.Value.SiteKey"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('@GoogleReCAPTCHA.Value.SiteKey', { action: 'homepage' }).then(function (token) {
+            });
+        });
+    </script>
 }

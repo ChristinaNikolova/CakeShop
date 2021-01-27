@@ -1,5 +1,6 @@
 ﻿@using CakeShop.Web.ViewModels.Administration.Tags.InputModels;
 @model UpdateTagInputModel;
+@inject IOptions<CakeShop.Web.SecurityModels.GoogleReCAPTCHA> GoogleReCAPTCHA;
 
 @{
     this.ViewData["Title"] = "Update";
@@ -30,3 +31,13 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script src="https://www.google.com/recaptcha/api.js?render=@GoogleReCAPTCHA.Value.SiteKey"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('@GoogleReCAPTCHA.Value.SiteKey', { action: 'homepage' }).then(function (token) {
+            });
+        });
+    </script>
+}

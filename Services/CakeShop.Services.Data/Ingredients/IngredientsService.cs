@@ -44,9 +44,7 @@
 
         public async Task DeleteAsync(string id)
         {
-            var ingredient = await this.ingredientsRepository
-                .All()
-                .FirstOrDefaultAsync(i => i.Id == id);
+            var ingredient = await this.GetByIdAsync(id);
 
             ingredient.IsDeleted = true;
 
@@ -89,14 +87,19 @@
 
         public async Task UpdateAsync(string id, string name)
         {
-            var ingredient = await this.ingredientsRepository
-                .All()
-                .FirstOrDefaultAsync(i => i.Id == id);
+            var ingredient = await this.GetByIdAsync(id);
 
             ingredient.Name = name;
 
             this.ingredientsRepository.Update(ingredient);
             await this.ingredientsRepository.SaveChangesAsync();
+        }
+
+        private async Task<Ingredient> GetByIdAsync(string id)
+        {
+            return await this.ingredientsRepository
+                .All()
+                .FirstOrDefaultAsync(i => i.Id == id);
         }
     }
 }

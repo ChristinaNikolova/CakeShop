@@ -44,9 +44,7 @@
 
         public async Task DeleteAsync(string id)
         {
-            var tag = await this.tagsRepository
-                .All()
-                .FirstOrDefaultAsync(i => i.Id == id);
+            var tag = await this.GetByIdAsync(id);
 
             tag.IsDeleted = true;
 
@@ -89,14 +87,19 @@
 
         public async Task UpdateAsync(string id, string name)
         {
-            var tag = await this.tagsRepository
-               .All()
-               .FirstOrDefaultAsync(i => i.Id == id);
+            var tag = await this.GetByIdAsync(id);
 
             tag.Name = name;
 
             this.tagsRepository.Update(tag);
             await this.tagsRepository.SaveChangesAsync();
+        }
+
+        private async Task<Tag> GetByIdAsync(string id)
+        {
+            return await this.tagsRepository
+                .All()
+                .FirstOrDefaultAsync(i => i.Id == id);
         }
     }
 }

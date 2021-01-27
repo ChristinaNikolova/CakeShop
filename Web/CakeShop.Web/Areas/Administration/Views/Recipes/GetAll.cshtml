@@ -1,5 +1,6 @@
 ﻿@using CakeShop.Web.ViewModels.Administration.Recipes.ViewModels;
 @model AllRecipesAdminViewModel;
+@inject IOptions<CakeShop.Web.SecurityModels.GoogleReCAPTCHA> GoogleReCAPTCHA;
 
 @{
     this.ViewData["Title"] = "Recipes";
@@ -59,4 +60,12 @@
 @section Scripts {
     <script src="~/js/loadDataTable.js" asp-append-version="true"></script>
     <script>loadDataTable();</script>
+
+    <script src="https://www.google.com/recaptcha/api.js?render=@GoogleReCAPTCHA.Value.SiteKey"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('@GoogleReCAPTCHA.Value.SiteKey', { action: 'homepage' }).then(function (token) {
+            });
+        });
+    </script>
 }

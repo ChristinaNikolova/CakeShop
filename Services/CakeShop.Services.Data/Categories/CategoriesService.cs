@@ -91,9 +91,7 @@
 
         public async Task UpdateAsync(string id, string name, IFormFile newPicture, string description)
         {
-            var category = await this.categoriesRepository
-               .All()
-               .FirstOrDefaultAsync(i => i.Id == id);
+            var category = await this.GetByIdAsync(id);
 
             category.Name = name;
             category.Description = description;
@@ -110,9 +108,7 @@
 
         public async Task DeleteAsync(string id)
         {
-            var category = await this.categoriesRepository
-                .All()
-                .FirstOrDefaultAsync(i => i.Id == id);
+            var category = await this.GetByIdAsync(id);
 
             category.IsDeleted = true;
 
@@ -134,6 +130,13 @@
         private async Task<string> GetPictureAsStringAsync(string name, IFormFile picture)
         {
             return await this.cloudinaryService.UploudAsync(picture, name);
+        }
+
+        private async Task<Category> GetByIdAsync(string id)
+        {
+            return await this.categoriesRepository
+               .All()
+               .FirstOrDefaultAsync(i => i.Id == id);
         }
     }
 }

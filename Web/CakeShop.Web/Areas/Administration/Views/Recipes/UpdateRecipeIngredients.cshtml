@@ -1,5 +1,6 @@
 ﻿@using CakeShop.Web.ViewModels.Administration.RecipeIngredients.InputModels;
 @model UpdateRecipeIngredientsInputModel;
+@inject IOptions<CakeShop.Web.SecurityModels.GoogleReCAPTCHA> GoogleReCAPTCHA;
 
 @{
     this.ViewData["Title"] = "Update Ingredients";
@@ -43,10 +44,10 @@
                     <ul id="ingredients-list">
                         @foreach (var ingredient in Model.RecipeIngredients)
                         {
-                        <li class="remove-ingredient" onclick="removeIngredientFromRecipe(event)">
-                            @ingredient.IngredientName: @ingredient.Quantity
-                            <span class="cart__close"><span class="icon_close"></span></span>
-                        </li>
+                            <li class="remove-ingredient" onclick="removeIngredientFromRecipe(event)">
+                                @ingredient.IngredientName: @ingredient.Quantity
+                                <span class="cart__close"><span class="icon_close"></span></span>
+                            </li>
                         }
                     </ul>
                 </div>
@@ -58,4 +59,12 @@
 @section Scripts {
     <script src="~/js/removeIngredientFromRecipe.js" asp-append-version="true"></script>
     <script>removeIngredientFromRecipe();</script>
+
+    <script src="https://www.google.com/recaptcha/api.js?render=@GoogleReCAPTCHA.Value.SiteKey"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('@GoogleReCAPTCHA.Value.SiteKey', { action: 'homepage' }).then(function (token) {
+            });
+        });
+    </script>
 }
