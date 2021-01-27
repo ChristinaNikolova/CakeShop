@@ -1,10 +1,11 @@
 ﻿namespace CakeShop.Web.ViewModels.Administration.Users.ViewModels
 {
+    using System.Linq;
+
     using AutoMapper;
     using CakeShop.Data.Models;
     using CakeShop.Data.Models.Enums;
     using CakeShop.Services.Mapping;
-    using System.Linq;
 
     public class UserAdminViewModel : IMapFrom<ApplicationUser>, IHaveCustomMappings
     {
