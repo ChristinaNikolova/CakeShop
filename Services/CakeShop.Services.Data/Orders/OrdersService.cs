@@ -66,6 +66,25 @@
             return totalSum;
         }
 
+        public async Task ChangeStatusAsync(string id, string status)
+        {
+            var order = await this.GetByIdAsync(id);
+            order.Status = Enum.Parse<Status>(status);
+
+            this.ordersRepository.Update(order);
+            await this.ordersRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(string id)
+        {
+            var order = await this.GetByIdAsync(id);
+
+            order.IsDeleted = true;
+
+            this.ordersRepository.Update(order);
+            await this.ordersRepository.SaveChangesAsync();
+        }
+
         public async Task<decimal> GetTotalPriceCurrentOrderByUserAsync(string userId)
         {
             var totalPrice = await this.ordersRepository
@@ -190,7 +209,7 @@
             var orders = await this.ordersRepository
                  .All()
                  .Where(o => o.Status == Enum.Parse<Status>(status))
-                 .OrderByDescending(o => o.FinalizeOrder)
+                 .OrderByDescending(o => o.FinalizeOrder.Date)
                  .To<T>()
                  .ToListAsync();
 
@@ -241,6 +260,13 @@
             this.ordersRepository.Update(order);
 
             return order;
+        }
+
+        private async Task<Order> GetByIdAsync(string id)
+        {
+            return await this.ordersRepository
+                .All()
+                .FirstOrDefaultAsync(o => o.Id == id);
         }
     }
 }

@@ -23,7 +23,7 @@
                                     <td class="product__cart__item">@order.FormattedFinalizeOrder</td>
                                     <td class="cart__price">$ @order.TotalPrice</td>
                                     <td class="cart__stock">@order.PaidAsString</td>
-                                    <td class="cart__btn"><a asp-area="Administration" asp-controller="Orders" asp-action="Manage" asp-route-id="@order.Id" class="site-btn">Manage</a></td>
+                                    <td class="cart__btn"><a asp-area="Administration" asp-controller="Orders" asp-action="GetOrderDetails" asp-route-id="@order.Id" class="site-btn">Manage</a></td>
                                     <td class="cart__close">
                                         <form method="post" asp-area="Administration" asp-controller="Orders" asp-action="Delete" asp-route-id="@order.Id">
                                             <button type="submit" class="site-btn">Delete</button>

@@ -1,0 +1,23 @@
+﻿@using CakeShop.Web.ViewModels.Orders.ViewModels;
+@model AllDessertsBasketViewModel;
+
+@{
+    var orderId = Model.DessertsInBasket.Select(deo => deo.OrderId).FirstOrDefault();
+    ViewData["Title"] = "Order's Details";
+}
+
+<partial name="_InfoMessagePartial" />
+<partial name="_BreadCrumbPartial" />
+<section class="shopping-cart spad">
+    <div class="container">
+        <div class="row">
+            <partial name="_DessertListDetailsPartial" model="Model" />
+            <vc:get-order-details order-id="@orderId"></vc:get-order-details>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/getUserDataButton.js" asp-append-version="true"></script>
+    <script>getUserDataButton();</script>
+}

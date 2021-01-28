@@ -33,7 +33,7 @@
             var userId = this.userManager.GetUserId((ClaimsPrincipal)this.User);
 
             var model = await this.ordersService.GetOrderDetailsAsync<DetailsCurrentOrderViewModel>(orderId);
-            model.User = await this.usersService.GetUserDataAsync<UserOrderDetailsViewModel>(userId);
+            model.User = await this.usersService.GetUserDataByOrderIdAsync<UserOrderDetailsViewModel>(orderId);
 
             return this.View(model);
         }

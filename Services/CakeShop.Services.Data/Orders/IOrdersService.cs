@@ -28,5 +28,9 @@
         Task<T> GetOrderDetailsAsync<T>(string orderId);
 
         Task<IEnumerable<T>> GetAllAsync<T>(string status);
+
+        Task DeleteAsync(string id);
+
+        Task ChangeStatusAsync(string id, string status);
     }
 }

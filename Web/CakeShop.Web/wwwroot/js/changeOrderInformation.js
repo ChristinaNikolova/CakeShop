@@ -31,9 +31,9 @@
 
     function showApprovedOrders() {
         document.getElementById("processing-orders").style.display = "none";
-        document.getElementById("approved-orders").style.display = "none";
+        document.getElementById("approved-orders").style.display = "block";
         document.getElementById("delivered-orders").style.display = "none";
-        document.getElementById("cancelled-orders").style.display = "block";
+        document.getElementById("cancelled-orders").style.display = "none";
 
         processing.classList.remove("active");
         approved.classList.add("active");

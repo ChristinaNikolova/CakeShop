@@ -11,6 +11,8 @@
 
         Task<string> GetUserAddressByIdAsync(string userId);
 
+        Task<T> GetUserDataByOrderIdAsync<T>(string orderId);
+
         Task<T> GetUserDataAsync<T>(string userId);
 
         Task<IEnumerable<T>> GetUserOrdersListAsync<T>(string userId);

@@ -46,6 +46,17 @@
             return address;
         }
 
+        public async Task<T> GetUserDataByOrderIdAsync<T>(string orderId)
+        {
+            var user = await this.usersRepository
+                .All()
+                .Where(u => u.Orders.Any(o => o.Id == orderId))
+                .To<T>()
+                .FirstOrDefaultAsync();
+
+            return user;
+        }
+
         public async Task<T> GetUserDataAsync<T>(string userId)
         {
             var user = await this.usersRepository
