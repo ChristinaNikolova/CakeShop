@@ -1,0 +1,53 @@
+﻿@using CakeShop.Web.ViewModels.Administration.Orders.ViewModels;
+@model AllOrdersViewModel;
+@inject IOptions<CakeShop.Web.SecurityModels.GoogleReCAPTCHA> GoogleReCAPTCHA;
+
+@{
+    this.ViewData["Title"] = "All Orders";
+}
+
+<partial name="_BreadCrumbPartial" />
+<section>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="nav nav-tabs">
+                <a id="processing" class="nav-link active color-black-with-effect">Processing</a>
+                <a id="approved" class="nav-link color-black-with-effect">Approved</a>
+                <a id="delivered" class="nav-link color-black-with-effect">Delivered</a>
+                <a id="cancelled" class="nav-link color-black-with-effect">Cancelled</a>
+            </div>
+
+            <div id="processing-orders" style="display:block">
+                <h3 class="text-center">Processing</h3>
+                <partial name="_OrderListPartial" model="Model.ProcessingOrders" />
+            </div>
+            <div id="approved-orders" style="display:none">
+                <h3 class="text-center">Approved</h3>
+                <partial name="_OrderListPartial" model="Model.ApprovedOrders" />
+            </div>
+            <div id="delivered-orders" style="display:none">
+                <h3 class="text-center">Delivered</h3>
+                <partial name="_OrderListPartial" model="Model.DeliveredOrders" />
+            </div>
+            <div id="cancelled-orders" style="display:none">
+                <h3 class="text-center">Cancelled</h3>
+                <partial name="_OrderListPartial" model="Model.CancelledOrders" />
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/loadDataTable.js" asp-append-version="true"></script>
+    <script src="~/js/changeOrderInformation.js" asp-append-version="true"></script>
+    <script>loadDataTable();</script>
+    <script>changeOrderInformation();</script>
+
+    <script src="https://www.google.com/recaptcha/api.js?render=@GoogleReCAPTCHA.Value.SiteKey"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('@GoogleReCAPTCHA.Value.SiteKey', { action: 'homepage' }).then(function (token) {
+            });
+        });
+    </script>
+}

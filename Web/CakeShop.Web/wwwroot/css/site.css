@@ -259,3 +259,12 @@ html {
 .danger:hover {
     background-color: red;
 }
+
+.color-black-with-effect {
+    color: black;
+}
+
+    .color-black-with-effect:hover {
+        color: #F08632;
+        cursor: pointer;
+    }

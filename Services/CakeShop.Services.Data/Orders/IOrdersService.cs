@@ -26,5 +26,7 @@
         Task<IEnumerable<T>> GetDessertsCurrentOrderAsync<T>(string orderId);
 
         Task<T> GetOrderDetailsAsync<T>(string orderId);
+
+        Task<IEnumerable<T>> GetAllAsync<T>(string status);
     }
 }

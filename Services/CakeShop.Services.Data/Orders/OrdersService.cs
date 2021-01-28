@@ -185,6 +185,18 @@
             return orderDetails;
         }
 
+        public async Task<IEnumerable<T>> GetAllAsync<T>(string status)
+        {
+            var orders = await this.ordersRepository
+                 .All()
+                 .Where(o => o.Status == Enum.Parse<Status>(status))
+                 .OrderByDescending(o => o.FinalizeOrder)
+                 .To<T>()
+                 .ToListAsync();
+
+            return orders;
+        }
+
         private async Task<Order> AddDessertToNewOrderAsync(string userId, string dessertId, int quantity, decimal dessertPrice, Order order)
         {
             var clientAddress = await this.usersService.GetUserAddressByIdAsync(userId);

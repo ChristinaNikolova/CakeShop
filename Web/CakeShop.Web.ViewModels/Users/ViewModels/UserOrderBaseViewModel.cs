@@ -1,30 +1,11 @@
 ﻿namespace CakeShop.Web.ViewModels.Users.ViewModels
 {
-    using System;
-
-    using CakeShop.Common;
     using CakeShop.Data.Models;
     using CakeShop.Services.Mapping;
+    using CakeShop.Web.ViewModels.Administration.Orders.ViewModels;
 
-    public class UserOrderBaseViewModel : IMapFrom<Order>
+    public class UserOrderBaseViewModel : OrderViewModel, IMapFrom<Order>
     {
-        public string Id { get; set; }
-
-        public decimal TotalPrice { get; set; }
-
-        public bool IsPaid { get; set; }
-
-        public string PaidAsString
-            => this.IsPaid ? "Yes" : "No";
-
         public string Status { get; set; }
-
-        public DateTime FinalizeOrder { get; set; }
-
-        //date as Eng utc now
-        public string FormattedFinalizeOrder
-            => string.Format(
-                 GlobalConstants.DateTimeFormat,
-                 TimeZoneInfo.ConvertTimeFromUtc(this.FinalizeOrder, TimeZoneInfo.FindSystemTimeZoneById(GlobalConstants.LocalTimeZone)));
     }
 }
