@@ -27,4 +27,8 @@
     <ProjectReference Include="..\CakeShop.Web.Infrastructure\CakeShop.Web.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Comments\ViewModels\" />
+  </ItemGroup>
+
 </Project>

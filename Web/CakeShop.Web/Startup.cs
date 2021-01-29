@@ -10,6 +10,7 @@
     using CakeShop.Data.Seeding;
     using CakeShop.Services.Cloudinary;
     using CakeShop.Services.Data.Categories;
+    using CakeShop.Services.Data.Comments;
     using CakeShop.Services.Data.DessertIngredients;
     using CakeShop.Services.Data.Desserts;
     using CakeShop.Services.Data.DessertTags;
@@ -92,6 +93,7 @@
             services.AddTransient<IDessertTagsService, DessertTagsService>();
             services.AddTransient<ITagsService, TagsService>();
             services.AddTransient<IRecipeIngredientsService, RecipeIngredientsService>();
+            services.AddTransient<ICommentsService, CommentsService>();
 
             // Add Antiforgery
             services.AddAntiforgery(options =>

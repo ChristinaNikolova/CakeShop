@@ -268,3 +268,7 @@ html {
         color: #F08632;
         cursor: pointer;
     }
+
+#show-comment-form:hover {
+    cursor: pointer;
+}

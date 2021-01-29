@@ -5,6 +5,7 @@
     using CakeShop.Services.Data.RecipeIngredients;
     using CakeShop.Services.Data.Recipes;
     using CakeShop.Web.ViewModels.Administration.RecipeIngredients.ViewModels;
+    using CakeShop.Web.ViewModels.Comments.InputModels;
     using CakeShop.Web.ViewModels.Recipes.ViewModels;
     using Microsoft.AspNetCore.Mvc;
 
@@ -34,7 +35,9 @@
         public async Task<IActionResult> GetRecipeDetails(string id)
         {
             var model = await this.recipesService.GetDetailsAsync<RecipeDetailsViewModel>(id);
+
             model.RepiceIngredients = await this.recipeIngredientsService.GetAllCurrentRecipeAsync<RecipeIngredientViewModel>(id);
+            model.AddCommentInputModel = new AddCommentInputModel() { Id = id, };
 
             return this.View(model);
         }
