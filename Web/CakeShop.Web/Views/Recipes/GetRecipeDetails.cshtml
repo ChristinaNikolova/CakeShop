@@ -1,0 +1,137 @@
+﻿@using CakeShop.Web.ViewModels.Recipes.ViewModels;
+@model RecipeDetailsViewModel;
+
+@{
+    ViewData["Title"] = "Recipe's Details";
+}
+
+<partial name="_BreadCrumbPartial" />
+<div class="blog-hero set-bg" data-setbg="/img/blog/details/blog-hero.jpg">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-7">
+                <div class="blog__hero__text">
+                    <div class="label">@Model.CategoryName</div>
+                    <h2>@Model.Title</h2>
+                    <ul>
+                        <li>By <span>@Model.Author</span></li>
+                        <li>@Model.CreatedOn</li>
+                        <li>@Model.CommentsCount Comments</li>
+                        <li>@Model.LikesCount Likes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="blog-details spad">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-8">
+                <div class="blog__details__content">
+                    <div class="blog__details__recipe">
+                        <div class="blog__details__recipe__item">
+                            <h6><img src="img/blog/details/user.png" alt=""> SERVES</h6>
+                            <span>@Model.Portions</span>
+                        </div>
+                        <div class="blog__details__recipe__item">
+                            <h6><img src="img/blog/details/clock.png" alt=""> PREP TIME</h6>
+                            <span>@Model.PreparationTime minute</span>
+                        </div>
+                        <div class="blog__details__recipe__item">
+                            <h6><img src="img/blog/details/clock.png" alt=""> COOK TIME</h6>
+                            <span>@Model.CookingTime minute</span>
+                        </div>
+                    </div>
+                    <div class="blog__details__recipe__details">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="blog__details__ingredients">
+                                    <h6>Ingredients</h6>
+                                    <ul>
+                                        @foreach (var ingredient in Model.RepiceIngredients)
+                                        {
+                                            <li>
+                                                <span>.</span>
+                                                @ingredient.Quantity @ingredient.IngredientName
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="blog__details__ingredients__pic">
+                                    <img src="@Model.Picture" alt="dessert-pic">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog__details__direction">
+                        <h6>Directions</h6>
+                        <article>
+                            @Html.Raw(@Model.SanitizedContent)
+                        </article>
+                    </div>
+                    <div class="blog__details__print">
+                        <a href="#" class="primary-btn"><i class="fa fa-print"></i> Print recipe</a>
+                    </div>
+                    <div class="blog__details__comment">
+                        <h5>@Model.CommentsCount Comment</h5>
+                        <a href="#" class="primary-btn">Leave a comment</a>
+                        <div class="blog__details__comment__item">
+                            <div class="blog__details__comment__item__pic">
+                                <img src="img/blog/details/comment-1.jpg" alt="">
+                            </div>
+                            <div class="blog__details__comment__item__text">
+                                <h6>Dylan Stewart</h6>
+                                <span>26 Feb 2020</span>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua vel facilisis.
+                                </p>
+                                <div class="blog__details__comment__btns">
+                                    <a href="#">Reply</a>
+                                    <a href="#">Like</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="blog__details__comment__item blog__details__comment__item--reply">
+                            <div class="blog__details__comment__item__pic">
+                                <img src="img/blog/details/comment-2.jpg" alt="">
+                            </div>
+                            <div class="blog__details__comment__item__text">
+                                <h6>Derrick Patrick</h6>
+                                <span>26 Feb 2020</span>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua vel facilisis.
+                                </p>
+                                <div class="blog__details__comment__btns">
+                                    <a href="#">Reply</a>
+                                    <a href="#">Like</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="blog__details__comment__item">
+                            <div class="blog__details__comment__item__pic">
+                                <img src="img/blog/details/comment-3.jpg" alt="">
+                            </div>
+                            <div class="blog__details__comment__item__text">
+                                <h6>Michael Luna</h6>
+                                <span>26 Feb 2020</span>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua vel facilisis.
+                                </p>
+                                <div class="blog__details__comment__btns">
+                                    <a href="#">Reply</a>
+                                    <a href="#">Like</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
