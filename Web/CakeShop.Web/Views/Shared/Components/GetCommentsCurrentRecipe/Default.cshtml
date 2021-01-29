@@ -1,0 +1,18 @@
+﻿@using CakeShop.Web.ViewModels.Comments.ViewModels;
+@model AllCommentsCurrentRecipeViewModel;
+
+
+@foreach (var comment in Model.Comments)
+{
+    <div class="blog__details__comment__item mt-4">
+        <div class="blog__details__comment__item__text">
+            <h6>@comment.ClientUserName</h6>
+            <span>@comment.CreatedOn</span>
+            <p>@comment.Content</p>
+            <div class="blog__details__comment__btns">
+                <a href="#">Reply</a>
+            </div>
+        </div>
+    </div>
+    <hr />
+}

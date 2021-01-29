@@ -78,57 +78,7 @@
                     <div class="blog__details__comment">
                         <h5>@Model.CommentsCount Comment</h5>
                         <partial name="_AddCommentFormPartial" model="@Model.AddCommentInputModel" />
-                        <div class="blog__details__comment__item mt-4">
-                            <div class="blog__details__comment__item__pic">
-                                <img src="img/blog/details/comment-1.jpg" alt="">
-                            </div>
-                            <div class="blog__details__comment__item__text">
-                                <h6>Dylan Stewart</h6>
-                                <span>26 Feb 2020</span>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua vel facilisis.
-                                </p>
-                                <div class="blog__details__comment__btns">
-                                    <a href="#">Reply</a>
-                                    <a href="#">Like</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="blog__details__comment__item blog__details__comment__item--reply">
-                            <div class="blog__details__comment__item__pic">
-                                <img src="img/blog/details/comment-2.jpg" alt="">
-                            </div>
-                            <div class="blog__details__comment__item__text">
-                                <h6>Derrick Patrick</h6>
-                                <span>26 Feb 2020</span>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua vel facilisis.
-                                </p>
-                                <div class="blog__details__comment__btns">
-                                    <a href="#">Reply</a>
-                                    <a href="#">Like</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="blog__details__comment__item">
-                            <div class="blog__details__comment__item__pic">
-                                <img src="img/blog/details/comment-3.jpg" alt="">
-                            </div>
-                            <div class="blog__details__comment__item__text">
-                                <h6>Michael Luna</h6>
-                                <span>26 Feb 2020</span>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua vel facilisis.
-                                </p>
-                                <div class="blog__details__comment__btns">
-                                    <a href="#">Reply</a>
-                                    <a href="#">Like</a>
-                                </div>
-                            </div>
-                        </div>
+                        <vc:get-comments-current-recipe recipe-id="@Model.Id"></vc:get-comments-current-recipe>
                     </div>
                 </div>
             </div>

@@ -1,10 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CakeShop.Web.ViewModels.Comments.ViewModels
+﻿namespace CakeShop.Web.ViewModels.Comments.ViewModels
 {
-    class CommentViewModel
+    using System;
+
+    using CakeShop.Data.Models;
+    using CakeShop.Services.Mapping;
+
+    public class CommentViewModel : IMapFrom<Comment>
     {
+        public string Content { get; set; }
+
+        public string ClientUserName { get; set; }
+
+        public DateTime CreatedOn { get; set; }
     }
 }

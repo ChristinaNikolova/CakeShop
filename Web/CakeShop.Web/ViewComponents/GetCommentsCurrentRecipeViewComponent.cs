@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
 
     using CakeShop.Services.Data.Comments;
+    using CakeShop.Web.ViewModels.Comments.ViewModels;
     using Microsoft.AspNetCore.Mvc;
 
     [ViewComponent]
@@ -17,12 +18,12 @@
 
         public async Task<IViewComponentResult> InvokeAsync(string recipeId)
         {
-            //var model = new AllCommentsCurrentRecipeViewModel()
-            //{
-            //    Comments = await this.commentsService.GetCommentsCurrentRecipeAsync<CommentViewModel>(recipeId),
-            //};
+            var model = new AllCommentsCurrentRecipeViewModel()
+            {
+                Comments = await this.commentsService.GetCommentsCurrentRecipeAsync<CommentViewModel>(recipeId),
+            };
 
-            return this.View();
+            return this.View(model);
         }
     }
 }
