@@ -1,5 +1,6 @@
 ﻿@using CakeShop.Web.ViewModels.Recipes.ViewModels;
 @model RecipeDetailsViewModel;
+@inject IOptions<CakeShop.Web.SecurityModels.GoogleReCAPTCHA> GoogleReCAPTCHA;
 
 @{
     ViewData["Title"] = "Recipe's Details";
@@ -86,16 +87,15 @@
     </div>
 </section>
 
-<script>
-    document.getElementById("show-comment-form").addEventListener("click", showCommentForm);
+@section Scripts {
+    <script src="~/js/loadCommentAddForm.js" asp-append-version="true"></script>
+    <script>loadCommentAddForm();</script>
 
-    function showCommentForm() {
-        let commentForm = document.getElementById("comment-form");
-
-        if (commentForm.style.display === "none") {
-            commentForm.style.display = "block";
-        } else {
-            commentForm.style.display = "none";
-        }
-    }
-</script>
+    <script src="https://www.google.com/recaptcha/api.js?render=@GoogleReCAPTCHA.Value.SiteKey"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('@GoogleReCAPTCHA.Value.SiteKey', { action: 'homepage' }).then(function (token) {
+            });
+        });
+    </script>
+}
