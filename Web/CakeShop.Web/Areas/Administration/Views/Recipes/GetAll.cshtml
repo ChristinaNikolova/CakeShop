@@ -35,7 +35,7 @@
                                             <img class="small-pic" src="@recipe.Picture" alt="dessert">
                                         </div>
                                         <div class="product__cart__item__text">
-                                            <a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id="@recipe.Id"><h6>@recipe.Title</h6></a>
+                                            <a asp-area="" asp-controller="Recipes" asp-action="RecipeDetails" asp-route-id="@recipe.Id"><h6>@recipe.Title</h6></a>
                                         </div>
                                     </td>
                                     <td class="cart__price">@recipe.CategoryName</td>

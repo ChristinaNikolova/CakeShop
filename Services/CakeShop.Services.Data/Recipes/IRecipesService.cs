@@ -24,5 +24,7 @@
         Task<bool> LikeRecipeAsync(string recipeId, string userId);
 
         Task<int> GetLikesCountAsync(string recipeId);
+
+        Task<IEnumerable<T>> GetRecentRecipesAsync<T>();
     }
 }

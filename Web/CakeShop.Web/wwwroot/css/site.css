@@ -272,3 +272,8 @@ html {
 #show-comment-form:hover {
     cursor: pointer;
 }
+
+.pic-side-bar {
+    width: 80px;
+    height: 80px;
+}

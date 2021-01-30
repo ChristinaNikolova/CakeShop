@@ -48,7 +48,7 @@
             return this.View(model);
         }
 
-        public async Task<IActionResult> GetRecipeDetails(string id)
+        public async Task<IActionResult> RecipeDetails(string id)
         {
             var userId = this.userManager.GetUserId(this.User);
 
@@ -87,7 +87,7 @@
 
             this.TempData["InfoMessage"] = GlobalConstants.SuccessSendRecipeMessage;
 
-            return this.RedirectToAction(nameof(this.GetRecipeDetails), new { id });
+            return this.RedirectToAction(nameof(this.RecipeDetails), new { id });
         }
 
         [HttpPost]

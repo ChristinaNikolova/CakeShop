@@ -26,14 +26,14 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.Redirect($"/Recipes/GetRecipeDetails/{input.Id}");
+                return this.Redirect($"/Recipes/RecipeDetails/{input.Id}");
             }
 
             var userId = this.userManager.GetUserId(this.User);
 
             await this.commentsService.AddAsync(input.Id, input.Content, userId);
 
-            return this.Redirect($"/Recipes/GetRecipeDetails/{input.Id}");
+            return this.Redirect($"/Recipes/RecipeDetails/{input.Id}");
         }
     }
 }

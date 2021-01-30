@@ -102,5 +102,8 @@
         public const string GenerateOrderPdfViewName = "GenerateOrderPdf";
 
         public const string PdfMimeType = "application/pdf";
+
+        // recipes blog
+        public const int RecentRecipesCount = 5;
     }
 }

@@ -1,6 +1,5 @@
 ﻿namespace CakeShop.Web.ViewModels.Recipes.ViewModels
 {
-    using System;
     using System.Net;
     using System.Text.RegularExpressions;
 
@@ -9,12 +8,8 @@
     using CakeShop.Services.Mapping;
     using Ganss.XSS;
 
-    public class RecipeViewModel : IMapFrom<Recipe>
+    public class RecipeViewModel : RecentRecipeViewModel, IMapFrom<Recipe>
     {
-        public string Id { get; set; }
-
-        public string Title { get; set; }
-
         public string Content { get; set; }
 
         public string SanitizedContent => new HtmlSanitizer().Sanitize(this.Content);
@@ -30,13 +25,7 @@
                         : content;
             }
         }
-
-        public string Picture { get; set; }
-
         public string Author { get; set; }
-
-        //format
-        public DateTime CreatedOn { get; set; }
 
         public string CategoryName { get; set; }
 

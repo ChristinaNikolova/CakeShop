@@ -1,0 +1,20 @@
+﻿@using CakeShop.Web.ViewModels.Recipes.ViewModels
+@model AllRecentRecipeViewModel;
+
+<div class="blog__sidebar__item">
+    <h5>Recent posts</h5>
+    <div class="blog__sidebar__recent">
+        @foreach (var recipe in Model.Recipes)
+        {
+            <a asp-area="" asp-controller="Recipes" asp-action="RecipeDetails" asp-route-id="@recipe.Id" class="blog__sidebar__recent__item">
+                <div class="blog__sidebar__recent__item__pic">
+                    <img class="pic-side-bar" src="@recipe.Picture" alt="recipe-pic">
+                </div>
+                <div class="blog__sidebar__recent__item__text">
+                    <h4>@recipe.Title</h4>
+                    <span>@recipe.CreatedOn</span>
+                </div>
+            </a>
+        }
+    </div>
+</div>

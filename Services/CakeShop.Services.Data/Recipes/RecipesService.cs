@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using CakeShop.Common;
     using CakeShop.Data.Common.Repositories;
     using CakeShop.Data.Models;
     using CakeShop.Services.Cloudinary;
@@ -127,6 +128,18 @@
                 .CountAsync(rl => rl.RecipeId == recipeId);
 
             return count;
+        }
+
+        public async Task<IEnumerable<T>> GetRecentRecipesAsync<T>()
+        {
+            var recipes = await this.recipesRepository
+                .All()
+                .OrderByDescending(r => r.CreatedOn)
+                .Take(GlobalConstants.RecentRecipesCount)
+                .To<T>()
+                .ToListAsync();
+
+            return recipes;
         }
 
         public async Task<bool> LikeRecipeAsync(string recipeId, string userId)
