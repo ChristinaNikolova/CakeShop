@@ -41,7 +41,7 @@
 
         public const string OrderConfirmationTitle = "Order confirmation";
 
-        public const string OrderConfirmation = "Your order is confirm!";
+        public const string OrderConfirmation = "Your order is confirmed!";
 
         // pagination
         public const int DessertsPerPage = 8;
@@ -90,7 +90,7 @@
 
         public const string AlreadyExistingTag = "Tag already exists!";
 
-        public const string PaymentSuccess = "Your payment is successful! You will inform you, when your order is approved.";
+        public const string PaymentSuccess = "Your payment is successful! We will inform you per email, when your order is approved.";
 
         public const string SuccessSendRecipeMessage = "Successfully send!";
 
