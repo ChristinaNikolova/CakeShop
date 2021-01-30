@@ -7,7 +7,6 @@
     using CakeShop.Data.Common.Repositories;
     using CakeShop.Data.Models;
     using CakeShop.Data.Models.Enums;
-    using CakeShop.Services.Data.Orders;
     using CakeShop.Services.Mapping;
     using Microsoft.EntityFrameworkCore;
 
@@ -44,6 +43,17 @@
                 .FirstOrDefaultAsync();
 
             return address;
+        }
+
+        public async Task<string> GetUserEmailByIdAsync(string userId)
+        {
+            var email = await this.usersRepository
+              .All()
+              .Where(u => u.Id == userId)
+              .Select(u => u.Email)
+              .FirstOrDefaultAsync();
+
+            return email;
         }
 
         public async Task<T> GetUserDataByOrderIdAsync<T>(string orderId)

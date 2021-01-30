@@ -152,7 +152,7 @@
             }
 
             // Add Rotativa
-            RotativaConfiguration.Setup(env.WebRootPath, "Rotativa");
+            RotativaConfiguration.Setup(env.WebRootPath, GlobalConstants.Rotativa);
 
             if (env.IsDevelopment())
             {

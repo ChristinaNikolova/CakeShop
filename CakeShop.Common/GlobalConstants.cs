@@ -35,6 +35,10 @@
 
         public const string ForgotPasswordMessage = "Please reset your password by <a href='{0}'>clicking here</a>.";
 
+        public const string SendRecipeAsPdfTitleMessage = "Recipe File";
+
+        public const string SendRecipeAsPdf = "Thank you! You can find the recipe in the attached files!";
+
         // pagination
         public const int DessertsPerPage = 8;
 
@@ -84,7 +88,13 @@
 
         public const string PaymentSuccess = "Your payment is successful!";
 
+        public const string SuccessSendRecipeMessage = "Successfully send!";
+
         // rotativa
-        public const string RotativaPath = "wwwroot/Rotativa";
+        public const string Rotativa = "Rotativa";
+
+        public const string GenerateRecipePdfViewNameName = "GenerateRecipePdf";
+
+        public const string PdfMimeType = "application/pdf";
     }
 }

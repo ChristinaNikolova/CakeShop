@@ -6,6 +6,7 @@
     ViewData["Title"] = "Recipe's Details";
 }
 
+<partial name="_InfoMessagePartial" />
 <partial name="_BreadCrumbPartial" />
 <div class="blog-hero set-bg" data-setbg="/img/blog/details/blog-hero.jpg">
     <div class="container">
@@ -75,7 +76,8 @@
                         </article>
                     </div>
                     <div class="blog__details__print">
-                        <a id="generate" asp-area="" asp-controller="Recipes" asp-action="GenerateRecipePdf" asp-route-id="@Model.Id" class="primary-btn"><i class="fa fa-print"></i> Print recipe</a>
+                        <a asp-area="" asp-controller="Recipes" asp-action="GenerateRecipePdf" asp-route-id="@Model.Id" class="primary-btn hover-effect-orange"><i class="fa fa-print"></i> Print recipe</a>
+                        <a asp-area="" asp-controller="Recipes" asp-action="SendRecipe" asp-route-id="@Model.Id" class="primary-btn hover-effect-orange"><i class="far fa-envelope"></i> Send recipe</a>
                     </div>
                     <div class="blog__details__comment">
                         <h5>@Model.CommentsCount Comment</h5>

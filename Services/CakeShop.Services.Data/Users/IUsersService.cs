@@ -11,6 +11,8 @@
 
         Task<string> GetUserAddressByIdAsync(string userId);
 
+        Task<string> GetUserEmailByIdAsync(string id);
+
         Task<T> GetUserDataByOrderIdAsync<T>(string orderId);
 
         Task<T> GetUserDataAsync<T>(string userId);
