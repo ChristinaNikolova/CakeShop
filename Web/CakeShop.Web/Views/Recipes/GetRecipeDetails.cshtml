@@ -20,7 +20,7 @@
                         <li>By <span>@Model.Author</span></li>
                         <li>@Model.CreatedOn</li>
                         <li>@Model.CommentsCount Comments</li>
-                        <li>@Model.LikesCount Likes</li>
+                        <li id="recipe-likes-count">@Model.RecipeLikesCount Likes</li>
                     </ul>
                 </div>
             </div>
@@ -82,11 +82,11 @@
                         <span id="like-recipe">
                             @if (Model.IsFavourite)
                             {
-                                <a class="primary-btn hover-effect-orange"><i class="far fa-heart"></i>Add to favs</a>
+                                <a class="primary-btn hover-effect-orange"><i class="fa fa-heart"></i>Remove from favs</a>
                             }
                             else
                             {
-                                <a class="primary-btn hover-effect-orange"><i class="fa fa-heart"></i>Remove from favs</a>
+                                <a class="primary-btn hover-effect-orange"><i class="far fa-heart"></i>Add to favs</a>
                             }
                         </span>
                     </div>

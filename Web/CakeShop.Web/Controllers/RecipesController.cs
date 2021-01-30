@@ -10,6 +10,7 @@
     using CakeShop.Services.Messaging;
     using CakeShop.Web.ViewModels.Administration.RecipeIngredients.ViewModels;
     using CakeShop.Web.ViewModels.Comments.InputModels;
+    using CakeShop.Web.ViewModels.RecipeLikes.ViewModels;
     using CakeShop.Web.ViewModels.Recipes.ViewModels;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -49,7 +50,6 @@
 
         public async Task<IActionResult> GetRecipeDetails(string id)
         {
-            ;
             var userId = this.userManager.GetUserId(this.User);
 
             var model = await this.recipesService.GetDetailsAsync<RecipeDetailsViewModel>(id);
@@ -96,13 +96,9 @@
             var userId = this.userManager.GetUserId(this.User);
 
             var isAdded = await this.recipesService.LikeRecipeAsync(recipeId, userId);
-            ;
-            return new LikeRecipeViewModel { IsAdded = isAdded };
-        }
-    }
+            var recipeLikesCount = await this.recipesService.GetLikesCountAsync(recipeId);
 
-    public class LikeRecipeViewModel
-    {
-        public bool IsAdded { get; set; }
+            return new LikeRecipeViewModel { IsAdded = isAdded, RecipeLikesCount = recipeLikesCount };
+        }
     }
 }

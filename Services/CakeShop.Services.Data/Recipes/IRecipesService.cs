@@ -22,5 +22,7 @@
         Task<bool> IsFavouriteAsync(string id, string userId);
 
         Task<bool> LikeRecipeAsync(string recipeId, string userId);
+
+        Task<int> GetLikesCountAsync(string recipeId);
     }
 }

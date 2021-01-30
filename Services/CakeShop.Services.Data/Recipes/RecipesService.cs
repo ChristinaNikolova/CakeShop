@@ -120,6 +120,15 @@
             return isFavourite;
         }
 
+        public async Task<int> GetLikesCountAsync(string recipeId)
+        {
+            var count = await this.recipeLikesRepository
+                .All()
+                .CountAsync(rl => rl.RecipeId == recipeId);
+
+            return count;
+        }
+
         public async Task<bool> LikeRecipeAsync(string recipeId, string userId)
         {
             var isAdded = true;

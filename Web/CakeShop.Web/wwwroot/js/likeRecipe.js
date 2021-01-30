@@ -13,16 +13,16 @@
             dataType: "json",
             headers: { 'X-CSRF-TOKEN': token },
             success: function (data) {
-                console.log(data);
                 let result = "";
 
                 if (data.isAdded) {
-                    result = '<a class="primary-btn hover-effect-orange"><i class="far fa-heart"></i>Add to favs</a>';
-                } else {
                     result = '<a class="primary-btn hover-effect-orange"><i class="fa fa-heart"></i>Remove from favs</a>';
+                } else {
+                    result = '<a class="primary-btn hover-effect-orange"><i class="far fa-heart"></i>Add to favs</a>';
                 }
-                console.log(result);
+
                 $("#like-recipe").html(result);
+                $("#recipe-likes-count").html(`${data.recipeLikesCount} Likes`);
             }
         });
     }
