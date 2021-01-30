@@ -2,6 +2,7 @@
 {
     using System.Reflection;
 
+    using CakeShop.Common;
     using CakeShop.Data;
     using CakeShop.Data.Common;
     using CakeShop.Data.Common.Repositories;
@@ -35,6 +36,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Rotativa.AspNetCore;
     using SendGrid;
 
     public class Startup
@@ -148,6 +150,9 @@
                 dbContext.Database.Migrate();
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
+
+            // Add Rotativa
+            RotativaConfiguration.Setup(env.WebRootPath, "Rotativa");
 
             if (env.IsDevelopment())
             {

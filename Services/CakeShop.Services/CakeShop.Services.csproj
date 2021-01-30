@@ -8,6 +8,13 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\Christina Nikolova\.nuget\packages\opencvsharp3-anycpu\4.0.0.20181129\build\..\runtimes\win10-x64\native\OpenCvSharpExtern.dll" />
+    <None Remove="C:\Users\Christina Nikolova\.nuget\packages\opencvsharp3-anycpu\4.0.0.20181129\build\..\runtimes\win10-x64\native\opencv_ffmpeg400_64.dll" />
+    <None Remove="C:\Users\Christina Nikolova\.nuget\packages\opencvsharp3-anycpu\4.0.0.20181129\build\..\runtimes\win10-x86\native\OpenCvSharpExtern.dll" />
+    <None Remove="C:\Users\Christina Nikolova\.nuget\packages\opencvsharp3-anycpu\4.0.0.20181129\build\..\runtimes\win10-x86\native\opencv_ffmpeg400.dll" />
+  </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
@@ -15,7 +22,9 @@
   <ItemGroup>
     <PackageReference Include="CloudinaryDotNet" Version="1.14.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
+    <PackageReference Include="OpenCvSharp3-AnyCPU" Version="4.0.0.20181129" />
     <PackageReference Include="PayPal" Version="1.9.1">
       <NoWarn>NU1701</NoWarn>
     </PackageReference>

@@ -83,5 +83,8 @@
         public const string AlreadyExistingTag = "Tag already exists!";
 
         public const string PaymentSuccess = "Your payment is successful!";
+
+        // rotativa
+        public const string RotativaPath = "wwwroot/Rotativa";
     }
 }

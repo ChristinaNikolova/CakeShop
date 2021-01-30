@@ -1,0 +1,104 @@
+﻿@using CakeShop.Web.ViewModels.Recipes.ViewModels
+@model RecipePDFViewModel;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Recipe</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="~/css/flaticon.css" type="text/css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/barfiller.css" type="text/css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/magnific-popup.css" type="text/css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/nice-select.css" type="text/css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/style.css" type="text/css" asp-append-version="true">
+    <link href="~/lib/datatables/media/css/jquery.dataTables.css" rel="stylesheet" asp-append-version="true" />
+
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-7">
+                <div class="blog__hero__text">
+                    <div class="label">@Model.CategoryName</div>
+                    <h2>@Model.Title</h2>
+                    <div class="col-lg-6">
+                        <div class="blog__details__ingredients__pic">
+                            <img src="@Model.Picture" alt="dessert-pic">
+                        </div>
+                    </div>
+                    <ul>
+                        <li>By <span>@Model.Author</span></li>
+                        <li>@Model.CreatedOn</li>
+                        <li>@Model.CommentsCount Comments</li>
+                        <li>@Model.LikesCount Likes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="blog-details spad">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-8">
+                    <div class="blog__details__content">
+                        <div class="blog__details__recipe">
+                            <div class="blog__details__recipe__item">
+                                <h6><img src="img/blog/details/user.png" alt=""> SERVES</h6>
+                                <span>@Model.Portions</span>
+                            </div>
+                            <div class="blog__details__recipe__item">
+                                <h6><img src="img/blog/details/clock.png" alt=""> PREP TIME</h6>
+                                <span>@Model.PreparationTime minute</span>
+                            </div>
+                            <div class="blog__details__recipe__item">
+                                <h6><img src="img/blog/details/clock.png" alt=""> COOK TIME</h6>
+                                <span>@Model.CookingTime minute</span>
+                            </div>
+                        </div>
+                        <div class="blog__details__recipe__details">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="blog__details__ingredients">
+                                        <h6>Ingredients</h6>
+                                        <ul>
+                                            @foreach (var ingredient in Model.RepiceIngredients)
+                                            {
+                                                <li>
+                                                    <span>.</span>
+                                                    @ingredient.Quantity @ingredient.IngredientName
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="blog__details__direction">
+                            <h6>Directions</h6>
+                            <article>
+                                @Html.Raw(@Model.SanitizedContent)
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

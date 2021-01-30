@@ -12,6 +12,7 @@
         <div class="row d-flex justify-content-center">
             <div class="col-lg-7">
                 <div class="blog__hero__text">
+                    <div id="recipe-id" hidden>@Model.Id</div>
                     <div class="label">@Model.CategoryName</div>
                     <h2>@Model.Title</h2>
                     <ul>
@@ -74,7 +75,7 @@
                         </article>
                     </div>
                     <div class="blog__details__print">
-                        <a href="#" class="primary-btn"><i class="fa fa-print"></i> Print recipe</a>
+                        <a id="generate" asp-area="" asp-controller="Recipes" asp-action="GenerateRecipePdf" asp-route-id="@Model.Id" class="primary-btn"><i class="fa fa-print"></i> Print recipe</a>
                     </div>
                     <div class="blog__details__comment">
                         <h5>@Model.CommentsCount Comment</h5>

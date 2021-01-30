@@ -8,6 +8,7 @@
     using CakeShop.Web.ViewModels.Comments.InputModels;
     using CakeShop.Web.ViewModels.Recipes.ViewModels;
     using Microsoft.AspNetCore.Mvc;
+    using Rotativa.AspNetCore;
 
     public class RecipesController : BaseController
     {
@@ -40,6 +41,13 @@
             model.AddCommentInputModel = new AddCommentInputModel() { Id = id, };
 
             return this.View(model);
+        }
+
+        public async Task<IActionResult> GenerateRecipePdf(string id)
+        {
+            var model = await this.recipesService.GetDetailsAsync<RecipePDFViewModel>(id);
+
+            return new ViewAsPdf(model);
         }
     }
 }
