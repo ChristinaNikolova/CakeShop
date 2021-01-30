@@ -16,6 +16,13 @@
         </div>
     </div>
 </section>
+@if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+{
+    <div class="blog__details__print">
+        <a asp-area="" asp-controller="Orders" asp-action="GenerateOrderPdf" asp-route-id="@orderId" class="primary-btn hover-effect-orange"><i class="fa fa-print"></i> Print order</a>
+    </div>
+}
+
 
 @section Scripts {
     <script src="~/js/getUserDataButton.js" asp-append-version="true"></script>

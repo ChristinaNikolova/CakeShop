@@ -13,6 +13,7 @@
     using CakeShop.Web.ViewModels.Users.ViewModels;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Rotativa.AspNetCore;
 
     public class OrdersController : BaseController
     {
@@ -157,6 +158,15 @@
             };
 
             return this.View(model);
+        }
+
+        public async Task<IActionResult> GenerateOrderPdf(string id)
+        {
+            var model = await this.ordersService.GetOrderDetailsAsync<OrderPDFViewModel>(id);
+            model.User = await this.usersService.GetUserDataByOrderIdAsync<UserOrderDetailsViewModel>(id);
+            model.DessertsInBasket = await this.ordersService.GetDessertsCurrentOrderAsync<DessertBasketViewModel>(id);
+
+            return new ViewAsPdf(model);
         }
     }
 }
