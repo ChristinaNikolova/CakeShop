@@ -1,7 +1,7 @@
 ﻿function likeDessert() {
-    document.getElementById("like-dessert").addEventListener("click", likeDessert);
+    document.getElementById("like-dessert").addEventListener("click", like);
 
-    function likeDessert() {
+    function like() {
         let dessertId = document.getElementById("dessert-id").innerHTML;
         var token = $("#likes input[name=__RequestVerificationToken]").val();
 

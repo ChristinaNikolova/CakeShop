@@ -75,10 +75,20 @@
                             @Html.Raw(@Model.SanitizedContent)
                         </article>
                     </div>
+                    <form id="favourite-recipes" method="post"></form>
                     <div class="blog__details__print">
-                        <a asp-area="" asp-controller="Recipes" asp-action="GenerateRecipePdf" asp-route-id="@Model.Id" class="primary-btn hover-effect-orange"><i class="fa fa-print"></i> Print recipe</a>
-                        <a asp-area="" asp-controller="Recipes" asp-action="SendRecipe" asp-route-id="@Model.Id" class="primary-btn hover-effect-orange"><i class="far fa-envelope"></i> Send recipe</a>
-                        <a asp-area="" asp-controller="Recipes" asp-action="SendRecipe" asp-route-id="@Model.Id" class="primary-btn hover-effect-orange"><i class="far fa-heart"></i> Like this recipe</a> 
+                        <a asp-area="" asp-controller="Recipes" asp-action="GeneratePdf" asp-route-id="@Model.Id" class="primary-btn hover-effect-orange"><i class="fa fa-print"></i> Print recipe</a>
+                        <a asp-area="" asp-controller="Recipes" asp-action="Send" asp-route-id="@Model.Id" class="primary-btn hover-effect-orange"><i class="far fa-envelope"></i> Send recipe</a>
+                        <span id="like-recipe">
+                            @if (Model.IsFavourite)
+                            {
+                                <a class="primary-btn hover-effect-orange"><i class="far fa-heart"></i>Add to favs</a>
+                            }
+                            else
+                            {
+                                <a class="primary-btn hover-effect-orange"><i class="fa fa-heart"></i>Remove from favs</a>
+                            }
+                        </span>
                     </div>
                     <div class="blog__details__comment">
                         <h5>@Model.CommentsCount Comment</h5>
@@ -93,7 +103,10 @@
 
 @section Scripts {
     <script src="~/js/loadCommentAddForm.js" asp-append-version="true"></script>
+    <script src="~/js/likeRecipe.js" asp-append-version="true"></script>
+
     <script>loadCommentAddForm();</script>
+    <script>likeRecipe();</script>
 
     <script src="https://www.google.com/recaptcha/api.js?render=@GoogleReCAPTCHA.Value.SiteKey"></script>
     <script>

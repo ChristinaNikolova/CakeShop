@@ -49,22 +49,26 @@
 
         public async Task<IActionResult> GetRecipeDetails(string id)
         {
+            ;
+            var userId = this.userManager.GetUserId(this.User);
+
             var model = await this.recipesService.GetDetailsAsync<RecipeDetailsViewModel>(id);
 
             model.RepiceIngredients = await this.recipeIngredientsService.GetAllCurrentRecipeAsync<RecipeIngredientViewModel>(id);
             model.AddCommentInputModel = new AddCommentInputModel() { Id = id, };
+            model.IsFavourite = await this.recipesService.IsFavouriteAsync(id, userId);
 
             return this.View(model);
         }
 
-        public async Task<IActionResult> GenerateRecipePdf(string id)
+        public async Task<IActionResult> GeneratePdf(string id)
         {
             var model = await this.recipesService.GetDetailsAsync<RecipePDFViewModel>(id);
 
             return new ViewAsPdf(model);
         }
 
-        public async Task<IActionResult> SendRecipe(string id)
+        public async Task<IActionResult> Send(string id)
         {
             var userId = this.userManager.GetUserId(this.User);
             var userEmail = await this.usersService.GetUserEmailByIdAsync(userId);
@@ -85,5 +89,20 @@
 
             return this.RedirectToAction(nameof(this.GetRecipeDetails), new { id });
         }
+
+        [HttpPost]
+        public async Task<ActionResult<LikeRecipeViewModel>> Like([FromBody] string recipeId)
+        {
+            var userId = this.userManager.GetUserId(this.User);
+
+            var isAdded = await this.recipesService.LikeRecipeAsync(recipeId, userId);
+            ;
+            return new LikeRecipeViewModel { IsAdded = isAdded };
+        }
+    }
+
+    public class LikeRecipeViewModel
+    {
+        public bool IsAdded { get; set; }
     }
 }

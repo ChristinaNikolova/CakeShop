@@ -18,5 +18,9 @@
         Task DeleteAsync(string id);
 
         Task<string> GetPictureAsync(string id);
+
+        Task<bool> IsFavouriteAsync(string id, string userId);
+
+        Task<bool> LikeRecipeAsync(string recipeId, string userId);
     }
 }

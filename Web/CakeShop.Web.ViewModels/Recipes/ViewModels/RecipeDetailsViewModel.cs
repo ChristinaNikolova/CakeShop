@@ -7,5 +7,7 @@
     public class RecipeDetailsViewModel : RecipePDFViewModel, IMapFrom<Recipe>
     {
         public AddCommentInputModel AddCommentInputModel { get; set; }
+
+        public bool IsFavourite { get; set; }
     }
 }

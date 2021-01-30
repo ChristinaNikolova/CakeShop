@@ -15,13 +15,16 @@
     {
         private readonly IRepository<Recipe> recipesRepository;
         private readonly ICloudinaryService cloudinaryService;
+        private readonly IRepository<RecipeLike> recipeLikesRepository;
 
         public RecipesService(
             IRepository<Recipe> recipesRepository,
-            ICloudinaryService cloudinaryService)
+            ICloudinaryService cloudinaryService,
+            IRepository<RecipeLike> recipeLikesRepository)
         {
             this.recipesRepository = recipesRepository;
             this.cloudinaryService = cloudinaryService;
+            this.recipeLikesRepository = recipeLikesRepository;
         }
 
         public async Task AddAsync(string title, string content, IFormFile picture, int portions, int preparationTime, int cookingTime, string categoryId)
@@ -108,6 +111,34 @@
             return picture;
         }
 
+        public async Task<bool> IsFavouriteAsync(string id, string userId)
+        {
+            var isFavourite = await this.recipeLikesRepository
+               .All()
+               .AnyAsync(rl => rl.RecipeId == id && rl.ClientId == userId);
+
+            return isFavourite;
+        }
+
+        public async Task<bool> LikeRecipeAsync(string recipeId, string userId)
+        {
+            var isAdded = true;
+            var isExisting = await this.IsFavouriteAsync(recipeId, userId);
+
+            if (isExisting)
+            {
+                isAdded = await this.RemoveFromFavouriteAsync(recipeId, userId, isAdded);
+            }
+            else
+            {
+                await this.AddToFavouriteAsync(recipeId, userId);
+            }
+
+            await this.recipeLikesRepository.SaveChangesAsync();
+
+            return isAdded;
+        }
+
         private async Task<string> GetPictureAsStringAsync(string name, IFormFile picture)
         {
             return await this.cloudinaryService.UploudAsync(picture, name);
@@ -118,6 +149,29 @@
             return await this.recipesRepository
                 .All()
                 .FirstOrDefaultAsync(d => d.Id == id);
+        }
+
+        private async Task AddToFavouriteAsync(string recipeId, string userId)
+        {
+            var recipeLike = new RecipeLike()
+            {
+                ClientId = userId,
+                RecipeId = recipeId,
+            };
+
+            await this.recipeLikesRepository.AddAsync(recipeLike);
+        }
+
+        private async Task<bool> RemoveFromFavouriteAsync(string recipeId, string userId, bool isAdded)
+        {
+            var recipeLike = await this.recipeLikesRepository
+                                .All()
+                                .FirstOrDefaultAsync(rl => rl.RecipeId == recipeId && rl.ClientId == userId);
+
+            isAdded = false;
+            this.recipeLikesRepository.Delete(recipeLike);
+
+            return isAdded;
         }
     }
 }
