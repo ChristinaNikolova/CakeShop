@@ -5,7 +5,7 @@
     using CakeShop.Data.Models;
     using CakeShop.Services.Mapping;
 
-    public class RecentRecipeViewModel : IMapFrom<Recipe>
+    public class SidebarRecipeViewModel : IMapFrom<Recipe>
     {
         public string Id { get; set; }
 

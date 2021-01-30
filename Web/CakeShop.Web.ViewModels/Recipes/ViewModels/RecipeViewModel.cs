@@ -8,7 +8,7 @@
     using CakeShop.Services.Mapping;
     using Ganss.XSS;
 
-    public class RecipeViewModel : RecentRecipeViewModel, IMapFrom<Recipe>
+    public class RecipeViewModel : SidebarRecipeViewModel, IMapFrom<Recipe>
     {
         public string Content { get; set; }
 
@@ -25,6 +25,7 @@
                         : content;
             }
         }
+
         public string Author { get; set; }
 
         public string CategoryName { get; set; }

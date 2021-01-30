@@ -103,7 +103,7 @@
 
         public const string PdfMimeType = "application/pdf";
 
-        // recipes blog
-        public const int RecentRecipesCount = 5;
+        // blog
+        public const int SidebarRecipesCount = 5;
     }
 }

@@ -135,7 +135,20 @@
             var recipes = await this.recipesRepository
                 .All()
                 .OrderByDescending(r => r.CreatedOn)
-                .Take(GlobalConstants.RecentRecipesCount)
+                .Take(GlobalConstants.SidebarRecipesCount)
+                .To<T>()
+                .ToListAsync();
+
+            return recipes;
+        }
+
+        public async Task<IEnumerable<T>> GetPopulartRecipesAsync<T>()
+        {
+            var recipes = await this.recipesRepository
+                .All()
+                .OrderByDescending(r => r.RecipeLikes.Count())
+                .ThenBy(r => r.Title)
+                .Take(GlobalConstants.SidebarRecipesCount)
                 .To<T>()
                 .ToListAsync();
 
