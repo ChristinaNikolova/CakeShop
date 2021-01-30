@@ -56,6 +56,14 @@
 
         public const string CriteriaName = "name";
 
+        // recipes sidebar criterias
+        public const string CriteriaRecent = "recent";
+
+        public const string CriteriaPopular = "popular";
+
+        // blog
+        public const int SidebarRecipesCount = 5;
+
         // status messages
         public const string ProcessingStatus = "Processing";
 
@@ -102,8 +110,5 @@
         public const string GenerateOrderPdfViewName = "GenerateOrderPdf";
 
         public const string PdfMimeType = "application/pdf";
-
-        // blog
-        public const int SidebarRecipesCount = 5;
     }
 }

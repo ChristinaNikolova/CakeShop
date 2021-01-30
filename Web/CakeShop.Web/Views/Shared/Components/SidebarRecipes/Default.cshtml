@@ -2,7 +2,14 @@
 @model AllSidebarRecipesViewModel;
 
 <div class="blog__sidebar__item">
-    <h5>Recent posts</h5>
+    @if (Model.Criteria == GlobalConstants.CriteriaRecent)
+    {
+        <h5>Recent posts</h5>
+    }
+    else
+    {
+        <h5>Popular posts</h5>
+    }
     <div class="blog__sidebar__recent">
         @foreach (var recipe in Model.Recipes)
         {

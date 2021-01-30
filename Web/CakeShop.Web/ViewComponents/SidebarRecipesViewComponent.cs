@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
 
+    using CakeShop.Common;
     using CakeShop.Services.Data.Recipes;
     using CakeShop.Web.ViewModels.Recipes.ViewModels;
     using Microsoft.AspNetCore.Mvc;
@@ -19,14 +20,16 @@
         public async Task<IViewComponentResult> InvokeAsync(string criteria)
         {
             var model = new AllSidebarRecipesViewModel();
-            //refacrot
-            if (criteria == "recent")
+
+            if (criteria == GlobalConstants.CriteriaRecent)
             {
                 model.Recipes = await this.recipesService.GetRecentRecipesAsync<SidebarRecipeViewModel>();
+                model.Criteria = GlobalConstants.CriteriaRecent;
             }
             else
             {
                 model.Recipes = await this.recipesService.GetPopulartRecipesAsync<SidebarRecipeViewModel>();
+                model.Criteria = GlobalConstants.CriteriaPopular;
             }
 
             return this.View(model);

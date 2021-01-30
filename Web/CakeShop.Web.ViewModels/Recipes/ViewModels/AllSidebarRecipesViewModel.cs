@@ -5,5 +5,7 @@
     public class AllSidebarRecipesViewModel
     {
         public IEnumerable<SidebarRecipeViewModel> Recipes { get; set; }
+
+        public string Criteria { get; set; }
     }
 }
