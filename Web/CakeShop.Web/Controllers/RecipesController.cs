@@ -1,6 +1,5 @@
 ﻿namespace CakeShop.Web.Controllers
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using CakeShop.Common;
@@ -72,7 +71,7 @@
 
             var model = await this.recipesService.GetDetailsAsync<RecipePDFViewModel>(id);
 
-            var emailAttachments = this.PreparePdfFile(model);
+            var emailAttachments = PDFController.PreparePdfFile<RecipePDFViewModel>(model, GlobalConstants.GenerateRecipePdfViewName, GlobalConstants.GenerateRecipePdfViewName, this.ControllerContext);
 
             await this.emailSender.SendEmailAsync(
                         GlobalConstants.CakeShopEmail,
@@ -85,26 +84,6 @@
             this.TempData["InfoMessage"] = GlobalConstants.SuccessSendRecipeMessage;
 
             return this.RedirectToAction(nameof(this.GetRecipeDetails), new { id });
-        }
-
-        private List<EmailAttachment> PreparePdfFile(RecipePDFViewModel model)
-        {
-            var recipeAsBytes = new Rotativa.AspNetCore
-                .ViewAsPdf(GlobalConstants.GenerateRecipePdfViewNameName, model)
-                .BuildFile(this.ControllerContext)
-                .GetAwaiter()
-                .GetResult();
-
-            var recipeAsEmailAttachment = new EmailAttachment()
-            {
-                Content = recipeAsBytes,
-                FileName = GlobalConstants.GenerateRecipePdfViewNameName,
-                MimeType = GlobalConstants.PdfMimeType,
-            };
-
-            var emailAttachments = new List<EmailAttachment>() { recipeAsEmailAttachment };
-
-            return emailAttachments;
         }
     }
 }

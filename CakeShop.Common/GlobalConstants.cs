@@ -39,6 +39,10 @@
 
         public const string SendRecipeAsPdf = "Thank you! You can find the recipe in the attached files!";
 
+        public const string OrderConfirmationTitle = "Order confirmation";
+
+        public const string OrderConfirmation = "Your order is confirm!";
+
         // pagination
         public const int DessertsPerPage = 8;
 
@@ -86,14 +90,16 @@
 
         public const string AlreadyExistingTag = "Tag already exists!";
 
-        public const string PaymentSuccess = "Your payment is successful!";
+        public const string PaymentSuccess = "Your payment is successful! You will inform you, when your order is approved.";
 
         public const string SuccessSendRecipeMessage = "Successfully send!";
 
         // rotativa
         public const string Rotativa = "Rotativa";
 
-        public const string GenerateRecipePdfViewNameName = "GenerateRecipePdf";
+        public const string GenerateRecipePdfViewName = "GenerateRecipePdf";
+
+        public const string GenerateOrderPdfViewName = "GenerateOrderPdf";
 
         public const string PdfMimeType = "application/pdf";
     }

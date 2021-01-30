@@ -66,13 +66,15 @@
             return totalSum;
         }
 
-        public async Task ChangeStatusAsync(string id, string status)
+        public async Task<string> ChangeStatusAsync(string id, string status)
         {
             var order = await this.GetByIdAsync(id);
             order.Status = Enum.Parse<Status>(status);
 
             this.ordersRepository.Update(order);
             await this.ordersRepository.SaveChangesAsync();
+
+            return order.ClientId;
         }
 
         public async Task DeleteAsync(string id)

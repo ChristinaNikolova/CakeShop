@@ -31,6 +31,6 @@
 
         Task DeleteAsync(string id);
 
-        Task ChangeStatusAsync(string id, string status);
+        Task<string> ChangeStatusAsync(string id, string status);
     }
 }

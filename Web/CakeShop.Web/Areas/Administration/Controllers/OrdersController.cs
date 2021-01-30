@@ -4,17 +4,28 @@
 
     using CakeShop.Common;
     using CakeShop.Services.Data.Orders;
+    using CakeShop.Services.Data.Users;
+    using CakeShop.Services.Messaging;
+    using CakeShop.Web.Controllers;
     using CakeShop.Web.ViewModels.Administration.Orders.ViewModels;
     using CakeShop.Web.ViewModels.Orders.ViewModels;
+    using CakeShop.Web.ViewModels.Users.ViewModels;
     using Microsoft.AspNetCore.Mvc;
 
     public class OrdersController : AdministrationController
     {
         private readonly IOrdersService ordersService;
+        private readonly IUsersService usersService;
+        private readonly IEmailSender emailSender;
 
-        public OrdersController(IOrdersService ordersService)
+        public OrdersController(
+            IOrdersService ordersService,
+            IUsersService usersService,
+            IEmailSender emailSender)
         {
             this.ordersService = ordersService;
+            this.usersService = usersService;
+            this.emailSender = emailSender;
         }
 
         public async Task<IActionResult> GetAll()
@@ -43,7 +54,22 @@
 
         public async Task<IActionResult> Approve(string id)
         {
-            await this.ordersService.ChangeStatusAsync(id, GlobalConstants.ApprovedStatus);
+            var userId = await this.ordersService.ChangeStatusAsync(id, GlobalConstants.ApprovedStatus);
+            var userEmail = await this.usersService.GetUserEmailByIdAsync(userId);
+
+            var model = await this.ordersService.GetOrderDetailsAsync<OrderPDFViewModel>(id);
+            model.User = await this.usersService.GetUserDataByOrderIdAsync<UserOrderDetailsViewModel>(id);
+            model.DessertsInBasket = await this.ordersService.GetDessertsCurrentOrderAsync<DessertBasketViewModel>(id);
+
+            var emailAttachments = PDFController.PreparePdfFile<OrderPDFViewModel>(model, GlobalConstants.GenerateOrderPdfViewName, GlobalConstants.GenerateOrderPdfViewName, this.ControllerContext);
+
+            await this.emailSender.SendEmailAsync(
+                        GlobalConstants.CakeShopEmail,
+                        GlobalConstants.SystemName,
+                        userEmail,
+                        GlobalConstants.OrderConfirmationTitle,
+                        string.Format(GlobalConstants.OrderConfirmation),
+                        attachments: emailAttachments);
 
             return this.RedirectToAction(nameof(this.GetOrderDetails), new { Id = id });
         }
