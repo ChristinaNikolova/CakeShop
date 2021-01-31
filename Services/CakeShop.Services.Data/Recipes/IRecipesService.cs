@@ -34,5 +34,9 @@
         Task<int> GetTotalCountRecipesAsync();
 
         Task<IEnumerable<T>> OrderRecipesByCriteria<T>(string criteria);
+
+        Task<IEnumerable<T>> GetUserFavouriteRecipesAsync<T>(string userId);
+
+        Task<IEnumerable<T>> UnlikeRecipeAsync<T>(string recipeId, string userId);
     }
 }

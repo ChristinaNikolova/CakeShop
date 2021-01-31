@@ -6,7 +6,9 @@
     using CakeShop.Common;
     using CakeShop.Data.Models;
     using CakeShop.Services.Data.Orders;
+    using CakeShop.Services.Data.Recipes;
     using CakeShop.Services.Data.Users;
+    using CakeShop.Web.ViewModels.Recipes.ViewModels;
     using CakeShop.Web.ViewModels.Users.ViewModels;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -16,15 +18,18 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IUsersService usersService;
         private readonly IOrdersService ordersService;
+        private readonly IRecipesService recipesService;
 
         public UsersController(
             UserManager<ApplicationUser> userManager,
             IUsersService usersService,
-            IOrdersService ordersService)
+            IOrdersService ordersService,
+            IRecipesService recipesService)
         {
             this.userManager = userManager;
             this.usersService = usersService;
             this.ordersService = ordersService;
+            this.recipesService = recipesService;
         }
 
         public async Task<IActionResult> MyOrders(int currentPage = 1)
@@ -40,6 +45,18 @@
                 UserOrders = await this.usersService.GetUserOrdersListAsync<UserOrderBaseViewModel>(userId, GlobalConstants.OrdersPerPage, (currentPage - 1) * GlobalConstants.OrdersPerPage),
                 CurrentPage = currentPage,
                 PagesCount = pageCount,
+            };
+
+            return this.View(model);
+        }
+
+        public async Task<IActionResult> FavouriteRecipes()
+        {
+            var userId = this.userManager.GetUserId(this.User);
+
+            var model = new AllUserFavouriteRecipesViewModel()
+            {
+                FavouriteRecipes = await this.recipesService.GetUserFavouriteRecipesAsync<UserFavouriteRecipeViewModel>(userId),
             };
 
             return this.View(model);

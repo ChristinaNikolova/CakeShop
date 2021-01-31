@@ -1,0 +1,59 @@
+﻿@using CakeShop.Web.ViewModels.Recipes.ViewModels;
+@model AllUserFavouriteRecipesViewModel;
+
+@{
+    ViewData["Title"] = "Favourite Recipes";
+}
+
+<partial name="_BreadCrumbPartial" />
+<section class="wishlist spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="empty-favourite-recipes" class="wishlist__cart__table">
+                    <form id="remove-from-favourite-recipes" method="post"></form>
+                    @if (Model.FavouriteRecipes.Count() == 0)
+                    {
+                        <h4>You don't have any favourite recipes yet! <a asp-area="" asp-controller="Recipes" asp-action="GetAll" class="color-black">Go</a> and check our recipes!</h4>
+                    }
+                    else
+                    {
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body">
+                                @foreach (var recipe in Model.FavouriteRecipes)
+                                {
+                                    <tr>
+                                        <td class="product__cart__item">
+                                            <div class="product__cart__item__pic">
+                                                <img class="small-pic" src="@recipe.Picture" alt="recipe-pic">
+                                            </div>
+                                            <div class="product__cart__item__text">
+                                                <a asp-area="" asp-controller="Recipes" asp-action="RecipeDetails" asp-route-id="@recipe.Id"><h6>@recipe.Title</h6></a>
+                                            </div>
+                                        </td>
+                                        <td class="cart__price">@recipe.CategoryName</td>
+                                        <td class="cart__btn"><a asp-area="" asp-controller="Recipes" asp-action="RecipeDetails" asp-route-id="@recipe.Id" class="site-btn">Read more</a></td>
+                                        <td id="@recipe.Id" class="cart__close" onclick="removeFromFavouriteRecipes(event)"><span class="icon_close"></span></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/removeFromFavouriteRecipes.js" asp-append-version="true"></script>
+    <script>removeFromFavouriteRecipes();</script>
+}

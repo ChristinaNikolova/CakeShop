@@ -188,6 +188,19 @@
             return recipesCount;
         }
 
+        public async Task<IEnumerable<T>> GetUserFavouriteRecipesAsync<T>(string userId)
+        {
+            var recipes = await this.recipesRepository
+                .All()
+                .Where(r => r.RecipeLikes.Any(rl => rl.ClientId == userId))
+                .OrderByDescending(r => r.CreatedOn)
+                .ThenBy(r => r.Title)
+                .To<T>()
+                .ToListAsync();
+
+            return recipes;
+        }
+
         public async Task<IEnumerable<T>> OrderRecipesByCriteria<T>(string criteria)
         {
             var criteriaLowerCase = criteria.ToLower();
@@ -256,6 +269,17 @@
             await this.recipeLikesRepository.SaveChangesAsync();
 
             return isAdded;
+        }
+
+        public async Task<IEnumerable<T>> UnlikeRecipeAsync<T>(string recipeId, string userId)
+        {
+            await this.RemoveFromFavouriteAsync(recipeId, userId, true);
+
+            await this.recipeLikesRepository.SaveChangesAsync();
+
+            var favouriteDesserts = await this.GetUserFavouriteRecipesAsync<T>(userId);
+
+            return favouriteDesserts;
         }
 
         private async Task<string> GetPictureAsStringAsync(string name, IFormFile picture)

@@ -5,14 +5,8 @@
     using CakeShop.Data.Models;
     using CakeShop.Services.Mapping;
 
-    public class SidebarRecipeViewModel : IMapFrom<Recipe>
+    public class SidebarRecipeViewModel : RecipeBaseViewModel, IMapFrom<Recipe>
     {
-        public string Id { get; set; }
-
-        public string Title { get; set; }
-
-        public string Picture { get; set; }
-
         //format
         public DateTime CreatedOn { get; set; }
     }

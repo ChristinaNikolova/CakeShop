@@ -125,5 +125,15 @@
 
             return new AllRecipesViewModel { Repices = recipes };
         }
+
+        [HttpPost]
+        public async Task<ActionResult<AllUserFavouriteRecipesViewModel>> RemoveFromFavouriteRecipes([FromBody] string recipeId)
+        {
+            var userId = this.userManager.GetUserId(this.User);
+
+            var favouriteRecipes = await this.recipesService.UnlikeRecipeAsync<UserFavouriteRecipeViewModel>(recipeId, userId);
+
+            return new AllUserFavouriteRecipesViewModel { FavouriteRecipes = favouriteRecipes };
+        }
     }
 }

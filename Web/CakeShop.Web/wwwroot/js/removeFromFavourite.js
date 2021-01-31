@@ -21,7 +21,7 @@
             });
 
             if (result === "") {
-                $('#empty-favourite-desserts').html(`<form id="remove-from-favourite" method="post"></form><h4>You don't have any favourite desserts yet! <a href="/Shop/GetAllCategories" class="color-black">Go</a> and check out desserts!</h4>`);
+                $('#empty-favourite-desserts').html(`<form id="remove-from-favourite" method="post"></form><h4>You don't have any favourite desserts yet! <a href="/Shop/GetAllCategories" class="color-black">Go</a> and check our desserts!</h4>`);
             }
             else {
 
