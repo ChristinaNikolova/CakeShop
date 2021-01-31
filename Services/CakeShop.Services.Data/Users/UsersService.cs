@@ -78,12 +78,14 @@
             return user;
         }
 
-        public async Task<IEnumerable<T>> GetUserOrdersListAsync<T>(string userId)
+        public async Task<IEnumerable<T>> GetUserOrdersListAsync<T>(string userId, int take, int skip)
         {
             var orders = await this.ordersRepository
                 .All()
                 .Where(o => o.ClientId == userId && o.Status != Status.NotFinish && o.Status != Status.Default)
                 .OrderByDescending(o => o.CreatedOn)
+                .Skip(skip)
+                .Take(take)
                 .To<T>()
                 .ToListAsync();
 

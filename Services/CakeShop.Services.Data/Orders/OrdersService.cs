@@ -206,6 +206,16 @@
             return orderDetails;
         }
 
+        public async Task<int> GetOrdersCountCurrentUserAsync(string userId)
+        {
+            var ordersCount = await this.ordersRepository
+                .All()
+                .Where(o => o.ClientId == userId && o.Status != Status.NotFinish && o.Status != Status.Default)
+                .CountAsync();
+
+            return ordersCount;
+        }
+
         public async Task<IEnumerable<T>> GetAllAsync<T>(string status)
         {
             var orders = await this.ordersRepository

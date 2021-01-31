@@ -48,6 +48,8 @@
 
         public const int RecipesPerPage = 5;
 
+        public const int OrdersPerPage = 5;
+
         // basket
         public const string AddedToBasketSuccessfully = "Successfully added!";
 

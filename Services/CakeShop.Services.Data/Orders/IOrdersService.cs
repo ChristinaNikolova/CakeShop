@@ -32,5 +32,7 @@
         Task DeleteAsync(string id);
 
         Task<string> ChangeStatusAsync(string id, string status);
+
+        Task<int> GetOrdersCountCurrentUserAsync(string userId);
     }
 }

@@ -1,0 +1,22 @@
+﻿@using CakeShop.Web.ViewModels.Users.ViewModels;
+@model AllUserOrdersBaseViewModel;
+
+<div id="pagination" class="shop__pagination mt-3">
+    @if (this.Model.CurrentPage != 1)
+    {
+        <a asp-controller="Users" asp-action="MyOrders"
+           asp-route-currentPage="@(this.Model.PreviousPage)"><span class="arrow_carrot-left"></span></a>
+    }
+
+    @for (int i = 1; i <= Model.PagesCount; i++)
+    {
+        var active = i == this.Model.CurrentPage ? "active" : string.Empty;
+        <a asp-controller="Users" asp-action="MyOrders" asp-route-currentPage="@i" class="@active-pagination">@i</a>
+    }
+
+    @if (this.Model.CurrentPage != this.Model.PagesCount)
+    {
+        <a asp-controller="Users" asp-action="MyOrders"
+           asp-route-currentPage="@(this.Model.NextPage)"><span class="arrow_carrot-right"></span></a>
+    }
+</div>
