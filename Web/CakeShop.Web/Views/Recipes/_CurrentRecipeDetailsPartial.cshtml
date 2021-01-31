@@ -1,0 +1,21 @@
+﻿@using CakeShop.Web.ViewModels.Recipes.ViewModels;
+@model RecipeViewModel;
+
+<div class="blog__item">
+    <div class="blog__item__pic set-bg" data-setbg="@Model.Picture">
+        <div class="blog__pic__inner">
+            <div class="label">@Model.CategoryName</div>
+            <ul>
+                <li>By <span>@Model.Author</span></li>
+                <li>@Model.CreatedOn</li>
+                <li><i class="far fa-thumbs-up"></i> @Model.RecipeLikesCount</li>
+                <li><i class="far fa-comments"></i> @Model.CommentsCount</li>
+            </ul>
+        </div>
+    </div>
+    <div class="blog__item__text">
+        <h2>@Model.Title</h2>
+        <p>@Model.ShortContent</p>
+        <a asp-area="" asp-controller="Recipes" asp-action="RecipeDetails" asp-route-id="@Model.Id">READ MORE</a>
+    </div>
+</div>

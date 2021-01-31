@@ -12,24 +12,7 @@
             <div class="col-lg-8">
                 @foreach (var repice in Model.Repices)
                 {
-                    <div class="blog__item">
-                        <div class="blog__item__pic set-bg" data-setbg="@repice.Picture">
-                            <div class="blog__pic__inner">
-                                <div class="label">@repice.CategoryName</div>
-                                <ul>
-                                    <li>By <span>@repice.Author</span></li>
-                                    <li>@repice.CreatedOn</li>
-                                    <li><i class="far fa-thumbs-up"></i> @repice.RecipeLikesCount</li>
-                                    <li><i class="far fa-comments"></i> @repice.CommentsCount</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="blog__item__text">
-                            <h2>@repice.Title</h2>
-                            <p>@repice.ShortContent</p>
-                            <a asp-area="" asp-controller="Recipes" asp-action="RecipeDetails" asp-route-id="@repice.Id">READ MORE</a>
-                        </div>
-                    </div>
+                    <partial name="_CurrentRecipeDetailsPartial" model="repice" />
                 }
                 <partial name="_RecipesPaginationPartial" />
             </div>
