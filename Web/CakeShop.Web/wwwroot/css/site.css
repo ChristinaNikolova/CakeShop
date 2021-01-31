@@ -298,3 +298,9 @@ html {
 .read-more-recipe:hover {
     color: #F08632;
 }
+
+.company-info {
+    color: #A4A4A4;
+    margin-bottom: 20px;
+    list-style-type: none;
+}

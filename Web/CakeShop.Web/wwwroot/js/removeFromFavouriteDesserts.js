@@ -1,4 +1,4 @@
-﻿function removeFromFavourite(event) {
+﻿function removeFromFavouriteDesserts(event) {
     if (event === undefined) {
         return;
     }
@@ -17,7 +17,7 @@
             var result = "";
 
             data.favouriteDesserts.forEach((dessert) => {
-                result += `<tr><td class="product__cart__item"><div class="product__cart__item__pic"><img class="small-pic" src="${dessert.picture}" alt="dessert"></div><div class="product__cart__item__text"><h6>${dessert.name}</h6></div></td><td class="cart__price">$ ${dessert.formattedPrice}</td><td class="cart__btn"><a href="/Shop/GetAllCurrentCategory/${dessert.categoryId}" class="color-black">${dessert.categoryName}</a></td><td class="cart__btn"><a href="/Shop/DessertDetails/${dessert.id}" class="site-btn">See details</a></td><td id="${dessert.id}" class="cart__close" onclick="removeFromFavourite(event)"><span class="icon_close"></span></td></tr>`;
+                result += `<tr><td class="product__cart__item"><div class="product__cart__item__pic"><img class="small-pic" src="${dessert.picture}" alt="dessert"></div><div class="product__cart__item__text"><h6>${dessert.name}</h6></div></td><td class="cart__price">$ ${dessert.formattedPrice}</td><td class="cart__btn"><a href="/Shop/GetAllCurrentCategory/${dessert.categoryId}" class="color-black">${dessert.categoryName}</a></td><td class="cart__btn"><a href="/Shop/DessertDetails/${dessert.id}" class="site-btn">See details</a></td><td id="${dessert.id}" class="cart__close" onclick="removeFromFavouriteDesserts(event)"><span class="icon_close"></span></td></tr>`;
             });
 
             if (result === "") {
