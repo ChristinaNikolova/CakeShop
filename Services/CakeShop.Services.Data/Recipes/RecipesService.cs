@@ -89,12 +89,23 @@
             return recipe;
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync<T>()
+        public async Task<IEnumerable<T>> GetAllAsync<T>(int take = 0, int skip = 0)
         {
-            var repices = await this.recipesRepository
+            var query = this.recipesRepository
                 .All()
                 .OrderByDescending(r => r.CreatedOn)
                 .ThenBy(r => r.Title)
+                .AsQueryable();
+
+            if (take != 0)
+            {
+                query = query
+                 .Skip(skip)
+                 .Take(take)
+                 .AsQueryable();
+            }
+
+            var repices = await query
                 .To<T>()
                 .ToListAsync();
 
@@ -166,6 +177,15 @@
                  .ToListAsync();
 
             return recipes;
+        }
+
+        public async Task<int> GetTotalCountRecipesAsync()
+        {
+            int recipesCount = await this.recipesRepository
+                .All()
+                .CountAsync();
+
+            return recipesCount;
         }
 
         public async Task<bool> LikeRecipeAsync(string recipeId, string userId)

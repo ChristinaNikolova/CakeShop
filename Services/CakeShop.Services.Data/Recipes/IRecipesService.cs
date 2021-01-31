@@ -7,7 +7,7 @@
 
     public interface IRecipesService
     {
-        Task<IEnumerable<T>> GetAllAsync<T>();
+        Task<IEnumerable<T>> GetAllAsync<T>(int take = 0, int skip = 0);
 
         Task AddAsync(string title, string content, IFormFile picture, int portions, int preparationTime, int cookingTime, string categoryId);
 
@@ -30,5 +30,7 @@
         Task<IEnumerable<T>> GetPopulartRecipesAsync<T>();
 
         Task<IEnumerable<T>> GetByCategoryAsync<T>(string categoryId);
+
+        Task<int> GetTotalCountRecipesAsync();
     }
 }

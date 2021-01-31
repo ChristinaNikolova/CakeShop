@@ -1,5 +1,6 @@
 ﻿namespace CakeShop.Web.Controllers
 {
+    using System;
     using System.Threading.Tasks;
 
     using CakeShop.Common;
@@ -38,11 +39,17 @@
             this.userManager = userManager;
         }
 
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(int currentPage = 1)
         {
+            var recipesCount = await this.recipesService.GetTotalCountRecipesAsync();
+
+            var pageCount = (int)Math.Ceiling((double)recipesCount / GlobalConstants.RecipesPerPage);
+
             var model = new AllRecipesViewModel()
             {
-                Repices = await this.recipesService.GetAllAsync<RecipeViewModel>(),
+                Repices = await this.recipesService.GetAllAsync<RecipeViewModel>(GlobalConstants.RecipesPerPage, (currentPage - 1) * GlobalConstants.RecipesPerPage),
+                CurrentPage = currentPage,
+                PagesCount = pageCount,
             };
 
             return this.View(model);

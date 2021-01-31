@@ -2,7 +2,9 @@
 {
     using System.Collections.Generic;
 
-    public class AllRecipesViewModel
+    using CakeShop.Web.ViewModels.Common.ViewModels;
+
+    public class AllRecipesViewModel : PaginationViewModel
     {
         public IEnumerable<RecipeViewModel> Repices { get; set; }
     }

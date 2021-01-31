@@ -46,6 +46,8 @@
         // pagination
         public const int DessertsPerPage = 8;
 
+        public const int RecipesPerPage = 5;
+
         // basket
         public const string AddedToBasketSuccessfully = "Successfully added!";
 
