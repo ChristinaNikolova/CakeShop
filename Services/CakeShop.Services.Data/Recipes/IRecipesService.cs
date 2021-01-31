@@ -28,5 +28,7 @@
         Task<IEnumerable<T>> GetRecentRecipesAsync<T>();
 
         Task<IEnumerable<T>> GetPopulartRecipesAsync<T>();
+
+        Task<IEnumerable<T>> GetByCategoryAsync<T>(string categoryId);
     }
 }

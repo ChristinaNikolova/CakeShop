@@ -19,9 +19,9 @@
         private readonly IRepository<RecipeLike> recipeLikesRepository;
 
         public RecipesService(
-            IRepository<Recipe> recipesRepository,
+            CakeShop.Data.Common.Repositories.IRepository<Recipe> recipesRepository,
             ICloudinaryService cloudinaryService,
-            IRepository<RecipeLike> recipeLikesRepository)
+            CakeShop.Data.Common.Repositories.IRepository<RecipeLike> recipeLikesRepository)
         {
             this.recipesRepository = recipesRepository;
             this.cloudinaryService = cloudinaryService;
@@ -151,6 +151,19 @@
                 .Take(GlobalConstants.SidebarRecipesCount)
                 .To<T>()
                 .ToListAsync();
+
+            return recipes;
+        }
+
+        public async Task<IEnumerable<T>> GetByCategoryAsync<T>(string categoryId)
+        {
+            var recipes = await this.recipesRepository
+                 .All()
+                 .Where(r => r.CategoryId == categoryId)
+                 .OrderByDescending(r => r.CreatedOn)
+                 .ThenBy(r => r.Title)
+                 .To<T>()
+                 .ToListAsync();
 
             return recipes;
         }

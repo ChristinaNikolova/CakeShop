@@ -100,5 +100,15 @@
 
             return new LikeRecipeViewModel { IsAdded = isAdded, RecipeLikesCount = recipeLikesCount };
         }
+
+        public async Task<IActionResult> AllByCategory(string id)
+        {
+            var model = new AllRecipesViewModel()
+            {
+                Repices = await this.recipesService.GetByCategoryAsync<RecipeViewModel>(id),
+            };
+
+            return this.View(model);
+        }
     }
 }
