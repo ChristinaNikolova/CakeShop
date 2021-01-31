@@ -188,6 +188,57 @@
             return recipesCount;
         }
 
+        public async Task<IEnumerable<T>> OrderRecipesByCriteria<T>(string criteria)
+        {
+            var criteriaLowerCase = criteria.ToLower();
+
+            var query = this.recipesRepository
+                .All()
+                .AsQueryable();
+
+            if (criteriaLowerCase == "Title".ToLower())
+            {
+                query = query
+                    .OrderBy(q => q.Title)
+                    .ThenByDescending(q => q.CreatedOn)
+                    .AsQueryable();
+            }
+            else if (criteriaLowerCase == "Newest".ToLower())
+            {
+                query = query
+                    .OrderByDescending(q => q.CreatedOn)
+                    .ThenBy(q => q.Title)
+                    .AsQueryable();
+            }
+            else if (criteriaLowerCase == "Oldest".ToLower())
+            {
+                query = query
+                    .OrderBy(q => q.CreatedOn)
+                    .ThenBy(q => q.Title)
+                    .AsQueryable();
+            }
+            else if (criteriaLowerCase == "Likes".ToLower())
+            {
+                query = query
+                    .OrderByDescending(q => q.RecipeLikes.Count())
+                    .ThenBy(q => q.Title)
+                    .AsQueryable();
+            }
+            else if (criteriaLowerCase == "Comments".ToLower())
+            {
+                query = query
+                    .OrderByDescending(q => q.Comments.Count())
+                    .ThenBy(q => q.Title)
+                    .AsQueryable();
+            }
+
+            var recipes = await query
+                .To<T>()
+                .ToListAsync();
+
+            return recipes;
+        }
+
         public async Task<bool> LikeRecipeAsync(string recipeId, string userId)
         {
             var isAdded = true;

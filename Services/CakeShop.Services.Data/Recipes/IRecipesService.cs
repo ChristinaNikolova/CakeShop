@@ -32,5 +32,7 @@
         Task<IEnumerable<T>> GetByCategoryAsync<T>(string categoryId);
 
         Task<int> GetTotalCountRecipesAsync();
+
+        Task<IEnumerable<T>> OrderRecipesByCriteria<T>(string criteria);
     }
 }

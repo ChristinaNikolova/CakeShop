@@ -9,7 +9,7 @@
 <section class="blog spad">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
+            <div id="all-recipes" class="col-lg-8">
                 @foreach (var repice in Model.Repices)
                 {
                     <partial name="_CurrentRecipeDetailsPartial" model="repice" />
