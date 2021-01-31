@@ -16,6 +16,6 @@
     <div class="blog__item__text">
         <h2>@Model.Title</h2>
         <p>@Model.ShortContent</p>
-        <a asp-area="" asp-controller="Recipes" asp-action="RecipeDetails" asp-route-id="@Model.Id">READ MORE</a>
+        <a class="read-more-recipe" asp-area="" asp-controller="Recipes" asp-action="RecipeDetails" asp-route-id="@Model.Id">READ MORE</a>
     </div>
 </div>
