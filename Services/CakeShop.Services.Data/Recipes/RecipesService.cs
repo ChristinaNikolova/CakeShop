@@ -196,35 +196,35 @@
                 .All()
                 .AsQueryable();
 
-            if (criteriaLowerCase == "Title".ToLower())
+            if (criteriaLowerCase == GlobalConstants.CriteriaTitle.ToLower())
             {
                 query = query
                     .OrderBy(q => q.Title)
                     .ThenByDescending(q => q.CreatedOn)
                     .AsQueryable();
             }
-            else if (criteriaLowerCase == "Newest".ToLower())
+            else if (criteriaLowerCase == GlobalConstants.CriteriaNewest.ToLower())
             {
                 query = query
                     .OrderByDescending(q => q.CreatedOn)
                     .ThenBy(q => q.Title)
                     .AsQueryable();
             }
-            else if (criteriaLowerCase == "Oldest".ToLower())
+            else if (criteriaLowerCase == GlobalConstants.CriteriaOldest.ToLower())
             {
                 query = query
                     .OrderBy(q => q.CreatedOn)
                     .ThenBy(q => q.Title)
                     .AsQueryable();
             }
-            else if (criteriaLowerCase == "Likes".ToLower())
+            else if (criteriaLowerCase == GlobalConstants.CriteriaLikes.ToLower())
             {
                 query = query
                     .OrderByDescending(q => q.RecipeLikes.Count())
                     .ThenBy(q => q.Title)
                     .AsQueryable();
             }
-            else if (criteriaLowerCase == "Comments".ToLower())
+            else if (criteriaLowerCase == GlobalConstants.CriteriaComments.ToLower())
             {
                 query = query
                     .OrderByDescending(q => q.Comments.Count())

@@ -58,6 +58,16 @@
 
         public const string CriteriaName = "name";
 
+        public const string CriteriaTitle = "Title";
+
+        public const string CriteriaNewest = "Newest";
+
+        public const string CriteriaOldest = "Oldest";
+
+        public const string CriteriaLikes = "Likes";
+
+        public const string CriteriaComments = "Comments";
+
         // recipes sidebar criterias
         public const string CriteriaRecent = "recent";
 
