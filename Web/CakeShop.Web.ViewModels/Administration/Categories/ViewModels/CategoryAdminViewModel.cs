@@ -2,13 +2,10 @@
 {
     using CakeShop.Data.Models;
     using CakeShop.Services.Mapping;
+    using CakeShop.Web.ViewModels.Categories.ViewModels;
 
-    public class CategoryAdminViewModel : IMapFrom<Category>
+    public class CategoryAdminViewModel : BaseCategoryViewModel, IMapFrom<Category>
     {
-        public string Id { get; set; }
-
-        public string Name { get; set; }
-
         public string Picture { get; set; }
 
         public int DessertsCount { get; set; }
