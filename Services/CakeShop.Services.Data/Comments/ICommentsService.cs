@@ -12,5 +12,7 @@
         Task<IEnumerable<T>> GetAllAsync<T>();
 
         Task DeleteAsync(string id);
+
+        Task<int> GetNewCommentsCountAsync();
     }
 }

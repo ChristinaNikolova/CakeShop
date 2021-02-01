@@ -1,14 +1,34 @@
 ﻿namespace CakeShop.Web.Areas.Administration.Controllers
 {
-    using CakeShop.Web.ViewModels.Administration.Dashboard;
+    using System.Threading.Tasks;
 
+    using CakeShop.Services.Data.Comments;
+    using CakeShop.Services.Data.Orders;
+    using CakeShop.Web.ViewModels.Administration.Dashboard.ViewModels;
     using Microsoft.AspNetCore.Mvc;
 
     public class DashboardController : AdministrationController
     {
-        public IActionResult Index()
+        private readonly IOrdersService ordersService;
+        private readonly ICommentsService commentsService;
+
+        public DashboardController(
+            IOrdersService ordersService,
+            ICommentsService commentsService)
         {
-            return this.View();
+            this.ordersService = ordersService;
+            this.commentsService = commentsService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var model = new AdminStatisticViewModel()
+            {
+                NewOrdersCount = await this.ordersService.GetProcessingOrdersCountAsync(),
+                NewCommentsCount = await this.commentsService.GetNewCommentsCountAsync(),
+            };
+
+            return this.View(model);
         }
     }
 }

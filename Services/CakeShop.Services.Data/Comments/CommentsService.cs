@@ -64,5 +64,15 @@
 
             return comments;
         }
+
+        public async Task<int> GetNewCommentsCountAsync()
+        {
+            var count = await this.commentsRepository
+                .All()
+                .CountAsync(c => c.CreatedOn.Date >= DateTime.UtcNow.AddDays(-1).Date
+                              && c.CreatedOn.Date >= DateTime.UtcNow.AddDays(-2).Date);
+
+            return count;
+        }
     }
 }

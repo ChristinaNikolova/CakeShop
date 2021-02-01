@@ -34,5 +34,7 @@
         Task<string> ChangeStatusAsync(string id, string status);
 
         Task<int> GetOrdersCountCurrentUserAsync(string userId);
+
+        Task<int> GetProcessingOrdersCountAsync();
     }
 }

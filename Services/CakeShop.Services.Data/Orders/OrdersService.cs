@@ -228,6 +228,15 @@
             return orders;
         }
 
+        public async Task<int> GetProcessingOrdersCountAsync()
+        {
+            var count = await this.ordersRepository
+                .All()
+                .CountAsync(o => o.Status == Status.Processing);
+
+            return count;
+        }
+
         private async Task<Order> AddDessertToNewOrderAsync(string userId, string dessertId, int quantity, decimal dessertPrice, Order order)
         {
             var clientAddress = await this.usersService.GetUserAddressByIdAsync(userId);

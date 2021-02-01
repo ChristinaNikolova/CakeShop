@@ -304,3 +304,12 @@ html {
     margin-bottom: 20px;
     list-style-type: none;
 }
+
+.color-red {
+    color: red;
+}
+
+    .color-red:hover {
+        cursor: pointer;
+        color: #F08632;
+    }

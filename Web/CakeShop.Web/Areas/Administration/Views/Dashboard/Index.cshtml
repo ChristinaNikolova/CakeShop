@@ -1,4 +1,8 @@
-﻿@{
+﻿@using CakeShop.Web.ViewModels.Administration.Dashboard.ViewModels;
+@model AdminStatisticViewModel;
+
+
+@{
     this.ViewData["Title"] = "Administration Area";
 }
 
@@ -73,5 +77,25 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div class="categories mt-3">
+    <div class="container">
+        @if (Model.NewOrdersCount != 0)
+        {
+            <h3 class="text-danger mb-4"><a asp-area="Administration" asp-controller="Orders" asp-action="GetAll" class="color-red">There are @Model.NewOrdersCount new orders!</a></h3>
+        }
+        else
+        {
+            <h3 class="text-success mb-4">There aren't new orders!</h3>
+        }
+        @if (Model.NewCommentsCount != 0)
+        {
+            <h3 class="text-danger"><a asp-area="Administration" asp-controller="Comments" asp-action="GetAll" class="color-red">There are @Model.NewCommentsCount new comments!</a></h3>
+        }
+        else
+        {
+            <h3 class="text-success">There aren't new comments!</h3>
+        }
     </div>
 </div>
