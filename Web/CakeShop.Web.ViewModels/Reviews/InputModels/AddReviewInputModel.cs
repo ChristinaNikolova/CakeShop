@@ -14,7 +14,6 @@
 
         [Range(typeof(int), DataValidation.ReviewMinPoints, DataValidation.ReviewMaxPoints)]
         [Display(Name = "Stars")]
-        [ValidateSelectedDropDownOption]
         public int Points { get; set; }
 
         public DessertAddReviewViewModel Dessert { get; set; }

@@ -121,6 +121,7 @@
 
             var dessertPrice = await this.dessertsService.GetDessertPriceAsync(dessertOrderToRemove.DessertId);
             order.TotalPrice -= dessertPrice * dessertOrderToRemove.Quantity;
+            order.ReviewsCount--;
 
             this.dessertOrdersRepository.Delete(dessertOrderToRemove);
             this.ordersRepository.Update(order);
@@ -237,6 +238,20 @@
             return count;
         }
 
+        public async Task UpdateOrderReviewStatusAsync(string orderId)
+        {
+            var order = await this.GetByIdAsync(orderId);
+            order.ReviewsCount--;
+
+            if (order.ReviewsCount == 0)
+            {
+                order.IsReview = true;
+            }
+
+            this.ordersRepository.Update(order);
+            await this.ordersRepository.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<T>> GetDessertsForReviewAsync<T>(string userId)
         {
             var desserts = await this.dessertOrdersRepository
@@ -272,6 +287,7 @@
 
             order.DessertOrders.Add(dessertOrder);
             order.TotalPrice += dessertPrice * quantity;
+            order.ReviewsCount++;
 
             await this.ordersRepository.AddAsync(order);
 
@@ -293,6 +309,7 @@
 
             order.DessertOrders.Add(dessertOrder);
             order.TotalPrice += dessertPrice * quantity;
+            order.ReviewsCount++;
 
             this.ordersRepository.Update(order);
 

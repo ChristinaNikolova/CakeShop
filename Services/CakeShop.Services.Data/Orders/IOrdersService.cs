@@ -38,5 +38,7 @@
         Task<int> GetProcessingOrdersCountAsync();
 
         Task<IEnumerable<T>> GetDessertsForReviewAsync<T>(string userId);
+
+        Task UpdateOrderReviewStatusAsync(string orderId);
     }
 }

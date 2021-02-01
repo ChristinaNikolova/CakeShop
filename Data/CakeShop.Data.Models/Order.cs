@@ -35,6 +35,8 @@
 
         public DateTime FinalizeOrder { get; set; }
 
+        public int ReviewsCount { get; set; }
+
         public bool IsReview { get; set; }
 
         [Required]

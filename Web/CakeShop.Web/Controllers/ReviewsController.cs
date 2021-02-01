@@ -2,9 +2,11 @@
 {
     using System.Threading.Tasks;
 
+    using CakeShop.Common;
     using CakeShop.Data.Models;
     using CakeShop.Services.Data.Desserts;
     using CakeShop.Services.Data.Orders;
+    using CakeShop.Services.Data.Reviews;
     using CakeShop.Web.ViewModels.DessertOrders.ViewModels;
     using CakeShop.Web.ViewModels.Desserts.ViewModels;
     using CakeShop.Web.ViewModels.Reviews.InputModels;
@@ -16,15 +18,18 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IOrdersService ordersService;
         private readonly IDessertsService dessertsService;
+        private readonly IReviewsService reviewsService;
 
         public ReviewsController(
             UserManager<ApplicationUser> userManager,
             IOrdersService ordersService,
-            IDessertsService dessertsService)
+            IDessertsService dessertsService,
+            IReviewsService reviewsService)
         {
             this.userManager = userManager;
             this.ordersService = ordersService;
             this.dessertsService = dessertsService;
+            this.reviewsService = reviewsService;
         }
 
         public async Task<IActionResult> GetAll()
@@ -50,21 +55,23 @@
             return this.View(model);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Add(AddDessertInputModel input)
-        //{
-        //    if (!this.ModelState.IsValid)
-        //    {
-        //        input.Categories = await this.categoriesService.GetAllAsSelectListItemAsync();
+        [HttpPost]
+        public async Task<IActionResult> Add(AddReviewInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                input.Dessert = await this.dessertsService.GetDetailsAsync<DessertAddReviewViewModel>(input.Dessert.Id);
 
-        //        return this.View(input);
-        //    }
+                return this.View(input);
+            }
 
-        //    await this.dessertsService.AddAsync(input.Name, input.Picture, input.Price, input.Description, input.CategoryId);
+            var userId = this.userManager.GetUserId(this.User);
 
-        //    this.TempData["InfoMessage"] = GlobalConstants.SuccessAddedMessage;
+            await this.reviewsService.AddAsync(input.Content, input.Points, input.OrderId, input.Dessert.Id, userId);
 
-        //    return this.RedirectToAction(nameof(this.GetAll));
-        //}
+            this.TempData["InfoMessage"] = GlobalConstants.SuccessAddedMessage;
+
+            return this.Redirect($"/Orders/GetOrderDetails/{input.OrderId}");
+        }
     }
 }

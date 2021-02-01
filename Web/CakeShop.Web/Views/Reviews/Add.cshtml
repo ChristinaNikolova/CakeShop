@@ -25,6 +25,8 @@
                 <div class="class__sidebar">
                     <h5>Write Review</h5>
                     <form asp-area="" asp-controller="Reviews" asp-action="Add" method="post">
+                        <input asp-for="@Model.OrderId" hidden />
+                        <input asp-for="@Model.Dessert.Id" hidden />
                         <div class="form-group">
                             <label asp-for="@Model.Content"></label>
                             <textarea asp-for="@Model.Content" class="form-control" rows="5"></textarea>
