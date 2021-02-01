@@ -11,6 +11,7 @@
     using CakeShop.Web.ViewModels.Categories.ViewModels;
     using CakeShop.Web.ViewModels.Desserts.InputModels;
     using CakeShop.Web.ViewModels.Desserts.ViewModels;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
@@ -33,6 +34,7 @@
             this.userManager = userManager;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllCategories()
         {
             var model = new AllCategoriesViewModel()
@@ -43,6 +45,7 @@
             return this.View(model);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllCurrentCategory(string id, int currentPage = 1)
         {
             var dessertsCount = await this.dessertsService.GetTotalCountDessertsByCategoryAsync(id);
@@ -69,6 +72,7 @@
             return this.View(model);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult<OrderDessertsViewModel>> OrderByCriteria([FromBody] OrderDessertsInputModel input)
         {

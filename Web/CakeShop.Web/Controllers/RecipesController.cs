@@ -13,6 +13,7 @@
     using CakeShop.Web.ViewModels.Comments.InputModels;
     using CakeShop.Web.ViewModels.RecipeLikes.ViewModels;
     using CakeShop.Web.ViewModels.Recipes.ViewModels;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Rotativa.AspNetCore;
@@ -39,6 +40,7 @@
             this.userManager = userManager;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> GetAll(int currentPage = 1)
         {
             var recipesCount = await this.recipesService.GetTotalCountRecipesAsync();
@@ -108,6 +110,7 @@
             return new LikeRecipeViewModel { IsAdded = isAdded, RecipeLikesCount = recipeLikesCount };
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> AllByCategory(string id)
         {
             var model = new AllRecipesViewModel()
@@ -118,6 +121,7 @@
             return this.View(model);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult<AllRecipesViewModel>> OrderByCriteria([FromBody] string criteria)
         {

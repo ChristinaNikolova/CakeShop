@@ -8,5 +8,9 @@
         Task AddAsync(string recipeId, string content, string userId);
 
         Task<IEnumerable<T>> GetCommentsCurrentRecipeAsync<T>(string recipeId);
+
+        Task<IEnumerable<T>> GetAllAsync<T>();
+
+        Task DeleteAsync(string id);
     }
 }

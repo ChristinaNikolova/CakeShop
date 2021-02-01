@@ -2,15 +2,9 @@
 {
     using CakeShop.Data.Models;
     using CakeShop.Services.Mapping;
+    using CakeShop.Web.ViewModels.Recipes.ViewModels;
 
-    public class RecipeAdminBaseViewModel : IMapFrom<Recipe>
+    public class RecipeAdminBaseViewModel : UserFavouriteRecipeViewModel, IMapFrom<Recipe>
     {
-        public string Id { get; set; }
-
-        public string Title { get; set; }
-
-        public string Picture { get; set; }
-
-        public string CategoryName { get; set; }
     }
 }

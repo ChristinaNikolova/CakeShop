@@ -3,9 +3,10 @@
     using System.Diagnostics;
 
     using CakeShop.Web.ViewModels;
-
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    [AllowAnonymous]
     public class HomeController : BaseController
     {
         public IActionResult Index()

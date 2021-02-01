@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
 
+    using CakeShop.Common;
     using CakeShop.Data.Models;
     using CakeShop.Services.Data.Comments;
     using CakeShop.Web.ViewModels.Comments.InputModels;
@@ -32,6 +33,8 @@
             var userId = this.userManager.GetUserId(this.User);
 
             await this.commentsService.AddAsync(input.Id, input.Content, userId);
+
+            this.TempData["InfoMessage"] = GlobalConstants.SuccessAddedMessage;
 
             return this.Redirect($"/Recipes/RecipeDetails/{input.Id}");
         }
