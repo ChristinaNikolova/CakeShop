@@ -37,13 +37,16 @@
                             <span asp-validation-for="@Model.Description" class="text-danger"></span>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-md-10">
                                 <label asp-for="@Model.NewPicture"></label>
                                 <input id="new-pic" type="file" asp-for="@Model.NewPicture" />
                                 <span asp-validation-for="@Model.NewPicture" class="text-danger"></span>
                             </div>
-                            <div class="form-group col-md-3 mt-4 ml-5">
-                                <button type="submit" class="site-btn mb-4">Update</button>
+                            <div class="form-group col-md-3 mt-4 ml-2">
+                                <button type="submit" class="site-btn mb-4 danger">Update</button>
+                            </div>
+                            <div class="form-group col-md-3 mt-4">
+                                <a asp-area="Administration" asp-controller="Desserts" asp-action="GetAll" class="site-btn mb-4">Back</a>
                             </div>
                         </div>
                     </form>
