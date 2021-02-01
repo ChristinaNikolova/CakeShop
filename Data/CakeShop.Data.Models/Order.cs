@@ -16,6 +16,7 @@
             this.Status = Status.NotFinish;
             this.IsPaid = false;
             this.TotalPrice = 0;
+            this.IsReview = false;
             this.DessertOrders = new HashSet<DessertOrder>();
         }
 
@@ -33,6 +34,8 @@
         public string Notes { get; set; }
 
         public DateTime FinalizeOrder { get; set; }
+
+        public bool IsReview { get; set; }
 
         [Required]
         public string ClientId { get; set; }

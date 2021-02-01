@@ -36,5 +36,7 @@
         Task<int> GetOrdersCountCurrentUserAsync(string userId);
 
         Task<int> GetProcessingOrdersCountAsync();
+
+        Task<IEnumerable<T>> GetDessertsForReviewAsync<T>(string userId);
     }
 }

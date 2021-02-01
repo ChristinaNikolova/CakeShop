@@ -113,7 +113,8 @@
             var isBell = await this.usersRepository
                 .All()
                 .Where(u => u.Id == userId)
-                .AnyAsync(u => u.Orders.Any(o => o.Status == Status.Delivered));
+                .AnyAsync(u => u.Orders
+                .Any(o => o.Status == Status.Delivered && o.IsReview == false));
 
             return isBell;
         }

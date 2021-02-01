@@ -84,7 +84,13 @@
         public const string MaxCookingTimeValue = "5000";
 
         // Review
+        public const int ReviewContentMinLenght = 5;
+
         public const int ReviewContentMaxLenght = 1000;
+
+        public const string ReviewMinPoints = "1";
+
+        public const string ReviewMaxPoints = "5";
 
         // Tag
         public const int TagNameMinLenght = 3;

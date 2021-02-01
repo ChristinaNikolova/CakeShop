@@ -1,0 +1,51 @@
+﻿@using CakeShop.Web.ViewModels.Reviews.InputModels;
+@model AddReviewInputModel;
+
+@{
+    ViewData["Title"] = "Add Review";
+}
+
+<partial name="_BreadCrumbPartial" />
+<section class="product-details spad">
+    <div class="container">
+        <div class="product__details__text">
+            <h4 class="text-uppercase mb-1"><a asp-area="" asp-controller="Shop" asp-action="DessertDetails" asp-route-id="@Model.Dessert.Id" class="color-black">@Model.Dessert.Name</a></h4>
+            <h6 class="text-uppercase mb-1"><a asp-area="" asp-controller="Orders" asp-action="GetOrderDetails" asp-route-id="@Model.OrderId" class="color-black">See order</a></h6>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="product__details__img">
+                    <div class="product__details__big__img">
+                        <img class="big_img" src="@Model.Dessert.Picture" alt="dessert-picture">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="class__sidebar">
+                    <h5>Write Review</h5>
+                    <form asp-area="" asp-controller="Reviews" asp-action="Add" method="post">
+                        <div class="form-group">
+                            <label asp-for="@Model.Content"></label>
+                            <textarea asp-for="@Model.Content" class="form-control" rows="5"></textarea>
+                            <span asp-validation-for="@Model.Content" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Points"></label>
+                            <select asp-for="@Model.Points" class="form-control">
+                                <option selected>Please select points</option>
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                            <span asp-validation-for="@Model.Points" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="site-btn">Create</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

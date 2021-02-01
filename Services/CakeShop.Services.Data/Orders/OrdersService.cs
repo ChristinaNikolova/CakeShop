@@ -237,6 +237,22 @@
             return count;
         }
 
+        public async Task<IEnumerable<T>> GetDessertsForReviewAsync<T>(string userId)
+        {
+            var desserts = await this.dessertOrdersRepository
+                .All()
+                .Where(deo => deo.Order.ClientId == userId
+                          && deo.Order.Status == Status.Delivered
+                          && !deo.Order.IsReview)
+                .OrderByDescending(deo => deo.CreatedOn)
+                .ThenBy(deo => deo.OrderId)
+                .ThenBy(deo => deo.Dessert.Name)
+                .To<T>()
+                .ToListAsync();
+
+            return desserts;
+        }
+
         private async Task<Order> AddDessertToNewOrderAsync(string userId, string dessertId, int quantity, decimal dessertPrice, Order order)
         {
             var clientAddress = await this.usersService.GetUserAddressByIdAsync(userId);
