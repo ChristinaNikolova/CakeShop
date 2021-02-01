@@ -34,4 +34,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\CakeShop.Data.Models\CakeShop.Data.Models.csproj" />
+  </ItemGroup>
+
 </Project>

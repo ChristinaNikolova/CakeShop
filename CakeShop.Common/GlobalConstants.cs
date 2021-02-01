@@ -124,5 +124,8 @@
         public const string GenerateOrderPdfViewName = "GenerateOrderPdf";
 
         public const string PdfMimeType = "application/pdf";
+
+        // hangfire
+        public const int DaysOneMonth = 30;
     }
 }
