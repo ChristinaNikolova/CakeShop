@@ -201,7 +201,7 @@
             return recipes;
         }
 
-        public async Task<IEnumerable<T>> OrderRecipesByCriteria<T>(string criteria)
+        public async Task<IEnumerable<T>> OrderRecipesByCriteriaAsync<T>(string criteria)
         {
             var criteriaLowerCase = criteria.ToLower();
 

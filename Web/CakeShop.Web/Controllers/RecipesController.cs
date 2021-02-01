@@ -125,7 +125,7 @@
         [HttpPost]
         public async Task<ActionResult<AllRecipesViewModel>> OrderByCriteria([FromBody] string criteria)
         {
-            var recipes = await this.recipesService.OrderRecipesByCriteria<RecipeViewModel>(criteria);
+            var recipes = await this.recipesService.OrderRecipesByCriteriaAsync<RecipeViewModel>(criteria);
 
             return new AllRecipesViewModel { Repices = recipes };
         }

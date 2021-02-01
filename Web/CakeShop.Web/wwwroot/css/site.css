@@ -147,8 +147,13 @@ html {
 
 .fa-book:before,
 .fa-truck:before,
-.fa-heart:before {
+.fa-heart:before,
+.fa-bell:before {
     font-size: 20px;
+}
+
+.fa-bell:before {
+    color: #F08632;
 }
 
 .fa-egg {

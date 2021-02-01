@@ -61,5 +61,20 @@
 
             return this.View(model);
         }
+
+        [HttpPost]
+        public async Task<ActionResult<bool>> BellNotification()
+        {
+            var userId = this.userManager.GetUserId(this.User);
+
+            if (userId == null)
+            {
+                return false;
+            }
+
+            var hasToShowBell = await this.usersService.CheckForBellAsync(userId);
+
+            return hasToShowBell;
+        }
     }
 }

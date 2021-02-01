@@ -20,5 +20,7 @@
         Task<IEnumerable<T>> GetUserOrdersListAsync<T>(string userId, int take, int skip);
 
         Task<IEnumerable<T>> GetAllAsync<T>();
+
+        Task<bool> CheckForBellAsync(string userId);
     }
 }
