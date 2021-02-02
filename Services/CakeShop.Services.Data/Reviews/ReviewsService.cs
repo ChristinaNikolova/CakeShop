@@ -6,6 +6,7 @@
 
     using CakeShop.Data.Common.Repositories;
     using CakeShop.Data.Models;
+    using CakeShop.Services.Data.DessertOrders;
     using CakeShop.Services.Data.Orders;
     using CakeShop.Services.Mapping;
     using Microsoft.EntityFrameworkCore;
@@ -14,13 +15,16 @@
     {
         private readonly IRepository<Review> reviewsRepository;
         private readonly IOrdersService ordersService;
+        private readonly IDessertOrdersService dessertOrdersService;
 
         public ReviewsService(
             IRepository<Review> reviewsRepository,
-            IOrdersService ordersService)
+            IOrdersService ordersService,
+            IDessertOrdersService dessertOrdersService)
         {
             this.reviewsRepository = reviewsRepository;
             this.ordersService = ordersService;
+            this.dessertOrdersService = dessertOrdersService;
         }
 
         public async Task AddAsync(string content, int points, string orderId, string dessertId, string userId)
@@ -34,6 +38,7 @@
             };
 
             await this.ordersService.UpdateOrderReviewStatusAsync(orderId);
+            await this.dessertOrdersService.UpdateDessertOrderReviewStatusAsync(dessertId, orderId);
 
             await this.reviewsRepository.AddAsync(review);
             await this.reviewsRepository.SaveChangesAsync();

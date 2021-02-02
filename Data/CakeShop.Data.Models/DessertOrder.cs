@@ -10,6 +10,7 @@
         public DessertOrder()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.IsReview = false;
         }
 
         [Required]
@@ -23,5 +24,7 @@
         public virtual Order Order { get; set; }
 
         public int Quantity { get; set; }
+
+        public bool IsReview { get; set; }
     }
 }

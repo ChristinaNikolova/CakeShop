@@ -11,10 +11,6 @@
 
         Task<decimal> GetTotalPriceCurrentOrderByUserAsync(string userId);
 
-        Task<int> GetTotalQuantitiesCurrentOrderAsync(string orderId);
-
-        Task<IEnumerable<T>> GetDessertsInBasketAsync<T>(string userId);
-
         Task<IEnumerable<T>> RemoveFromBasketAsync<T>(string dessertOrderId, string userId);
 
         Task<string> GetOrderIdByUserAsync(string userId);
@@ -23,11 +19,11 @@
 
         Task AddDetailsToCurrentOrderAsync(string orderId, string deliveryAddress, string notes);
 
-        Task<IEnumerable<T>> GetDessertsCurrentOrderAsync<T>(string orderId);
-
         Task<T> GetOrderDetailsAsync<T>(string orderId);
 
         Task<IEnumerable<T>> GetAllAsync<T>(string status);
+
+        Task<IEnumerable<T>> GetUserOrdersListAsync<T>(string userId, int take, int skip);
 
         Task DeleteAsync(string id);
 
@@ -36,8 +32,6 @@
         Task<int> GetOrdersCountCurrentUserAsync(string userId);
 
         Task<int> GetProcessingOrdersCountAsync();
-
-        Task<IEnumerable<T>> GetDessertsForReviewAsync<T>(string userId);
 
         Task UpdateOrderReviewStatusAsync(string orderId);
     }

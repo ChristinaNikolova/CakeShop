@@ -14,11 +14,13 @@
     using CakeShop.Services.Data.Categories;
     using CakeShop.Services.Data.Comments;
     using CakeShop.Services.Data.DessertIngredients;
+    using CakeShop.Services.Data.DessertOrders;
     using CakeShop.Services.Data.Desserts;
     using CakeShop.Services.Data.DessertTags;
     using CakeShop.Services.Data.Ingredients;
     using CakeShop.Services.Data.Orders;
     using CakeShop.Services.Data.RecipeIngredients;
+    using CakeShop.Services.Data.RecipeLikes;
     using CakeShop.Services.Data.Recipes;
     using CakeShop.Services.Data.Reviews;
     using CakeShop.Services.Data.Tags;
@@ -119,6 +121,8 @@
             services.AddTransient<ITagsService, TagsService>();
             services.AddTransient<IRecipeIngredientsService, RecipeIngredientsService>();
             services.AddTransient<ICommentsService, CommentsService>();
+            services.AddTransient<IDessertOrdersService, DessertOrdersService>();
+            services.AddTransient<IRecipeLikesService, RecipeLikesService>();
 
             // Add Antiforgery
             services.AddAntiforgery(options =>

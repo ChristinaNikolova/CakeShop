@@ -4,8 +4,8 @@
 
     using CakeShop.Common;
     using CakeShop.Data.Models;
+    using CakeShop.Services.Data.DessertOrders;
     using CakeShop.Services.Data.Desserts;
-    using CakeShop.Services.Data.Orders;
     using CakeShop.Services.Data.Reviews;
     using CakeShop.Web.ViewModels.DessertOrders.ViewModels;
     using CakeShop.Web.ViewModels.Desserts.ViewModels;
@@ -16,20 +16,20 @@
     public class ReviewsController : BaseController
     {
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly IOrdersService ordersService;
         private readonly IDessertsService dessertsService;
         private readonly IReviewsService reviewsService;
+        private readonly IDessertOrdersService dessertOrdersService;
 
         public ReviewsController(
             UserManager<ApplicationUser> userManager,
-            IOrdersService ordersService,
             IDessertsService dessertsService,
-            IReviewsService reviewsService)
+            IReviewsService reviewsService,
+            IDessertOrdersService dessertOrdersService)
         {
             this.userManager = userManager;
-            this.ordersService = ordersService;
             this.dessertsService = dessertsService;
             this.reviewsService = reviewsService;
+            this.dessertOrdersService = dessertOrdersService;
         }
 
         public async Task<IActionResult> GetAll()
@@ -38,7 +38,7 @@
 
             var model = new AllWaitingForReviewDessertsViewModel()
             {
-                Desserts = await this.ordersService.GetDessertsForReviewAsync<WaitingForReviewDessertViewModel>(userId),
+                Desserts = await this.dessertOrdersService.GetDessertsForReviewAsync<WaitingForReviewDessertViewModel>(userId),
             };
 
             return this.View(model);

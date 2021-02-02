@@ -6,6 +6,7 @@
     using CakeShop.Common;
     using CakeShop.Data.Models;
     using CakeShop.Services.Data.RecipeIngredients;
+    using CakeShop.Services.Data.RecipeLikes;
     using CakeShop.Services.Data.Recipes;
     using CakeShop.Services.Data.Users;
     using CakeShop.Services.Messaging;
@@ -23,6 +24,7 @@
         private readonly IRecipesService recipesService;
         private readonly IUsersService usersService;
         private readonly IRecipeIngredientsService recipeIngredientsService;
+        private readonly IRecipeLikesService recipeLikesService;
         private readonly IEmailSender emailSender;
         private readonly UserManager<ApplicationUser> userManager;
 
@@ -30,12 +32,14 @@
             IRecipesService recipesService,
             IUsersService usersService,
             IRecipeIngredientsService recipeIngredientsService,
+            IRecipeLikesService recipeLikesService,
             IEmailSender emailSender,
             UserManager<ApplicationUser> userManager)
         {
             this.recipesService = recipesService;
             this.usersService = usersService;
             this.recipeIngredientsService = recipeIngredientsService;
+            this.recipeLikesService = recipeLikesService;
             this.emailSender = emailSender;
             this.userManager = userManager;
         }
@@ -65,7 +69,7 @@
 
             model.RepiceIngredients = await this.recipeIngredientsService.GetAllCurrentRecipeAsync<RecipeIngredientViewModel>(id);
             model.AddCommentInputModel = new AddCommentInputModel() { Id = id, };
-            model.IsFavourite = await this.recipesService.IsFavouriteAsync(id, userId);
+            model.IsFavourite = await this.recipeLikesService.IsFavouriteAsync(id, userId);
 
             return this.View(model);
         }
@@ -104,8 +108,8 @@
         {
             var userId = this.userManager.GetUserId(this.User);
 
-            var isAdded = await this.recipesService.LikeRecipeAsync(recipeId, userId);
-            var recipeLikesCount = await this.recipesService.GetLikesCountAsync(recipeId);
+            var isAdded = await this.recipeLikesService.LikeRecipeAsync(recipeId, userId);
+            var recipeLikesCount = await this.recipeLikesService.GetLikesCountAsync(recipeId);
 
             return new LikeRecipeViewModel { IsAdded = isAdded, RecipeLikesCount = recipeLikesCount };
         }
@@ -135,7 +139,7 @@
         {
             var userId = this.userManager.GetUserId(this.User);
 
-            var favouriteRecipes = await this.recipesService.UnlikeRecipeAsync<UserFavouriteRecipeViewModel>(recipeId, userId);
+            var favouriteRecipes = await this.recipeLikesService.UnlikeRecipeAsync<UserFavouriteRecipeViewModel>(recipeId, userId);
 
             return new AllUserFavouriteRecipesViewModel { FavouriteRecipes = favouriteRecipes };
         }

@@ -8,6 +8,7 @@
     using CakeShop.Data.Common.Repositories;
     using CakeShop.Data.Models;
     using CakeShop.Data.Models.Enums;
+    using CakeShop.Services.Data.DessertOrders;
     using CakeShop.Services.Data.Desserts;
     using CakeShop.Services.Data.Users;
     using CakeShop.Services.Mapping;
@@ -16,20 +17,20 @@
     public class OrdersService : IOrdersService
     {
         private readonly IRepository<Order> ordersRepository;
-        private readonly IRepository<DessertOrder> dessertOrdersRepository;
         private readonly IUsersService usersService;
         private readonly IDessertsService dessertsService;
+        private readonly IDessertOrdersService dessertOrdersService;
 
         public OrdersService(
             IRepository<Order> ordersRepository,
-            IRepository<DessertOrder> dessertOrdersRepository,
             IUsersService usersService,
-            IDessertsService dessertsService)
+            IDessertsService dessertsService,
+            IDessertOrdersService dessertOrdersService)
         {
             this.ordersRepository = ordersRepository;
-            this.dessertOrdersRepository = dessertOrdersRepository;
             this.usersService = usersService;
             this.dessertsService = dessertsService;
+            this.dessertOrdersService = dessertOrdersService;
         }
 
         public async Task<string> AddToBasketAsync(string userId, string dessertId, int quantity)
@@ -98,22 +99,9 @@
             return totalPrice;
         }
 
-        public async Task<IEnumerable<T>> GetDessertsInBasketAsync<T>(string userId)
-        {
-            var desserts = await this.dessertOrdersRepository
-                .All()
-                .Where(deo => deo.Order.Status == Status.NotFinish && deo.Order.ClientId == userId)
-                .To<T>()
-                .ToListAsync();
-
-            return desserts;
-        }
-
         public async Task<IEnumerable<T>> RemoveFromBasketAsync<T>(string dessertOrderId, string userId)
         {
-            var dessertOrderToRemove = await this.dessertOrdersRepository
-                .All()
-                .FirstOrDefaultAsync(deo => deo.Id == dessertOrderId);
+            var dessertOrderToRemove = await this.dessertOrdersService.GetByIdAsync(dessertOrderId);
 
             var order = await this.ordersRepository
                 .All()
@@ -123,24 +111,14 @@
             order.TotalPrice -= dessertPrice * dessertOrderToRemove.Quantity;
             order.ReviewsCount--;
 
-            this.dessertOrdersRepository.Delete(dessertOrderToRemove);
+            await this.dessertOrdersService.DeleteAsync(dessertOrderToRemove);
+
             this.ordersRepository.Update(order);
             await this.ordersRepository.SaveChangesAsync();
-            await this.dessertOrdersRepository.SaveChangesAsync();
 
-            var desserts = await this.GetDessertsInBasketAsync<T>(userId);
+            var desserts = await this.dessertOrdersService.GetDessertsInBasketAsync<T>(userId);
 
             return desserts;
-        }
-
-        public async Task<int> GetTotalQuantitiesCurrentOrderAsync(string orderId)
-        {
-            var quantities = await this.dessertOrdersRepository
-                .All()
-                .Where(deo => deo.OrderId == orderId)
-                .SumAsync(deo => deo.Quantity);
-
-            return quantities;
         }
 
         public async Task<string> GetOrderIdByUserAsync(string userId)
@@ -170,6 +148,20 @@
             return order.Id;
         }
 
+        public async Task<IEnumerable<T>> GetUserOrdersListAsync<T>(string userId, int take, int skip)
+        {
+            var orders = await this.ordersRepository
+                .All()
+                .Where(o => o.ClientId == userId && o.Status != Status.NotFinish && o.Status != Status.Default)
+                .OrderByDescending(o => o.CreatedOn)
+                .Skip(skip)
+                .Take(take)
+                .To<T>()
+                .ToListAsync();
+
+            return orders;
+        }
+
         public async Task AddDetailsToCurrentOrderAsync(string orderId, string deliveryAddress, string notes)
         {
             var order = await this.ordersRepository
@@ -181,19 +173,6 @@
 
             this.ordersRepository.Update(order);
             await this.ordersRepository.SaveChangesAsync();
-        }
-
-        public async Task<IEnumerable<T>> GetDessertsCurrentOrderAsync<T>(string orderId)
-        {
-            var desserts = await this.dessertOrdersRepository
-                .All()
-                .Where(deo => deo.OrderId == orderId)
-                .OrderByDescending(deo => deo.Quantity)
-                .ThenBy(deo => deo.Dessert.Name)
-                .To<T>()
-                .ToListAsync();
-
-            return desserts;
         }
 
         public async Task<T> GetOrderDetailsAsync<T>(string orderId)
@@ -250,22 +229,6 @@
 
             this.ordersRepository.Update(order);
             await this.ordersRepository.SaveChangesAsync();
-        }
-
-        public async Task<IEnumerable<T>> GetDessertsForReviewAsync<T>(string userId)
-        {
-            var desserts = await this.dessertOrdersRepository
-                .All()
-                .Where(deo => deo.Order.ClientId == userId
-                          && deo.Order.Status == Status.Delivered
-                          && !deo.Order.IsReview)
-                .OrderByDescending(deo => deo.CreatedOn)
-                .ThenBy(deo => deo.OrderId)
-                .ThenBy(deo => deo.Dessert.Name)
-                .To<T>()
-                .ToListAsync();
-
-            return desserts;
         }
 
         private async Task<Order> AddDessertToNewOrderAsync(string userId, string dessertId, int quantity, decimal dessertPrice, Order order)

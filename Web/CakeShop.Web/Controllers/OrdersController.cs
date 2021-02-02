@@ -4,6 +4,7 @@
 
     using CakeShop.Common;
     using CakeShop.Data.Models;
+    using CakeShop.Services.Data.DessertOrders;
     using CakeShop.Services.Data.Orders;
     using CakeShop.Services.Data.Users;
     using CakeShop.Web.ViewModels.DessertOrders.ViewModels;
@@ -20,15 +21,18 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IOrdersService ordersService;
         private readonly IUsersService usersService;
+        private readonly IDessertOrdersService dessertOrdersService;
 
         public OrdersController(
             UserManager<ApplicationUser> userManager,
             IOrdersService ordersService,
-            IUsersService usersService)
+            IUsersService usersService,
+            IDessertOrdersService dessertOrdersService)
         {
             this.userManager = userManager;
             this.ordersService = ordersService;
             this.usersService = usersService;
+            this.dessertOrdersService = dessertOrdersService;
         }
 
         [HttpPost]
@@ -66,7 +70,7 @@
 
             var model = new AllDessertsBasketViewModel()
             {
-                DessertsInBasket = await this.ordersService.GetDessertsInBasketAsync<DessertBasketViewModel>(userId),
+                DessertsInBasket = await this.dessertOrdersService.GetDessertsInBasketAsync<DessertBasketViewModel>(userId),
                 IsAlreadyPaid = false,
             };
 
@@ -102,7 +106,7 @@
 
             var totalPrice = await this.ordersService.GetTotalPriceCurrentOrderByUserAsync(userId);
             var orderId = await this.ordersService.GetOrderIdByUserAsync(userId);
-            var quantities = await this.ordersService.GetTotalQuantitiesCurrentOrderAsync(orderId);
+            var quantities = await this.dessertOrdersService.GetTotalQuantitiesCurrentOrderAsync(orderId);
 
             return new RemoveFromOrderViewModel
             {
@@ -120,9 +124,9 @@
             var model = new CheckoutInputModel()
             {
                 User = await this.usersService.GetUserDataAsync<UserCheckoutViewModel>(userId),
-                Desserts = await this.ordersService.GetDessertsInBasketAsync<DessertBaseViewModel>(userId),
+                Desserts = await this.dessertOrdersService.GetDessertsInBasketAsync<DessertBaseViewModel>(userId),
                 TotalPrice = await this.ordersService.GetTotalPriceCurrentOrderByUserAsync(userId),
-                Quantities = await this.ordersService.GetTotalQuantitiesCurrentOrderAsync(orderId),
+                Quantities = await this.dessertOrdersService.GetTotalQuantitiesCurrentOrderAsync(orderId),
             };
 
             return this.View(model);
@@ -137,9 +141,9 @@
             if (!this.ModelState.IsValid)
             {
                 input.User = await this.usersService.GetUserDataAsync<UserCheckoutViewModel>(userId);
-                input.Desserts = await this.ordersService.GetDessertsInBasketAsync<DessertBaseViewModel>(userId);
+                input.Desserts = await this.dessertOrdersService.GetDessertsInBasketAsync<DessertBaseViewModel>(userId);
                 input.TotalPrice = totalPrice;
-                input.Quantities = await this.ordersService.GetTotalQuantitiesCurrentOrderAsync(orderId);
+                input.Quantities = await this.dessertOrdersService.GetTotalQuantitiesCurrentOrderAsync(orderId);
 
                 return this.View(input);
             }
@@ -153,7 +157,7 @@
         {
             var model = new AllDessertsBasketViewModel()
             {
-                DessertsInBasket = await this.ordersService.GetDessertsCurrentOrderAsync<DessertBasketViewModel>(id),
+                DessertsInBasket = await this.dessertOrdersService.GetDessertsCurrentOrderAsync<DessertBasketViewModel>(id),
                 IsAlreadyPaid = true,
             };
 
@@ -164,7 +168,7 @@
         {
             var model = await this.ordersService.GetOrderDetailsAsync<OrderPDFViewModel>(id);
             model.User = await this.usersService.GetUserDataByOrderIdAsync<UserOrderDetailsViewModel>(id);
-            model.DessertsInBasket = await this.ordersService.GetDessertsCurrentOrderAsync<DessertBasketViewModel>(id);
+            model.DessertsInBasket = await this.dessertOrdersService.GetDessertsCurrentOrderAsync<DessertBasketViewModel>(id);
 
             return new ViewAsPdf(model);
         }

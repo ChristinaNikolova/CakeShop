@@ -19,12 +19,6 @@
 
         Task<string> GetPictureAsync(string id);
 
-        Task<bool> IsFavouriteAsync(string id, string userId);
-
-        Task<bool> LikeRecipeAsync(string recipeId, string userId);
-
-        Task<int> GetLikesCountAsync(string recipeId);
-
         Task<IEnumerable<T>> GetRecentRecipesAsync<T>();
 
         Task<IEnumerable<T>> GetPopulartRecipesAsync<T>();
@@ -36,7 +30,5 @@
         Task<IEnumerable<T>> OrderRecipesByCriteriaAsync<T>(string criteria);
 
         Task<IEnumerable<T>> GetUserFavouriteRecipesAsync<T>(string userId);
-
-        Task<IEnumerable<T>> UnlikeRecipeAsync<T>(string recipeId, string userId);
     }
 }

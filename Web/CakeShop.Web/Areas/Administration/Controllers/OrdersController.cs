@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
 
     using CakeShop.Common;
+    using CakeShop.Services.Data.DessertOrders;
     using CakeShop.Services.Data.Orders;
     using CakeShop.Services.Data.Users;
     using CakeShop.Services.Messaging;
@@ -16,15 +17,18 @@
     {
         private readonly IOrdersService ordersService;
         private readonly IUsersService usersService;
+        private readonly IDessertOrdersService dessertOrdersService;
         private readonly IEmailSender emailSender;
 
         public OrdersController(
             IOrdersService ordersService,
             IUsersService usersService,
+            IDessertOrdersService dessertOrdersService,
             IEmailSender emailSender)
         {
             this.ordersService = ordersService;
             this.usersService = usersService;
+            this.dessertOrdersService = dessertOrdersService;
             this.emailSender = emailSender;
         }
 
@@ -45,7 +49,7 @@
         {
             var model = new AllDessertsBasketViewModel()
             {
-                DessertsInBasket = await this.ordersService.GetDessertsCurrentOrderAsync<DessertBasketViewModel>(id),
+                DessertsInBasket = await this.dessertOrdersService.GetDessertsCurrentOrderAsync<DessertBasketViewModel>(id),
                 IsAlreadyPaid = true,
             };
 
@@ -59,7 +63,7 @@
 
             var model = await this.ordersService.GetOrderDetailsAsync<OrderPDFViewModel>(id);
             model.User = await this.usersService.GetUserDataByOrderIdAsync<UserOrderDetailsViewModel>(id);
-            model.DessertsInBasket = await this.ordersService.GetDessertsCurrentOrderAsync<DessertBasketViewModel>(id);
+            model.DessertsInBasket = await this.dessertOrdersService.GetDessertsCurrentOrderAsync<DessertBasketViewModel>(id);
 
             var emailAttachments = PDFController.PreparePdfFile<OrderPDFViewModel>(model, GlobalConstants.GenerateOrderPdfViewName, GlobalConstants.GenerateOrderPdfViewName, this.ControllerContext);
 

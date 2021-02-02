@@ -42,7 +42,7 @@
 
             var model = new AllUserOrdersBaseViewModel()
             {
-                UserOrders = await this.usersService.GetUserOrdersListAsync<UserOrderBaseViewModel>(userId, GlobalConstants.OrdersPerPage, (currentPage - 1) * GlobalConstants.OrdersPerPage),
+                UserOrders = await this.ordersService.GetUserOrdersListAsync<UserOrderBaseViewModel>(userId, GlobalConstants.OrdersPerPage, (currentPage - 1) * GlobalConstants.OrdersPerPage),
                 CurrentPage = currentPage,
                 PagesCount = pageCount,
             };

@@ -13,14 +13,10 @@
     public class UsersService : IUsersService
     {
         private readonly IRepository<ApplicationUser> usersRepository;
-        private readonly IRepository<Order> ordersRepository;
 
-        public UsersService(
-            IRepository<ApplicationUser> usersRepository,
-            IRepository<Order> ordersRepository)
+        public UsersService(IRepository<ApplicationUser> usersRepository)
         {
             this.usersRepository = usersRepository;
-            this.ordersRepository = ordersRepository;
         }
 
         public async Task<IEnumerable<T>> GetAllAsync<T>()
@@ -76,20 +72,6 @@
                 .FirstOrDefaultAsync();
 
             return user;
-        }
-
-        public async Task<IEnumerable<T>> GetUserOrdersListAsync<T>(string userId, int take, int skip)
-        {
-            var orders = await this.ordersRepository
-                .All()
-                .Where(o => o.ClientId == userId && o.Status != Status.NotFinish && o.Status != Status.Default)
-                .OrderByDescending(o => o.CreatedOn)
-                .Skip(skip)
-                .Take(take)
-                .To<T>()
-                .ToListAsync();
-
-            return orders;
         }
 
         public async Task<ApplicationUser> UpdateUserProfileAsync(string id, string firstName, string lastName, string address, string phoneNumber)
