@@ -1,6 +1,5 @@
 ﻿namespace CakeShop.Services.Data.Comments
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -33,11 +32,18 @@
             await this.commentsRepository.SaveChangesAsync();
         }
 
+        public async Task ApproveAsync(string id)
+        {
+            var comment = await this.GetByIdAsync(id);
+            comment.CommentStatus = CommentStatus.Approved;
+
+            this.commentsRepository.Update(comment);
+            await this.commentsRepository.SaveChangesAsync();
+        }
+
         public async Task DeleteAsync(string id)
         {
-            var comment = await this.commentsRepository
-                .All()
-                .FirstOrDefaultAsync(c => c.Id == id);
+            var comment = await this.GetByIdAsync(id);
 
             this.commentsRepository.Delete(comment);
             await this.commentsRepository.SaveChangesAsync();
@@ -76,6 +82,13 @@
                 .CountAsync();
 
             return count;
+        }
+
+        private async Task<Comment> GetByIdAsync(string id)
+        {
+            return await this.commentsRepository
+                .All()
+                .FirstOrDefaultAsync(c => c.Id == id);
         }
     }
 }

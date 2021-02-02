@@ -34,7 +34,7 @@
 
             await this.commentsService.AddAsync(input.Id, input.Content, userId);
 
-            this.TempData["InfoMessage"] = GlobalConstants.SuccessAddedMessage;
+            this.TempData["InfoMessage"] = GlobalConstants.SuccessAddedComment;
 
             return this.Redirect($"/Recipes/RecipeDetails/{input.Id}");
         }

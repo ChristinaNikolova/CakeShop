@@ -14,5 +14,7 @@
         Task DeleteAsync(string id);
 
         Task<int> GetNewCommentsCountAsync();
+
+        Task ApproveAsync(string id);
     }
 }

@@ -21,24 +21,30 @@
                                 <th>User</th>
                                 <th>Recipe</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var comment in Model.Comments)
                             {
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__text">@comment.Content</div>
-                                    </td>
-                                    <td class="cart__price">@comment.FormattedCreatedOn</td>
-                                    <td class="cart__stock">@comment.ClientUserName</td>
-                                    <td class="cart__stock"><a asp-area="" asp-controller="Recipes" asp-action="RecipeDetails" asp-route-id="@comment.RecipeId">@comment.RecipeTitle</a></td>
-                                    <td class="cart__close">
-                                        <form method="post" asp-area="Administration" asp-controller="Comments" asp-action="Delete" asp-route-id="@comment.Id">
-                                            <button type="submit" class="site-btn">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td class="product__cart__item">
+                                    <div class="product__cart__item__text">@comment.Content</div>
+                                </td>
+                                <td class="cart__price">@comment.FormattedCreatedOn</td>
+                                <td class="cart__stock">@comment.ClientUserName</td>
+                                <td class="cart__stock"><a asp-area="" asp-controller="Recipes" asp-action="RecipeDetails" asp-route-id="@comment.RecipeId">@comment.RecipeTitle</a></td>
+                                <td class="cart__close">
+                                    <form method="post" asp-area="Administration" asp-controller="Comments" asp-action="Approve" asp-route-id="@comment.Id">
+                                        <button type="submit" class="site-btn">Approve</button>
+                                    </form>
+                                </td>
+                                <td class="cart__close">
+                                    <form method="post" asp-area="Administration" asp-controller="Comments" asp-action="Delete" asp-route-id="@comment.Id">
+                                        <button type="submit" class="site-btn">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>

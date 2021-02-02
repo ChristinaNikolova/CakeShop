@@ -122,6 +122,8 @@
 
         public const string SuccessSendRecipeMessage = "Successfully send!";
 
+        public const string SuccessAddedComment = "Your comment is created, but it isn't approve by Admin yet!";
+
         // rotativa
         public const string Rotativa = "Rotativa";
 

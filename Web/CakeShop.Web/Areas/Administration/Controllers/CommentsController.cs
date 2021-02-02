@@ -35,5 +35,15 @@
 
             return this.RedirectToAction(nameof(this.GetAll));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Approve(string id)
+        {
+            await this.commentsService.ApproveAsync(id);
+
+            this.TempData["InfoMessage"] = GlobalConstants.SuccessUpdateMessage;
+
+            return this.RedirectToAction(nameof(this.GetAll));
+        }
     }
 }

@@ -44,6 +44,18 @@
                 opt => opt.MapFrom(x => x.Comments
                 .Where(y => y.CommentStatus == CommentStatus.Approved)
                 .Count()));
+
+            configuration.CreateMap<Recipe, RecipeDetailsViewModel>().ForMember(
+                m => m.CommentsCount,
+                opt => opt.MapFrom(x => x.Comments
+                .Where(y => y.CommentStatus == CommentStatus.Approved)
+                .Count()));
+
+            configuration.CreateMap<Recipe, RecipePDFViewModel>().ForMember(
+                m => m.CommentsCount,
+                opt => opt.MapFrom(x => x.Comments
+                .Where(y => y.CommentStatus == CommentStatus.Approved)
+                .Count()));
         }
     }
 }
