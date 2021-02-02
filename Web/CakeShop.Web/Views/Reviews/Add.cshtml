@@ -1,5 +1,6 @@
 ﻿@using CakeShop.Web.ViewModels.Reviews.InputModels;
 @model AddReviewInputModel;
+@inject IOptions<CakeShop.Web.SecurityModels.GoogleReCAPTCHA> GoogleReCAPTCHA;
 
 @{
     ViewData["Title"] = "Add Review";
@@ -51,3 +52,13 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <script src="https://www.google.com/recaptcha/api.js?render=@GoogleReCAPTCHA.Value.SiteKey"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('@GoogleReCAPTCHA.Value.SiteKey', { action: 'homepage' }).then(function (token) {
+            });
+        });
+    </script>
+}
