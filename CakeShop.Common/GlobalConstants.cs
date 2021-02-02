@@ -6,7 +6,13 @@
 
         public const string AdministratorRoleName = "Administrator";
 
+        public const string AdminName = "Admin";
+
         public const string AdminEmail = "admin@cakeshop.com";
+
+        public const string AdminPicture = "https://res.cloudinary.com/dieu4mste/image/upload/v1612248363/logo_n5n55j.png";
+
+        public const string SystemPasswordHashed = "AQAAAAEAACcQAAAAECrjCD23cQQ28Tyci+UMuaGrFMDUb/trG4E0RbJa4McRVfWFJ6c5UG4NpbXDB6K5rQ==";
 
         // seed data
         public const string TagSeederPath = @"../../Data/CakeShop.Data/Seeding/Data/Tags.json";

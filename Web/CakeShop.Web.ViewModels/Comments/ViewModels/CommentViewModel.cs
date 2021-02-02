@@ -11,6 +11,8 @@
 
         public string ClientUserName { get; set; }
 
+        public string ClientPicture { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public string FormattedCreatedOn

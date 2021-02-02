@@ -90,7 +90,7 @@
             user.LastName = lastName;
             user.Address = address;
             user.PhoneNumber = phoneNumber;
-            ;
+
             if (newPicture != null)
             {
                 string newPictureAsUrl = await this.cloudinaryService.UploudAsync(newPicture, user.UserName);

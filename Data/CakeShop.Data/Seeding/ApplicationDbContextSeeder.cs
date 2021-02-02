@@ -32,6 +32,7 @@
                               new CategoriesSeeder(),
                               new DessertsSeeder(),
                               new UsersToRolesSeeder(),
+                              new UsersSeeder(),
                           };
 
             foreach (var seeder in seeders)
