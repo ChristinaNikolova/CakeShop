@@ -14,6 +14,7 @@
     using CakeShop.Services.Data.Categories;
     using CakeShop.Services.Data.Comments;
     using CakeShop.Services.Data.DessertIngredients;
+    using CakeShop.Services.Data.DessertLikes;
     using CakeShop.Services.Data.DessertOrders;
     using CakeShop.Services.Data.Desserts;
     using CakeShop.Services.Data.DessertTags;
@@ -123,6 +124,7 @@
             services.AddTransient<ICommentsService, CommentsService>();
             services.AddTransient<IDessertOrdersService, DessertOrdersService>();
             services.AddTransient<IRecipeLikesService, RecipeLikesService>();
+            services.AddTransient<IDessertLikesService, DessertLikesService>();
 
             // Add Antiforgery
             services.AddAntiforgery(options =>

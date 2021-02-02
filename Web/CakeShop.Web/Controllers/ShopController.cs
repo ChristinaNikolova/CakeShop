@@ -6,6 +6,7 @@
     using CakeShop.Common;
     using CakeShop.Data.Models;
     using CakeShop.Services.Data.Categories;
+    using CakeShop.Services.Data.DessertLikes;
     using CakeShop.Services.Data.Desserts;
     using CakeShop.Services.Data.Orders;
     using CakeShop.Web.ViewModels.Categories.ViewModels;
@@ -20,17 +21,20 @@
         private readonly ICategoriesService categoriesService;
         private readonly IDessertsService dessertsService;
         private readonly IOrdersService ordersService;
+        private readonly IDessertLikesService dessertLikesService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public ShopController(
             ICategoriesService categoriesService,
             IDessertsService dessertsService,
             IOrdersService ordersService,
+            IDessertLikesService dessertLikesService,
             UserManager<ApplicationUser> userManager)
         {
             this.categoriesService = categoriesService;
             this.dessertsService = dessertsService;
             this.ordersService = ordersService;
+            this.dessertLikesService = dessertLikesService;
             this.userManager = userManager;
         }
 
@@ -67,7 +71,7 @@
             var userId = this.userManager.GetUserId(this.User);
 
             var model = await this.dessertsService.GetDetailsAsync<DessertDetailsViewModel>(id);
-            model.IsFavourite = await this.dessertsService.IsFavouriteAsync(id, userId);
+            model.IsFavourite = await this.dessertLikesService.IsFavouriteAsync(id, userId);
 
             return this.View(model);
         }

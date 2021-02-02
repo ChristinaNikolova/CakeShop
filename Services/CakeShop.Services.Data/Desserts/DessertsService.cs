@@ -15,16 +15,13 @@
     public class DessertsService : IDessertsService
     {
         private readonly IRepository<Dessert> dessertsRepository;
-        private readonly IRepository<DessertLike> dessertLikesRepository;
         private readonly ICloudinaryService cloudinaryService;
 
         public DessertsService(
             IRepository<Dessert> dessertsRepository,
-            IRepository<DessertLike> dessertLikesRepository,
             ICloudinaryService cloudinaryService)
         {
             this.dessertsRepository = dessertsRepository;
-            this.dessertLikesRepository = dessertLikesRepository;
             this.cloudinaryService = cloudinaryService;
         }
 
@@ -175,45 +172,6 @@
             return desserts;
         }
 
-        public async Task<bool> IsFavouriteAsync(string dessertId, string userId)
-        {
-            var isFavourite = await this.dessertLikesRepository
-                .All()
-                .AnyAsync(dl => dl.DessertId == dessertId && dl.ClientId == userId);
-
-            return isFavourite;
-        }
-
-        public async Task<bool> LikeDessertAsync(string dessertId, string userId)
-        {
-            var isAdded = true;
-            var isExisting = await this.IsFavouriteAsync(dessertId, userId);
-
-            if (isExisting)
-            {
-                isAdded = await this.RemoveFromFavouriteAsync(dessertId, userId, isAdded);
-            }
-            else
-            {
-                await this.AddToFavouriteAsync(dessertId, userId);
-            }
-
-            await this.dessertLikesRepository.SaveChangesAsync();
-
-            return isAdded;
-        }
-
-        public async Task<IEnumerable<T>> UnlikeDessertAsync<T>(string dessertId, string userId)
-        {
-            await this.RemoveFromFavouriteAsync(dessertId, userId, true);
-
-            await this.dessertLikesRepository.SaveChangesAsync();
-
-            var favouriteDesserts = await this.GetUserFavouriteDessertsAsync<T>(userId);
-
-            return favouriteDesserts;
-        }
-
         public async Task DeleteAsync(string id)
         {
             var dessert = await this.GetByIdAsync(id);
@@ -240,29 +198,6 @@
             return await this.dessertsRepository
                 .All()
                 .FirstOrDefaultAsync(d => d.Id == id);
-        }
-
-        private async Task AddToFavouriteAsync(string dessertId, string userId)
-        {
-            var dessertLike = new DessertLike()
-            {
-                ClientId = userId,
-                DessertId = dessertId,
-            };
-
-            await this.dessertLikesRepository.AddAsync(dessertLike);
-        }
-
-        private async Task<bool> RemoveFromFavouriteAsync(string dessertId, string userId, bool isAdded)
-        {
-            var dessertLike = await this.dessertLikesRepository
-                                .All()
-                                .FirstOrDefaultAsync(dl => dl.DessertId == dessertId && dl.ClientId == userId);
-
-            isAdded = false;
-            this.dessertLikesRepository.Delete(dessertLike);
-
-            return isAdded;
         }
 
         private async Task<string> GetPictureAsStringAsync(string name, IFormFile picture)

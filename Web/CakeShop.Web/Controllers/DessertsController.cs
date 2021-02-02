@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
 
     using CakeShop.Data.Models;
+    using CakeShop.Services.Data.DessertLikes;
     using CakeShop.Services.Data.Desserts;
     using CakeShop.Web.ViewModels.DessertLikes.ViewModels;
     using CakeShop.Web.ViewModels.Desserts.ViewModels;
@@ -13,13 +14,16 @@
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IDessertsService dessertsService;
+        private readonly IDessertLikesService dessertLikesService;
 
         public DessertsController(
             UserManager<ApplicationUser> userManager,
-            IDessertsService dessertsService)
+            IDessertsService dessertsService,
+            IDessertLikesService dessertLikesService)
         {
             this.userManager = userManager;
             this.dessertsService = dessertsService;
+            this.dessertLikesService = dessertLikesService;
         }
 
         [HttpPost]
@@ -27,7 +31,7 @@
         {
             var userId = this.userManager.GetUserId(this.User);
 
-            var isAdded = await this.dessertsService.LikeDessertAsync(dessertId, userId);
+            var isAdded = await this.dessertLikesService.LikeDessertAsync(dessertId, userId);
 
             return new LikeDessertViewModel { IsAdded = isAdded };
         }
@@ -49,7 +53,7 @@
         {
             var userId = this.userManager.GetUserId(this.User);
 
-            var favouriteDessets = await this.dessertsService.UnlikeDessertAsync<DessertViewModel>(dessertId, userId);
+            var favouriteDessets = await this.dessertLikesService.UnlikeDessertAsync<DessertViewModel>(dessertId, userId);
 
             return new AllFavouriteDessertsViewModel { FavouriteDesserts = favouriteDessets };
         }

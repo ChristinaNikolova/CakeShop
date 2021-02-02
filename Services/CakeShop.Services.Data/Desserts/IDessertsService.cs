@@ -15,15 +15,9 @@
 
         Task<IEnumerable<T>> GetAllWithCurrentTagsAsync<T>(string categoryId, string[] tagTagNames);
 
-        Task<bool> LikeDessertAsync(string dessertId, string userId);
-
-        Task<bool> IsFavouriteAsync(string dessertId, string userId);
-
         Task<decimal> GetDessertPriceAsync(string dessertId);
 
         Task<IEnumerable<T>> GetUserFavouriteDessertsAsync<T>(string userId);
-
-        Task<IEnumerable<T>> UnlikeDessertAsync<T>(string dessertId, string userId);
 
         Task<IEnumerable<T>> OrderDessertsAsync<T>(string targetCriteria, string categoryId);
 
