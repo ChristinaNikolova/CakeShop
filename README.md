@@ -41,7 +41,7 @@ CakeShop is a web application, that can be used to present particular online sho
       * add/delete ingredients to current recipe.
       * see all the orders, change their status and search, order and filter them.
       * approve/delete new comments and search, order and filter them.
-      * see all the users, the statistic for them and and search, order and filter them.
+      * see all the users, the statistic for them and search, order and filter them.
       * see HangFire Dashboard.
 
 ## :hammer_and_pick: Build with
