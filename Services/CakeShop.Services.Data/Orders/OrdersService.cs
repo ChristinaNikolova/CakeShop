@@ -37,7 +37,7 @@
         {
             var hasUserAlreadyBasket = await this.ordersRepository
                 .All()
-                .AnyAsync(o => o.ClientId == userId && o.Status == Status.NotFinish);
+                .AnyAsync(o => o.ClientId == userId && o.OrderStatus == OrderStatus.NotFinish);
 
             var dessertPrice = await this.dessertsService.GetDessertPriceAsync(dessertId);
             var order = null as Order;
@@ -70,7 +70,7 @@
         public async Task<string> ChangeStatusAsync(string id, string status)
         {
             var order = await this.GetByIdAsync(id);
-            order.Status = Enum.Parse<Status>(status);
+            order.OrderStatus = Enum.Parse<OrderStatus>(status);
 
             this.ordersRepository.Update(order);
             await this.ordersRepository.SaveChangesAsync();
@@ -92,7 +92,7 @@
         {
             var totalPrice = await this.ordersRepository
                  .All()
-                 .Where(o => o.ClientId == userId && o.Status == Status.NotFinish)
+                 .Where(o => o.ClientId == userId && o.OrderStatus == OrderStatus.NotFinish)
                  .Select(o => o.TotalPrice)
                  .FirstOrDefaultAsync();
 
@@ -105,7 +105,7 @@
 
             var order = await this.ordersRepository
                 .All()
-                .FirstOrDefaultAsync(o => o.ClientId == userId && o.Status == Status.NotFinish);
+                .FirstOrDefaultAsync(o => o.ClientId == userId && o.OrderStatus == OrderStatus.NotFinish);
 
             var dessertPrice = await this.dessertsService.GetDessertPriceAsync(dessertOrderToRemove.DessertId);
             order.TotalPrice -= dessertPrice * dessertOrderToRemove.Quantity;
@@ -125,7 +125,7 @@
         {
             var orderId = await this.ordersRepository
                 .All()
-                .Where(o => o.ClientId == userId && o.Status == Status.NotFinish)
+                .Where(o => o.ClientId == userId && o.OrderStatus == OrderStatus.NotFinish)
                 .Select(o => o.Id)
                 .FirstOrDefaultAsync();
 
@@ -136,10 +136,10 @@
         {
             var order = await this.ordersRepository
                 .All()
-                .FirstOrDefaultAsync(o => o.ClientId == userId && o.Status == Status.NotFinish);
+                .FirstOrDefaultAsync(o => o.ClientId == userId && o.OrderStatus == OrderStatus.NotFinish);
 
             order.IsPaid = true;
-            order.Status = Status.Processing;
+            order.OrderStatus = OrderStatus.Processing;
             order.FinalizeOrder = DateTime.UtcNow;
 
             this.ordersRepository.Update(order);
@@ -152,7 +152,9 @@
         {
             var orders = await this.ordersRepository
                 .All()
-                .Where(o => o.ClientId == userId && o.Status != Status.NotFinish && o.Status != Status.Default)
+                .Where(o => o.ClientId == userId
+                         && o.OrderStatus != OrderStatus.NotFinish
+                         && o.OrderStatus != OrderStatus.Default)
                 .OrderByDescending(o => o.CreatedOn)
                 .Skip(skip)
                 .Take(take)
@@ -190,7 +192,7 @@
         {
             var ordersCount = await this.ordersRepository
                 .All()
-                .Where(o => o.ClientId == userId && o.Status != Status.NotFinish && o.Status != Status.Default)
+                .Where(o => o.ClientId == userId && o.OrderStatus != OrderStatus.NotFinish && o.OrderStatus != OrderStatus.Default)
                 .CountAsync();
 
             return ordersCount;
@@ -200,7 +202,7 @@
         {
             var orders = await this.ordersRepository
                  .All()
-                 .Where(o => o.Status == Enum.Parse<Status>(status))
+                 .Where(o => o.OrderStatus == Enum.Parse<OrderStatus>(status))
                  .OrderByDescending(o => o.FinalizeOrder.Date)
                  .To<T>()
                  .ToListAsync();
@@ -212,7 +214,7 @@
         {
             var count = await this.ordersRepository
                 .All()
-                .CountAsync(o => o.Status == Status.Processing);
+                .CountAsync(o => o.OrderStatus == OrderStatus.Processing);
 
             return count;
         }
@@ -261,7 +263,7 @@
         {
             order = await this.ordersRepository
                                 .All()
-                                .FirstOrDefaultAsync(o => o.ClientId == userId && o.Status == Status.NotFinish);
+                                .FirstOrDefaultAsync(o => o.ClientId == userId && o.OrderStatus == OrderStatus.NotFinish);
 
             var dessertOrder = new DessertOrder()
             {

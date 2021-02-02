@@ -6,6 +6,6 @@
 
     public class UserOrderBaseViewModel : OrderViewModel, IMapFrom<Order>
     {
-        public string Status { get; set; }
+        public string OrderStatus { get; set; }
     }
 }

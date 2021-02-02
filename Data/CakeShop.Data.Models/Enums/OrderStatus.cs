@@ -1,6 +1,6 @@
 ﻿namespace CakeShop.Data.Models.Enums
 {
-    public enum Status
+    public enum OrderStatus
     {
         Default = 0,
         NotFinish = 1,

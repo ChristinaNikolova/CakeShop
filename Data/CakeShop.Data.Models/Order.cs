@@ -13,7 +13,7 @@
         public Order()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.Status = Status.NotFinish;
+            this.OrderStatus = OrderStatus.NotFinish;
             this.IsPaid = false;
             this.TotalPrice = 0;
             this.IsReview = false;
@@ -28,7 +28,7 @@
 
         public bool IsPaid { get; set; }
 
-        public Status Status { get; set; }
+        public OrderStatus OrderStatus { get; set; }
 
         [MaxLength(DataValidation.OrderNotesMaxLenght)]
         public string Notes { get; set; }

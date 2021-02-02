@@ -23,7 +23,8 @@
         {
             var desserts = await this.dessertOrdersRepository
                 .All()
-                .Where(deo => deo.Order.Status == Status.NotFinish && deo.Order.ClientId == userId)
+                .Where(deo => deo.Order.OrderStatus == OrderStatus.NotFinish
+                           && deo.Order.ClientId == userId)
                 .To<T>()
                 .ToListAsync();
 
@@ -58,7 +59,7 @@
             var desserts = await this.dessertOrdersRepository
                 .All()
                 .Where(deo => deo.Order.ClientId == userId
-                          && deo.Order.Status == Status.Delivered
+                          && deo.Order.OrderStatus == OrderStatus.Delivered
                           && !deo.Order.IsReview
                           && !deo.IsReview)
                 .OrderByDescending(deo => deo.CreatedOn)

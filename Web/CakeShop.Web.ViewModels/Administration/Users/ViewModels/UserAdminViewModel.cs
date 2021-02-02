@@ -25,7 +25,7 @@
         {
             configuration.CreateMap<ApplicationUser, UserAdminViewModel>().ForMember(
                 m => m.TotalSumOrders,
-                opt => opt.MapFrom(x => x.Orders.Where(o => o.Status == Status.Delivered).Sum(y => y.TotalPrice)));
+                opt => opt.MapFrom(x => x.Orders.Where(o => o.OrderStatus == OrderStatus.Delivered).Sum(y => y.TotalPrice)));
         }
     }
 }

@@ -108,7 +108,7 @@
                 .All()
                 .Where(u => u.Id == userId)
                 .AnyAsync(u => u.Orders
-                .Any(o => o.Status == Status.Delivered && o.IsReview == false));
+                .Any(o => o.OrderStatus == OrderStatus.Delivered && o.IsReview == false));
 
             return isBell;
         }

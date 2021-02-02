@@ -67,6 +67,7 @@
 
         public async Task<int> GetNewCommentsCountAsync()
         {
+            //change
             var count = await this.commentsRepository
                 .All()
                 .CountAsync(c => c.CreatedOn.Date >= DateTime.UtcNow.AddDays(-1).Date

@@ -39,21 +39,21 @@
                                     {
                                         <td class="cart__stock text-danger">@order.PaidAsString</td>
                                     }
-                                    @if (order.Status == GlobalConstants.ApprovedStatus)
+                                    @if (order.OrderStatus == GlobalConstants.ApprovedStatus)
                                     {
-                                        <td class="cart__stock text-info">@order.Status</td>
+                                        <td class="cart__stock text-info">@order.OrderStatus</td>
                                     }
-                                    else if (order.Status == GlobalConstants.CancelledStatus)
+                                    else if (order.OrderStatus == GlobalConstants.CancelledStatus)
                                     {
-                                        <td class="cart__stock text-danger">@order.Status</td>
+                                        <td class="cart__stock text-danger">@order.OrderStatus</td>
                                     }
-                                    else if (order.Status == GlobalConstants.DeliveredStatus)
+                                    else if (order.OrderStatus == GlobalConstants.DeliveredStatus)
                                     {
-                                        <td class="cart__stock text-success">@order.Status</td>
+                                        <td class="cart__stock text-success">@order.OrderStatus</td>
                                     }
                                     else
                                     {
-                                        <td class="cart__stock text-warning">@order.Status</td>
+                                        <td class="cart__stock text-warning">@order.OrderStatus</td>
                                     }
                                     <td class="cart__btn"><a asp-area="" asp-controller="Orders" asp-action="GetOrderDetails" asp-route-id="@order.Id" class="site-btn">Details</a></td>
                                 </tr>

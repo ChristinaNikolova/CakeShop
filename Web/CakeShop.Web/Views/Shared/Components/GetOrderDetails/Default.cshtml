@@ -6,7 +6,7 @@
         <h6>Order</h6>
         <ul>
             <li>Paid: <span>@Model.PaidAsString</span></li>
-            <li>Order Status: <span>@Model.Status</span></li>
+            <li>Order Status: <span>@Model.OrderStatus</span></li>
             <li>Order Date: <span>@Model.FormattedFinalizeOrder</span></li>
             <li>Total Sum: <span>$ @Model.TotalPrice</span></li>
         </ul>
@@ -31,17 +31,17 @@
 {
     <div class="align-self-center">
         <hr />
-        @if (Model.Status == GlobalConstants.ProcessingStatus)
+        @if (Model.OrderStatus == GlobalConstants.ProcessingStatus)
         {
             <a asp-area="Administration" asp-controller="Orders" asp-action="Approve" asp-route-id="@Model.Id" class="site-btn">Approve</a>
             <a asp-area="Administration" asp-controller="Orders" asp-action="Cancel" asp-route-id="@Model.Id" class="site-btn">Cancel</a>
         }
-        else if (Model.Status == GlobalConstants.ApprovedStatus)
+        else if (Model.OrderStatus == GlobalConstants.ApprovedStatus)
         {
             <a asp-area="Administration" asp-controller="Orders" asp-action="Delivery" asp-route-id="@Model.Id" class="site-btn">Delivered</a>
             <a asp-area="Administration" asp-controller="Orders" asp-action="Cancel" asp-route-id="@Model.Id" class="site-btn">Cancel</a>
         }
-        else if (Model.Status == GlobalConstants.CancelledStatus)
+        else if (Model.OrderStatus == GlobalConstants.CancelledStatus)
         {
             <a asp-area="Administration" asp-controller="Orders" asp-action="Process" asp-route-id="@Model.Id" class="site-btn">Processing</a>
         }

@@ -24,7 +24,7 @@
             var ordersToDelete = await this.ordersRepository
                 .All()
                 .Where(o => o.FinalizeOrder.AddDays(GlobalConstants.DaysOneMonth).Date <= DateTime.Today.Date
-                         && o.Status == Status.Cancelled)
+                         && o.OrderStatus == OrderStatus.Cancelled)
                 .ToListAsync();
 
             foreach (var order in ordersToDelete)
