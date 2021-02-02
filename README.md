@@ -21,10 +21,10 @@ CakeShop is a web application, that can be used to present particular online sho
     - write comments to recipe
     - print the recipe as Pdf
     - sent recipe to his email as Pdf
+    - has notification after delivery to leave a review
     - has user's own dashboard with all information about:
-      * information about their orders, the order's details and their status. 
+      * their orders, the order's details and their status. 
       * all their favourite recipes and desserts.
-      * has notification after delivery to leave a review
    
 #### :white_check_mark: Admin futures: 
 
