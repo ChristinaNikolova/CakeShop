@@ -7,7 +7,9 @@
 
     public class SidebarRecipeViewModel : RecipeBaseViewModel, IMapFrom<Recipe>
     {
-        //format
         public DateTime CreatedOn { get; set; }
+
+        public string FormattedCreatedOn
+            => this.CreatedOn.ToShortDateString();
     }
 }

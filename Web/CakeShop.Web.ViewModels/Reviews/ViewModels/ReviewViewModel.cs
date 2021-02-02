@@ -18,6 +18,6 @@
         public DateTime CreatedOn { get; set; }
 
         public string CreatedOnAsString
-            => string.Format("{0:g}", this.CreatedOn);
+            => string.Format("{0:d}", this.CreatedOn);
     }
 }

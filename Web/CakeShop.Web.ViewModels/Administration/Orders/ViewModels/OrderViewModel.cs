@@ -2,7 +2,6 @@
 {
     using System;
 
-    using CakeShop.Common;
     using CakeShop.Data.Models;
     using CakeShop.Services.Mapping;
 
@@ -20,8 +19,6 @@
         public DateTime FinalizeOrder { get; set; }
 
         public string FormattedFinalizeOrder
-            => string.Format(
-                 GlobalConstants.DateTimeFormat,
-                 TimeZoneInfo.ConvertTimeFromUtc(this.FinalizeOrder, TimeZoneInfo.FindSystemTimeZoneById(GlobalConstants.LocalTimeZone)));
+            => this.FinalizeOrder.ToShortDateString();
     }
 }
