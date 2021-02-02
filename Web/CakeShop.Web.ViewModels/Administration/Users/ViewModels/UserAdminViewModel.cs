@@ -26,6 +26,12 @@
             configuration.CreateMap<ApplicationUser, UserAdminViewModel>().ForMember(
                 m => m.TotalSumOrders,
                 opt => opt.MapFrom(x => x.Orders.Where(o => o.OrderStatus == OrderStatus.Delivered).Sum(y => y.TotalPrice)));
+
+            configuration.CreateMap<ApplicationUser, UserAdminViewModel>().ForMember(
+                m => m.CommentsCount,
+                opt => opt.MapFrom(x => x.Comments
+                .Where(y => y.CommentStatus == CommentStatus.Approved)
+                .Count()));
         }
     }
 }

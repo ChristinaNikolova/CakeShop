@@ -7,6 +7,7 @@
 
     using CakeShop.Data.Common.Repositories;
     using CakeShop.Data.Models;
+    using CakeShop.Data.Models.Enums;
     using CakeShop.Services.Mapping;
     using Microsoft.EntityFrameworkCore;
 
@@ -57,7 +58,8 @@
         {
             var comments = await this.commentsRepository
                 .All()
-                .Where(c => c.RecipeId == recipeId)
+                .Where(c => c.RecipeId == recipeId
+                         && c.CommentStatus == CommentStatus.Approved)
                 .OrderByDescending(c => c.CreatedOn)
                 .To<T>()
                 .ToListAsync();
