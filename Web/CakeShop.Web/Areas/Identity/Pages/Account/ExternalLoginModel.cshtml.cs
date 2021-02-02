@@ -127,6 +127,17 @@
 
                 var firstName = info.Principal.FindFirstValue(ClaimTypes.Name).Split(" ")[0];
                 var lastName = info.Principal.FindFirstValue(ClaimTypes.Name).Split(" ").Last();
+                var picture = string.Empty;
+
+                if (info.LoginProvider == "Facebook")
+                {
+                    var identifier = info.Principal.FindFirstValue(ClaimTypes.NameIdentifier);
+                    picture = $"https://graph.facebook.com/{identifier}/picture?type=large";
+                }
+                else if (info.LoginProvider == "Google")
+                {
+                    picture = info.Principal.FindFirstValue("picture");
+                }
 
                 user = new ApplicationUser
                 {
@@ -136,6 +147,7 @@
                     LastName = lastName,
                     Address = this.Input.Address,
                     PhoneNumber = this.Input.PhoneNumber,
+                    Picture = picture,
                 };
 
                 var result = await this.userManager.CreateAsync(user);

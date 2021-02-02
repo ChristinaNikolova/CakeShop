@@ -36,6 +36,7 @@
     using Hangfire;
     using Hangfire.Dashboard;
     using Hangfire.SqlServer;
+    using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -164,6 +165,7 @@
                {
                    option.ClientId = this.configuration["Google:ClientId"];
                    option.ClientSecret = this.configuration["Google:ClientSecret"];
+                   option.ClaimActions.MapJsonKey("picture", "picture");
                });
         }
 

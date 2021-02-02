@@ -3,6 +3,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using CakeShop.Common;
+    using Microsoft.AspNetCore.Http;
 
     public class RegisterInputModel
     {
@@ -46,5 +47,10 @@
         [Display(Name = "Phone")]
         [Phone]
         public string PhoneNumber { get; set; }
+
+        [Required]
+        [Display(Name = "Profile Picture")]
+        [DataType(DataType.Upload)]
+        public IFormFile Picture { get; set; }
     }
 }

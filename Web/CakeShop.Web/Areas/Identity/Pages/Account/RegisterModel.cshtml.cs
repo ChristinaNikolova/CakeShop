@@ -2,11 +2,11 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     using CakeShop.Common;
     using CakeShop.Data.Models;
+    using CakeShop.Services.Cloudinary;
     using CakeShop.Services.Messaging;
     using CakeShop.Web.Areas.Identity.Pages.Account.InputModels;
     using Microsoft.AspNetCore.Authentication;
@@ -23,17 +23,20 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<RegisterModel> logger;
         private readonly IEmailSender emailSender;
+        private readonly ICloudinaryService cloudinaryService;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ICloudinaryService cloudinaryService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
             this.emailSender = emailSender;
+            this.cloudinaryService = cloudinaryService;
         }
 
         [BindProperty]
@@ -56,6 +59,8 @@
 
             if (this.ModelState.IsValid)
             {
+                string pictureAsString = await this.cloudinaryService.UploudAsync(this.Input.Picture, this.Input.UserName);
+
                 var user = new ApplicationUser
                 {
                     Email = this.Input.Email,
@@ -64,6 +69,7 @@
                     LastName = this.Input.LastName,
                     Address = this.Input.Address,
                     PhoneNumber = this.Input.PhoneNumber,
+                    Picture = pictureAsString,
                 };
 
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);

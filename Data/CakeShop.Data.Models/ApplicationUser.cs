@@ -36,6 +36,9 @@
         [MaxLength(DataValidation.UserAddressMaxLenght)]
         public string Address { get; set; }
 
+        [Required]
+        public string Picture { get; set; }
+
         // Audit info
         public DateTime CreatedOn { get; set; }
 

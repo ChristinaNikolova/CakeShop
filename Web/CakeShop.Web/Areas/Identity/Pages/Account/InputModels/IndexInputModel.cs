@@ -3,6 +3,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using CakeShop.Common;
+    using Microsoft.AspNetCore.Http;
 
     public class IndexInputModel
     {
@@ -27,5 +28,9 @@
         [Display(Name = "Phone")]
         [Phone]
         public string PhoneNumber { get; set; }
+
+        [DataType(DataType.Upload)]
+        [Display(Name = "New Picture")]
+        public IFormFile NewPicture { get; set; }
     }
 }

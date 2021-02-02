@@ -4,10 +4,11 @@
     using System.Threading.Tasks;
 
     using CakeShop.Data.Models;
+    using Microsoft.AspNetCore.Http;
 
     public interface IUsersService
     {
-        Task<ApplicationUser> UpdateUserProfileAsync(string id, string firstName, string lastName, string address, string phoneNumber);
+        Task<ApplicationUser> UpdateUserProfileAsync(string id, string firstName, string lastName, string address, string phoneNumber, IFormFile newPicture);
 
         Task<string> GetUserAddressByIdAsync(string userId);
 

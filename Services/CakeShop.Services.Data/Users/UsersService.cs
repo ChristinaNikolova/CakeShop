@@ -7,16 +7,22 @@
     using CakeShop.Data.Common.Repositories;
     using CakeShop.Data.Models;
     using CakeShop.Data.Models.Enums;
+    using CakeShop.Services.Cloudinary;
     using CakeShop.Services.Mapping;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
 
     public class UsersService : IUsersService
     {
         private readonly IRepository<ApplicationUser> usersRepository;
+        private readonly ICloudinaryService cloudinaryService;
 
-        public UsersService(IRepository<ApplicationUser> usersRepository)
+        public UsersService(
+            IRepository<ApplicationUser> usersRepository,
+            ICloudinaryService cloudinaryService)
         {
             this.usersRepository = usersRepository;
+            this.cloudinaryService = cloudinaryService;
         }
 
         public async Task<IEnumerable<T>> GetAllAsync<T>()
@@ -74,7 +80,7 @@
             return user;
         }
 
-        public async Task<ApplicationUser> UpdateUserProfileAsync(string id, string firstName, string lastName, string address, string phoneNumber)
+        public async Task<ApplicationUser> UpdateUserProfileAsync(string id, string firstName, string lastName, string address, string phoneNumber, IFormFile newPicture)
         {
             var user = await this.usersRepository
                             .All()
@@ -84,6 +90,12 @@
             user.LastName = lastName;
             user.Address = address;
             user.PhoneNumber = phoneNumber;
+            ;
+            if (newPicture != null)
+            {
+                string newPictureAsUrl = await this.cloudinaryService.UploudAsync(newPicture, user.UserName);
+                user.Picture = newPictureAsUrl;
+            }
 
             await this.usersRepository.SaveChangesAsync();
 
