@@ -9,7 +9,7 @@
 
         Task<IEnumerable<T>> GetCommentsCurrentRecipeAsync<T>(string recipeId);
 
-        Task<IEnumerable<T>> GetAllAsync<T>();
+        Task<IEnumerable<T>> GetAllUnapprovedAsync<T>();
 
         Task DeleteAsync(string id);
 

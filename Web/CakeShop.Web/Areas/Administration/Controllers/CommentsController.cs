@@ -20,7 +20,7 @@
         {
             var model = new AllCommentsAdminViewModel()
             {
-                Comments = await this.commentsService.GetAllAsync<CommentAdminViewModel>(),
+                Comments = await this.commentsService.GetAllUnapprovedAsync<CommentAdminViewModel>(),
             };
 
             return this.View(model);

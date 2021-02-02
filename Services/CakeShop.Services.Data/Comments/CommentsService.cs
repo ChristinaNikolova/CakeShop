@@ -43,10 +43,11 @@
             await this.commentsRepository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync<T>()
+        public async Task<IEnumerable<T>> GetAllUnapprovedAsync<T>()
         {
             var comments = await this.commentsRepository
                 .All()
+                .Where(c => c.CommentStatus == CommentStatus.NotApproved)
                 .OrderByDescending(c => c.CreatedOn)
                 .To<T>()
                 .ToListAsync();
@@ -69,11 +70,10 @@
 
         public async Task<int> GetNewCommentsCountAsync()
         {
-            //change
             var count = await this.commentsRepository
                 .All()
-                .CountAsync(c => c.CreatedOn.Date >= DateTime.UtcNow.AddDays(-1).Date
-                              && c.CreatedOn.Date >= DateTime.UtcNow.AddDays(-2).Date);
+                .Where(c => c.CommentStatus == CommentStatus.NotApproved)
+                .CountAsync();
 
             return count;
         }
