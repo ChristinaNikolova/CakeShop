@@ -122,7 +122,7 @@
         // rotativa
         public const string Rotativa = "Rotativa";
 
-        public const string GenerateRecipePdfViewName = "GenerateRecipePdf";
+        public const string GenerateRecipePdfViewName = "GeneratePdf";
 
         public const string GenerateOrderPdfViewName = "GenerateOrderPdf";
 
