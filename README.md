@@ -12,16 +12,16 @@ CakeShop is a web application, that can be used to present particular online sho
     - see all desserts, filter and order them by different criteria.
     - see dessert's detail page. 
     - like/unlike particular dessert. 
-    - add/remove desserts to/from his basket
-    - can pay orders with PayPal
+    - add/remove desserts to/from his basket.
+    - can pay orders with PayPal.
     - after delivery write a review about the desserts and give an assessment.
     - see the cooking blog(recipes), filter and order the recipes by different criteria. 
     - see reicpe's details page.  
-    - like/unlike recipes 
-    - write comments to recipe
-    - print the recipe as Pdf
-    - sent recipe to his email as Pdf
-    - has notification after delivery to leave a review
+    - like/unlike recipes.
+    - write comments to recipe.
+    - print the recipe as Pdf.
+    - sent recipe to his email as Pdf.
+    - has notification after delivery to leave a review.
     - has user's own dashboard with all information about:
       * their orders, the order's details and their status. 
       * all their favourite recipes and desserts.
